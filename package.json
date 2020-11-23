@@ -1,0 +1,73 @@
+{
+  "name": "material-ui-helper",
+  "version": "1.0.4",
+  "description": "Material-Ui component with more option",
+  "author": "Aryan-mor",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Aryan-mor/material-ui-helper.git"
+  },
+  "main": "dist/index.js",
+  "module": "dist/index.modern.js",
+  "source": "src/index.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "scripts": {
+    "build": "microbundle-crl --no-compress --format modern,cjs",
+    "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "prepare": "run-s build",
+    "test": "run-s test:unit test:lint test:build",
+    "test:build": "run-s build",
+    "test:lint": "eslint .",
+    "test:unit": "cross-env CI=1 react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom",
+    "predeploy": "cd example && yarn install && yarn run build",
+    "deploy": "gh-pages -d example/build"
+  },
+  "peerDependencies": {
+    "react": "^16.0.0",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.45",
+    "@material-ui/styles": "^4.10.0",
+    "clsx": "^1.1.1",
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "eslint": "latest",
+    "eslint-config-prettier": "latest",
+    "eslint-config-standard": "latest",
+    "eslint-config-standard-react": "latest",
+    "eslint-plugin-import": "latest",
+    "eslint-plugin-node": "latest",
+    "eslint-plugin-prettier": "latest",
+    "eslint-plugin-promise": "latest",
+    "eslint-plugin-react": "latest",
+    "eslint-plugin-standard": "latest",
+    "microbundle-crl": "latest",
+    "babel-eslint": "latest",
+    "cross-env": "latest",
+    "gh-pages": "latest",
+    "npm-run-all": "latest",
+    "prettier": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-scripts": "latest",
+    "prop-types": "^15.7.2"
+  },
+  "files": [
+    "dist"
+  ],
+  "bugs": {
+    "url": "https://github.com/Aryan-mor/material-ui-helper/issues"
+  },
+  "homepage": "https://github.com/Aryan-mor/material-ui-helper#readme",
+  "directories": {
+    "example": "example"
+  },
+  "dependencies": {},
+  "keywords": [
+    "material-ui"
+  ]
+}
