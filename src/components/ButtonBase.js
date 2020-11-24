@@ -2,7 +2,7 @@ import React from "react";
 import {ButtonBase as MaterialButtonBase} from "@material-ui/core";
 import PropTypes from 'prop-types'
 import Box, { boxPropType } from './Box'
-import { UtilsStyle } from './utils/Utils'
+import { UtilsStyle } from '../utils/Utils'
 
 
 function ButtonBase(pr) {

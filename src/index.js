@@ -1,7 +1,7 @@
-export { default as Box } from "./Box"
-export { default as Typography } from "./Typography"
-export { default as ButtonBase } from "./ButtonBase"
-export { default as Tooltip } from "./Tooltip"
-export { default as IconButton } from "./IconButton"
-
-
+export { default as Box } from './components/Box'
+export { default as Typography } from './components/Typography'
+export { default as ButtonBase } from './components/ButtonBase'
+export { default as Tooltip } from './components/Tooltip'
+export { default as IconButton } from './components/IconButton'
+export { UtilsStyle } from './utils/Utils'
+export { tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement } from './utils/Helper'

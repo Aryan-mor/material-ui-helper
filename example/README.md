@@ -1,5 +1,9 @@
-This example was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-It is linked to the material-ui-helper package in the parent directory for development purposes.
-
-You can run `npm install` and then `npm start` to test your package.
+#MaterialUIHelper library\
+If you want turn off logger(gLog,gError, ...) you can use this code=>
+Add "set REACT_APP_MATERIAL_HELPER_LOGGER=false" on your package.json script;
+Example:
+{
+  "scripts": {
+    "build":"set REACT_APP_MATERIAL_HELPER_LOGGER=false react-scripts build"
+  }
+}

@@ -1,6 +1,6 @@
 {
   "name": "material-ui-helper",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Material-Ui component with more option",
   "author": "Aryan-mor",
   "license": "ISC",
@@ -25,6 +25,8 @@
     "test:watch": "react-scripts test --env=jsdom",
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
+  },
+  "dependencies": {
   },
   "peerDependencies": {
     "react": "^16.0.0",
@@ -54,7 +56,11 @@
     "react": "latest",
     "react-dom": "latest",
     "react-scripts": "latest",
-    "prop-types": "^15.7.2"
+    "prop-types": "^15.7.2",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/lab": "^4.0.0-alpha.45",
+    "@material-ui/styles": "^4.10.0",
+    "clsx": "^1.1.1"
   },
   "files": [
     "dist"
@@ -66,7 +72,6 @@
   "directories": {
     "example": "example"
   },
-  "dependencies": {},
   "keywords": [
     "material-ui"
   ]
