@@ -3,20 +3,15 @@ export const toNumberSafe = (x) => {
   return isNumeric(x) ? _.toNumber(x) : x
 }
 
-export const tryIt = (fun) => {
-  try {
-    fun()
-  } catch (e) {
-  }
-}
-
-export const getSafe = (fun, defaultVal) => {
+export const tryIt = (fun, defaultVal) => {
   try {
     return fun()
   } catch (e) {
-    return defaultVal
+    return _.isFunction(defaultVal) ? defaultVal() : defaultVal
   }
 }
+
+export const getSafe = (fun, defaultVal) => tryIt(fun, defaultVal)
 //endregion functions
 
 //region log

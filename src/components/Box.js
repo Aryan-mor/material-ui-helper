@@ -53,6 +53,8 @@ function Box(pr) {
 
 //region propTypes
 export const boxPropType = {
+  width:PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  height:PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   display: PropTypes.oneOf(['block', 'flex', 'none', 'inline', 'inline-block', 'grid']),
   alignItems: PropTypes.oneOf(['unset', 'flex-start', 'flex-end', 'center', 'stretch', 'initial', 'inherit']),
   alignContent: PropTypes.oneOf(['stretch', 'center', 'flex-start', 'flex-end', 'space-between', 'space-around', 'initial', 'inherit']),
