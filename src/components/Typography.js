@@ -59,13 +59,12 @@ function Typo({ cm = 'div', children, variant, ...props }) {
     </Tp>
   )
 }
-
 const CM = forwardRef(
   ({ component, variant, fontWeight,textAlign, ...props }, ref) => (
     <Box
+      itemscope={}
       ref={ref}
       component={_.isObject(variant) ? ResponsiveTypo : Typo}
-      display={'flex'}
       cm={component}
       variant={variant}
       {...props}
@@ -82,12 +81,10 @@ export default function Typography(props) {
   return <CM {...props}>{props.children}</CM>
 }
 
-export const typographyPropTypes = {
+Typography.propTypes =  {
+  ...boxPropType,
   component: PropTypes.string,
   variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
   fontWeight: PropTypes.oneOf(['normal', 'bold', 'bolder', 'lighter', 100, 200, 300, 400, 500, 600, 700, 800, 900]),
-  textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify', 'initial', 'inherit']),
-  ...boxPropType
+  textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify', 'initial', 'inherit'])
 }
-
-Typography.propTypes = typographyPropTypes

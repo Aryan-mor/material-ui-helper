@@ -1,3 +1,5 @@
+import _ from 'lodash'
+
 //region functions
 export const toNumberSafe = (x) => {
   return isNumeric(x) ? _.toNumber(x) : x
