@@ -100,6 +100,7 @@ export const buttonPropType = {
   href: PropTypes.string,
   buttonProps: PropTypes.object,
   styleProps: PropTypes.object,
+  onClick:PropTypes.func,
   typography: PropTypes.shape({
     component: PropTypes.string,
     variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
@@ -125,6 +126,7 @@ Button.propTypes = {
   fullWidth: PropTypes.bool,
   href: PropTypes.string,
   buttonProps: PropTypes.object,
+  onClick:PropTypes.func,
   typography: PropTypes.shape({
     component: PropTypes.string,
     variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
