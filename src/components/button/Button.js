@@ -85,7 +85,7 @@ Button.defaultProps = {
 
 
 export const buttonPropType = {
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  component: PropTypes.any,
   variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
   colorDef: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
   color: PropTypes.string,
@@ -112,7 +112,7 @@ export const buttonPropType = {
 }
 
 Button.propTypes = {
-  component: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  component: PropTypes.any,
   variant: PropTypes.oneOf(['contained', 'outlined', 'text']),
   colorDef: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
   color: PropTypes.string,

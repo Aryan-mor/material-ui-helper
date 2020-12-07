@@ -27,6 +27,8 @@ function Box(pr) {
     loading,
     loadingWidth,
     onClick,
+    onMouseEnter,
+    onMouseLeave,
     ...props
   } = pr
   //endregion props
@@ -41,6 +43,8 @@ function Box(pr) {
           justifyContent={justifyContent || (justifyCenter || center) ? 'center' : undefined}
           flexDirection={flexDirection || (column) ? 'column' : undefined}
           onClick={onClick}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
           {...props}
           style={{
             ...UtilsStyle.borderRadius(borderRadius),
@@ -56,7 +60,7 @@ function Box(pr) {
 
 //region propTypes
 export const boxPropType = {
-  component:PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
+  component: PropTypes.any,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   display: PropTypes.oneOf(['block', 'flex', 'none', 'inline', 'inline-block', 'grid']),
@@ -75,7 +79,9 @@ export const boxPropType = {
   skeleton: PropTypes.bool,
   loading: PropTypes.bool,
   loadingWidth: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 }
 
 Box.defaultProps = {
@@ -85,11 +91,11 @@ Box.defaultProps = {
   overflow: 'hidden',
   center: false,
   column: false,
-  loadingWidth: "25%",
+  loadingWidth: '25%'
 }
 
-Box.propTypes =  {
-  component:PropTypes.oneOfType([PropTypes.string, PropTypes.element,PropTypes.func]),
+Box.propTypes = {
+  component: PropTypes.any,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   display: PropTypes.oneOf(['block', 'flex', 'none', 'inline', 'inline-block', 'grid']),
@@ -108,7 +114,9 @@ Box.propTypes =  {
   skeleton: PropTypes.bool,
   loading: PropTypes.bool,
   loadingWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  onClick: PropTypes.func
+  onClick: PropTypes.func,
+  onMouseEnter: PropTypes.func,
+  onMouseLeave: PropTypes.func
 }
 
 export default Box
