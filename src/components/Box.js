@@ -61,6 +61,7 @@ function Box(pr) {
 
 //region propTypes
 export const boxPropType = {
+  component:PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   display: PropTypes.oneOf(['block', 'flex', 'none', 'inline', 'inline-block', 'grid']),
@@ -94,6 +95,7 @@ Box.defaultProps = {
 }
 
 Box.propTypes =  {
+  component:PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   display: PropTypes.oneOf(['block', 'flex', 'none', 'inline', 'inline-block', 'grid']),

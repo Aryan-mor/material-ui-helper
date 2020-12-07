@@ -59,32 +59,33 @@ function Typo({ cm = 'div', children, variant, ...props }) {
     </Tp>
   )
 }
-const CM = forwardRef(
-  ({ component, variant, fontWeight,textAlign, ...props }, ref) => (
-    <Box
-      itemscope={}
-      ref={ref}
-      component={_.isObject(variant) ? ResponsiveTypo : Typo}
-      cm={component}
-      variant={variant}
-      {...props}
-      style={{
-        fontWeight: fontWeight,
-        textAlign:textAlign,
-        ...props.style
-      }}>
-      {props.children}
-    </Box>
-  ))
+
+const CM = forwardRef(({ component, variant, fontWeight, textAlign, colorDef, color, ...props }, ref) => (
+  <Box
+    ref={ref}
+    component={_.isObject(variant) ? ResponsiveTypo : Typo}
+    color={colorDef}
+    cm={component}
+    variant={variant}
+    {...props}
+    style={{
+      fontWeight: fontWeight,
+      textAlign: textAlign,
+      color: color,
+      ...props.style
+    }}>
+    {props.children}
+  </Box>
+))
 
 export default function Typography(props) {
   return <CM {...props}>{props.children}</CM>
 }
 
-Typography.propTypes =  {
+Typography.propTypes = {
   ...boxPropType,
   component: PropTypes.string,
   variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
   fontWeight: PropTypes.oneOf(['normal', 'bold', 'bolder', 'lighter', 100, 200, 300, 400, 500, 600, 700, 800, 900]),
-  textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify', 'initial', 'inherit'])
+  textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify', 'initial', 'inherit']),
 }
