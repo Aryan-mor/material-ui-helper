@@ -14,6 +14,14 @@ export const tryIt = (fun, defaultVal) => {
 }
 
 export const getSafe = (fun, defaultVal) => tryIt(fun, defaultVal)
+
+export const isServer = () => !process.browser;
+
+export const isClient = () => process.browser;
+
+export function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 //endregion functions
 
 //region log
