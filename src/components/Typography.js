@@ -5,6 +5,7 @@ import { useTheme } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import PropTypes from 'prop-types'
 import Box, { boxPropType } from './Box'
+import Box2 from '../Box2'
 
 function ResponsiveTypo({ children, variant: vari, ...props }) {
   const theme = useTheme()
@@ -60,32 +61,34 @@ function Typo({ cm = 'div', children, variant, ...props }) {
   )
 }
 
-const CM = forwardRef(({ component, variant, fontWeight, textAlign, colorDef, color, ...props }, ref) => (
-  <Box
-    ref={ref}
-    component={_.isObject(variant) ? ResponsiveTypo : Typo}
-    color={colorDef}
-    cm={component}
-    variant={variant}
-    {...props}
-    style={{
-      fontWeight: fontWeight,
-      textAlign: textAlign,
-      color: color,
-      ...props.style
-    }}>
-    {props.children}
-  </Box>
-))
+const CM = forwardRef(
+  ({ component, variant, fontWeight,textAlign, ...props }, ref) => (
+    <Box
+      ref={ref}
+      component={_.isObject(variant) ? ResponsiveTypo : Typo}
+      display={'flex'}
+      cm={component}
+      variant={variant}
+      {...props}
+      style={{
+        fontWeight: fontWeight,
+        textAlign:textAlign,
+        ...props.style
+      }}>
+      {props.children}
+    </Box>
+  ))
 
 export default function Typography(props) {
   return <CM {...props}>{props.children}</CM>
 }
 
-Typography.propTypes = {
-  ...boxPropType,
+export const typographyPropTypes = {
   component: PropTypes.string,
   variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
   fontWeight: PropTypes.oneOf(['normal', 'bold', 'bolder', 'lighter', 100, 200, 300, 400, 500, 600, 700, 800, 900]),
   textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify', 'initial', 'inherit']),
+  ...boxPropType
 }
+
+Typography.propTypes = typographyPropTypes

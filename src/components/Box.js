@@ -37,6 +37,7 @@ function Box(pr) {
     <HoverStyle hoverStyle={hoverStyle} {...props}>
       <LoadingContainer skeleton={skeleton} loading={loading}>
         <MaterialBox
+          component={component}
           overflow={overflow}
           display={display}
           alignItems={alignItems || (alignCenter || center) ? 'center' : undefined}

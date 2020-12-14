@@ -1,5 +1,6 @@
 import React from 'react'
 import { Box, Button, gLog, IconButton, Typography, UtilsStyle, SuccessButton } from 'material-ui-helper'
+import Test from './Test'
 
 const App = () => {
   gLog('process.env.', process.env)
@@ -37,6 +38,7 @@ const App = () => {
           ffff
         </IconButton>
       </Box>
+      <Test/>
     </Box>
   )
 }
