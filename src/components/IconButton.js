@@ -8,7 +8,7 @@ function IconButton(pr) {
   const { tooltip, tooltipDisable, ...props }=pr
 
   const el = (
-    <MaterialIconButton>
+    <MaterialIconButton {...props}>
       {props.children}
     </MaterialIconButton>
   )
