@@ -26,6 +26,7 @@ function Box(pr) {
     skeleton,
     loading,
     loadingWidth,
+    textSelectable,
     onClick,
     onMouseEnter,
     onMouseLeave,
@@ -48,6 +49,13 @@ function Box(pr) {
           onMouseLeave={onMouseLeave}
           {...props}
           style={{
+            ...(!textSelectable ? {
+              webkitTouchCallout: 'none', /* iOS Safari */
+              webkitUserSelect: 'none', /* Safari */
+              mozUserSelect: 'none', /* Old versions of Firefox */
+              msUserSelect: 'none', /* Internet Explorer/Edge */
+              userSelect: 'none'
+            } : {}),
             ...UtilsStyle.borderRadius(borderRadius),
             ...props.style
           }}>
@@ -79,6 +87,7 @@ export const boxPropType = {
   hoverStyle: PropTypes.object,
   skeleton: PropTypes.bool,
   loading: PropTypes.bool,
+  textSelectable: PropTypes.bool,
   loadingWidth: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
@@ -92,7 +101,8 @@ Box.defaultProps = {
   overflow: 'hidden',
   center: false,
   column: false,
-  loadingWidth: '25%'
+  loadingWidth: '25%',
+  textSelectable: true
 }
 
 Box.propTypes = {
@@ -114,6 +124,7 @@ Box.propTypes = {
   hoverStyle: PropTypes.object,
   skeleton: PropTypes.bool,
   loading: PropTypes.bool,
+  textSelectable: PropTypes.bool,
   loadingWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
