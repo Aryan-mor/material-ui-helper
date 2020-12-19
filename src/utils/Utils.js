@@ -1,3 +1,5 @@
+import { gLog } from './Helper'
+
 export const UtilsStyle = {
   transition: (duration = 500) => {
     return {
@@ -9,6 +11,7 @@ export const UtilsStyle = {
     }
   },
   borderRadius: (radius) => {
+
     return {
       borderRadius: radius,
       WebkitBorderRadius: radius,

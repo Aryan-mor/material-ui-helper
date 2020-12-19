@@ -33,32 +33,32 @@ function Box(pr) {
     ...props
   } = pr
   //endregion props
-
   return (
-    <HoverStyle hoverStyle={hoverStyle} {...props}>
+    <HoverStyle
+      hoverStyle={hoverStyle}
+      component={component}
+      overflow={overflow}
+      display={display}
+      alignItems={alignItems || (alignCenter || center) ? 'center' : undefined}
+      justifyContent={justifyContent || (justifyCenter || center) ? 'center' : undefined}
+      flexDirection={flexDirection || (column) ? 'column' : undefined}
+      onClick={onClick}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      {...props}
+      style={{
+        ...(!textSelectable ? {
+          webkitTouchCallout: 'none', /* iOS Safari */
+          webkitUserSelect: 'none', /* Safari */
+          mozUserSelect: 'none', /* Old versions of Firefox */
+          msUserSelect: 'none', /* Internet Explorer/Edge */
+          userSelect: 'none'
+        } : {}),
+        ...UtilsStyle.borderRadius(borderRadius),
+        ...props.style
+      }}>
       <LoadingContainer skeleton={skeleton} loading={loading}>
-        <MaterialBox
-          component={component}
-          overflow={overflow}
-          display={display}
-          alignItems={alignItems || (alignCenter || center) ? 'center' : undefined}
-          justifyContent={justifyContent || (justifyCenter || center) ? 'center' : undefined}
-          flexDirection={flexDirection || (column) ? 'column' : undefined}
-          onClick={onClick}
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          {...props}
-          style={{
-            ...(!textSelectable ? {
-              webkitTouchCallout: 'none', /* iOS Safari */
-              webkitUserSelect: 'none', /* Safari */
-              mozUserSelect: 'none', /* Old versions of Firefox */
-              msUserSelect: 'none', /* Internet Explorer/Edge */
-              userSelect: 'none'
-            } : {}),
-            ...UtilsStyle.borderRadius(borderRadius),
-            ...props.style
-          }}>
+        <MaterialBox>
           {props.children}
           <Loading loading={loading} skeleton={skeleton} loadingWidth={loadingWidth}/>
         </MaterialBox>

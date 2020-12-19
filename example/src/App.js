@@ -26,9 +26,12 @@ const App = () => {
         </SuccessButton>
       </Box>
       <Box variant={'h6'}
+           hoverStyle={{
+             backgroundColor:"red !important"
+           }}
+           borderRadius={30}
            style={{
              backgroundColor: 'blue',
-             ...UtilsStyle.borderRadius(30)
            }}>
         test
         <Typography p={5} skeleton={true}>
