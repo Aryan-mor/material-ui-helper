@@ -16,4 +16,12 @@ export { default as HoverWatcher } from './helper/HoverWatcher'
 
 export { UtilsStyle, Random } from './utils/Utils'
 
-export { tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement ,isServer,isClient,sleep} from './utils/Helper'
+export {
+  tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement, isServer, isClient, sleep
+} from './utils/Helper'
+
+export { default as FormController } from './components/FormController'
+export { default as TextFieldContainer } from './components/textField/TextFieldContainer'
+export { default as DefaultTextField } from './components/textField/DefaultTextField'
+export { default as NoneTextField } from './components/textField/NoneTextField'
+export { default as TextField,createName } from './components/textField/TextField'

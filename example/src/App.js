@@ -1,9 +1,9 @@
 import React from 'react'
-import { Box, Button, gLog, IconButton, Typography, UtilsStyle, SuccessButton } from 'material-ui-helper'
+import { Box, Button, IconButton, Typography } from 'material-ui-helper'
 import Test from './Test'
 
 const App = () => {
-  gLog('process.env.', process.env)
+
 
   return (
     <Box column={true} p={2}>
@@ -18,20 +18,14 @@ const App = () => {
           }}>
           default button
         </Button>
-        <SuccessButton mx={2}
-                       typography={{
-                         variant: 'h1'
-                       }}>
-          default button
-        </SuccessButton>
       </Box>
       <Box variant={'h6'}
            hoverStyle={{
-             backgroundColor:"red !important"
+             backgroundColor: 'red !important'
            }}
            borderRadius={30}
            style={{
-             backgroundColor: 'blue',
+             backgroundColor: 'blue'
            }}>
         test
         <Typography p={5} skeleton={true}>

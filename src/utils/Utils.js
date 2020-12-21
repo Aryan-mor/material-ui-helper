@@ -56,4 +56,3 @@ export const Random = {
     return result
   }
 }
-

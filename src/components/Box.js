@@ -7,8 +7,8 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import PropTypes from 'prop-types'
 import { gLog, UtilsStyle } from '..'
 
-function Box(pr) {
 
+const Box = React.forwardRef((pr, ref) => {
   //region props
   const {
     component,
@@ -33,7 +33,8 @@ function Box(pr) {
     ...props
   } = pr
   //endregion props
-  return (
+
+  return(
     <HoverStyle
       hoverStyle={hoverStyle}
       component={component}
@@ -58,14 +59,15 @@ function Box(pr) {
         ...props.style
       }}>
       <LoadingContainer skeleton={skeleton} loading={loading}>
-        <MaterialBox>
+        <MaterialBox ref={ref}>
           {props.children}
           <Loading loading={loading} skeleton={skeleton} loadingWidth={loadingWidth}/>
         </MaterialBox>
       </LoadingContainer>
     </HoverStyle>
   )
-}
+})
+
 
 //region propTypes
 export const boxPropType = {

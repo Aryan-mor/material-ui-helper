@@ -1,10 +1,28 @@
-import React from "react";
-import {Box, getSafe, tryIt, Typography as HelperTypography} from "material-ui-helper";
+import React, { useRef } from 'react'
+import {gLog,SuccessButton,FormController,createName,DefaultTextField,Box, getSafe, tryIt, Typography as HelperTypography} from "material-ui-helper";
 import MaterialTypography from "@material-ui/core/Typography";
+
 export default function Search(params) {
+
+  const ref = useRef(null)
 
   return (
     <Box>
+
+      <SuccessButton mx={2}
+                     onClick={()=>{
+                       tryIt(()=>{
+                         gLog("saflasklfklaskflkas",ref.current.serialize())
+                       })
+                     }}
+                     typography={{
+                       variant: 'h1'
+                     }}>
+        default button
+      </SuccessButton>
+      <FormController innerRef={ref} name={'form22'} my={2}>
+        <DefaultTextField name={createName({ group: 'gp', name: 'input' })}/>
+      </FormController>
       <Box width={"1/3"} column={true}
            textSelectable={false} pt={5}>
         {["h1","h2","h3","h4","h5","h6"].map((variant)=>
