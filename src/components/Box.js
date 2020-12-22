@@ -40,9 +40,9 @@ const Box = React.forwardRef((pr, ref) => {
       component={component}
       overflow={overflow}
       display={display}
-      alignItems={alignItems || (alignCenter || center) ? 'center' : undefined}
-      justifyContent={justifyContent || (justifyCenter || center) ? 'center' : undefined}
-      flexDirection={flexDirection || (column) ? 'column' : undefined}
+      alignItems={alignItems || ((alignCenter || center) ? 'center' : undefined)}
+      justifyContent={justifyContent || ((justifyCenter || center) ? 'center' : undefined)}
+      flexDirection={flexDirection || ((column) ? 'column' : undefined)}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

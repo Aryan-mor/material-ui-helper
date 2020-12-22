@@ -79,7 +79,7 @@ const CM = forwardRef(
     </Box>
   ))
 
-export default function Typography(props) {
+function Typography(props) {
   return <CM {...props}>{props.children}</CM>
 }
 
@@ -100,3 +100,5 @@ Typography.propTypes = {
   textSelectable:PropTypes.bool,
   ...boxPropType
 }
+
+export default Typography;
