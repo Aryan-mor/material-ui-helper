@@ -21,7 +21,7 @@ const Box = React.forwardRef((pr, ref) => {
     justifyCenter,
     center,
     flexDirection,
-    column,
+    flexDirectionColumn,
     borderRadius,
     skeleton,
     loading,
@@ -42,7 +42,7 @@ const Box = React.forwardRef((pr, ref) => {
       display={display}
       alignItems={alignItems || ((alignCenter || center) ? 'center' : undefined)}
       justifyContent={justifyContent || ((justifyCenter || center) ? 'center' : undefined)}
-      flexDirection={flexDirection || ((column) ? 'column' : undefined)}
+      flexDirection={flexDirection || ((flexDirectionColumn) ? 'column' : undefined)}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -84,7 +84,7 @@ export const boxPropType = {
   alignCenter: PropTypes.bool,
   center: PropTypes.bool,
   flexDirection: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse', 'initial', 'inherit']),
-  column: PropTypes.bool,
+  flexDirectionColumn: PropTypes.bool,
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hoverStyle: PropTypes.object,
   skeleton: PropTypes.bool,
@@ -102,7 +102,7 @@ Box.defaultProps = {
   justifyCenter: false,
   overflow: 'hidden',
   center: false,
-  column: false,
+  flexDirectionColumn: false,
   loadingWidth: '25%',
   textSelectable: true
 }
@@ -121,7 +121,7 @@ Box.propTypes = {
   center: PropTypes.bool,
   flexDirection: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse', 'initial', 'inherit']),
   flexWrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse', 'initial', 'inherit']),
-  column: PropTypes.bool,
+  flexDirectionColumn: PropTypes.bool,
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   hoverStyle: PropTypes.object,
   skeleton: PropTypes.bool,
