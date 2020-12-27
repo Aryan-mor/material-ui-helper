@@ -1,26 +1,37 @@
-import React from 'react'
-import { Box, IconButton, Typography } from 'material-ui-helper'
+import React, { useState } from 'react'
+import { Button, Dialog, Box, IconButton, Typography } from 'material-ui-helper'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useTheme } from '@material-ui/core'
 
 const App = () => {
-
+  const [open, setOpen] = useState(false)
   return (
     <React.Fragment>
-      <P/>
-      <P/>
-      <P/>
-      <P/>
-      <P/>
+      <Button
+        onClick={() => {
+          setOpen(true)
+        }}>
+        open Dialog
+      </Button>
+      <Dialog open={open}
+              header={false}
+              onOutSideClickClose={false}
+              onClose={() => {
+                setOpen(false)
+              }}>
+        <Box p={5}>
+          diallllllllllllllllog
+        </Box>
+      </Dialog>
     </React.Fragment>
   )
 }
 
 function P(props) {
-  const primaryKey = "color"
+  const primaryKey = 'color'
 
-  return(
+  return (
     <Box width={1} flexDirection={'column'}>
       <Box flex={1} width={1}>
         <React.Fragment>
@@ -30,7 +41,7 @@ function P(props) {
             px={1}
             alignItems={'center'}
             style={{
-              cursor: "pointer"
+              cursor: 'pointer'
             }}>
             زنگ
           </Typography>
@@ -46,26 +57,26 @@ function P(props) {
               {
                 id: 1,
                 title: 'قرمز',
-                enTitle: "red",
-                color: "red"
+                enTitle: 'red',
+                color: 'red'
               },
               {
                 id: 2,
                 title: 'آبی',
-                enTitle: "blue",
-                color: "blue"
+                enTitle: 'blue',
+                color: 'blue'
               },
               {
                 id: 3,
                 title: 'سبز',
-                enTitle: "green",
-                color: "green"
+                enTitle: 'green',
+                color: 'green'
               },
               {
                 id: 4,
                 title: 'سیاه',
-                enTitle: "black",
-                color: "black"
+                enTitle: 'black',
+                color: 'black'
               }
             ].map((it, index) => {
 
@@ -74,7 +85,8 @@ function P(props) {
                   item={it}
                   primaryKey={primaryKey}
                   active={true}
-                  onClick={()=>{}}/>
+                  onClick={() => {
+                  }}/>
               )
             })
           }
@@ -85,12 +97,11 @@ function P(props) {
 }
 
 
-
-function Item({item: it, primaryKey, active, onClick, ...props}) {
-const theme = useTheme()
+function Item({ item: it, primaryKey, active, onClick, ...props }) {
+  const theme = useTheme()
   return (
     <Box
-      alignItems={"stretch"}
+      alignItems={'stretch'}
       width={'max-content'}
       onClick={onClick}
       style={{
@@ -99,7 +110,7 @@ const theme = useTheme()
       <Checkbox
         checked={active}
         onChange={onClick}
-        inputProps={{'aria-label': `item-${it[primaryKey]}`}}
+        inputProps={{ 'aria-label': `item-${it[primaryKey]}` }}
         style={{
           margin: theme.spacing(0, 2)
         }}
@@ -109,21 +120,21 @@ const theme = useTheme()
         alignCenter={true}
         textSelectable={false}>
         <Box
-          component={"span"}
-          borderRadius={"100%"}
+          component={'span'}
+          borderRadius={'100%'}
           width={20} height={20} mx={1}
-          style={{backgroundColor: it.color}}/>
+          style={{ backgroundColor: it.color }}/>
         {
           !_.isObject(it.title) ?
-            <Typography variant={"body2"}>
+            <Typography variant={'body2'}>
               {it.title}
             </Typography> :
             <Box>
-              <Typography variant={"body2"}>
+              <Typography variant={'body2'}>
                 {it.title.fa}
               </Typography>
               <Typography flex={1} justifyContent={'flex-end'}
-                          variant={"body2"}>
+                          variant={'body2'}>
                 {it.title.en}
               </Typography>
             </Box>

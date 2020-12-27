@@ -49,10 +49,10 @@ const Box = React.forwardRef((pr, ref) => {
       {...props}
       style={{
         ...(!textSelectable ? {
-          webkitTouchCallout: 'none', /* iOS Safari */
-          webkitUserSelect: 'none', /* Safari */
-          mozUserSelect: 'none', /* Old versions of Firefox */
-          msUserSelect: 'none', /* Internet Explorer/Edge */
+          WebkitTouchCallout: 'none', /* iOS Safari */
+          WebkitUserSelect: 'none', /* Safari */
+          MozUserSelect: 'none', /* Old versions of Firefox */
+          MsUserSelect: 'none', /* Internet Explorer/Edge */
           userSelect: 'none'
         } : {}),
         ...UtilsStyle.borderRadius(borderRadius),

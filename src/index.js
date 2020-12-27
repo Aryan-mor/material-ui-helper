@@ -3,6 +3,7 @@ export { default as Typography } from './components/Typography'
 export { default as ButtonBase } from './components/ButtonBase'
 export { default as Tooltip } from './components/Tooltip'
 export { default as IconButton } from './components/IconButton'
+export { default as Dialog } from './components/Dialog'
 export { default as useInterval } from './utils/useInterval'
 export { default as useIsomorphicLayoutEffect } from './utils/useIsomorphicLayoutEffect'
 

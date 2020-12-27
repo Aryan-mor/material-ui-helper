@@ -1,6 +1,6 @@
 {
   "name": "material-ui-helper",
-  "version": "1.0.18",
+  "version": "1.0.19",
   "description": "Material-Ui component with more option",
   "author": "Aryan-mor",
   "license": "ISC",
@@ -26,13 +26,13 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "peerDependencies": {
     "react": "^16.0.0",
     "@material-ui/core": "^4.11.0",
     "@material-ui/lab": "^4.0.0-alpha.45",
     "@material-ui/styles": "^4.10.0",
+    "@material-ui/icons": "^4.9.1",
     "clsx": "^1.1.1",
     "lodash": "^4.17.15"
   },
@@ -60,6 +60,7 @@
     "@material-ui/core": "^4.11.0",
     "@material-ui/lab": "^4.0.0-alpha.45",
     "@material-ui/styles": "^4.10.0",
+    "@material-ui/icons": "^4.9.1",
     "clsx": "^1.1.1"
   },
   "files": [
