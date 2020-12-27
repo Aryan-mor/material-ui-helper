@@ -17,6 +17,9 @@ const App = () => {
       <Dialog open={open}
               header={false}
               onOutSideClickClose={false}
+              onBackdropClick={()=>{
+
+              }}
               onClose={() => {
                 setOpen(false)
               }}>

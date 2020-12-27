@@ -4,7 +4,7 @@ import Slide from '@material-ui/core/Slide'
 import IconButton from '@material-ui/core/IconButton'
 import { Close } from '@material-ui/icons'
 import _ from 'lodash'
-import { isElement, tryIt } from '..'
+import { gLog, isElement, tryIt } from '..'
 import PropTypes from 'prop-types'
 import Box from './Box'
 
@@ -12,18 +12,21 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />
 })
 
+
 export default function Dialog(pr) {
 
   const {
     open,
     header,
     closeElement,
+    maxWidth,
     fullWidth,
     fullScreen,
+    scroll,
     transition,
     rootProps,
     headerProps,
-    onOutSideClickClose,
+    onBackdropClick,
     onClose,
     ...props
   } = pr
@@ -56,9 +59,12 @@ export default function Dialog(pr) {
       open={open}
       fullWidth={fullWidth}
       fullScreen={fullScreen}
+      scroll={scroll}
+      maxWidth={maxWidth === 'false' ? false : maxWidth}
       TransitionComponent={transition ? Transition : undefined}
       keepMounted
-      onClose={onOutSideClickClose ? _.isFunction(onOutSideClickClose) ? onOutSideClickClose : handleCloseDialog : undefined}
+      onBackdropClick={_.isFunction(onBackdropClick) ? onBackdropClick : undefined}
+      onClose={!onBackdropClick ? handleCloseDialog : undefined}
       {...props}>
       <Box display={'flex'} flexDirection={'column'} {...rootProps}>
         {header ?
@@ -94,10 +100,12 @@ Dialog.defaultProps = {
   closeElement: true,
   fullWidth: false,
   fullScreen: false,
+  scroll: 'paper',
   transition: true,
+  maxWidth: 'lg',
   rootProps: {},
   headerProps: {},
-  onOutSideClickClose: true
+  onBackdropClick: true
 }
 
 Dialog.propTypes = {
@@ -109,6 +117,8 @@ Dialog.propTypes = {
   transition: PropTypes.bool,
   rootProps: PropTypes.object,
   headerProps: PropTypes.object,
-  onOutSideClickClose: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
+  maxWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', 'false']),
+  scroll: PropTypes.oneOf(['body', 'paper']),
+  onBackdropClick: PropTypes.oneOfType([PropTypes.bool, PropTypes.func]),
   onClose: PropTypes.func
 }
