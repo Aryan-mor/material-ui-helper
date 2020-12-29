@@ -3,9 +3,9 @@ import { TextField as MaterialTextField, useTheme } from '@material-ui/core'
 import _ from 'lodash'
 import Typography from '../Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
-import Box from '@material-ui/core/Box'
 import PropTypes from 'prop-types'
 import { getSafe, gLog, tryIt } from '../..'
+import Box from '../Box'
 
 function TextField(pr) {
   const {

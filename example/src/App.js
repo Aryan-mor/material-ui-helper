@@ -6,7 +6,7 @@ import { useTheme } from '@material-ui/core'
 
 const App = () => {
   const [open, setOpen] = useState(false)
-  const ref = useRef();
+  const ref = useRef()
 
   return (
     <React.Fragment>
@@ -21,17 +21,27 @@ const App = () => {
         onSubmit={() => {
           alert('onSubmit')
         }}
+        onError={() => {
+          alert('onError')
+        }}
         m={2}>
-        <DefaultTextField
-          onChangeDelay={2000}
-          multiline={true}
-          rowsMax={5}
-          rows={3}
-          onChange={(e, j) => {
-            gLog('aslfglasklfkaslk', { e, j })
-          }}
-          autoFocus={true}
-        />
+        <Box flexDirection={'column'}>
+          <DefaultTextField
+            name={'one'}
+            onChangeDelay={2000}
+            onChange={(e, j) => {
+              gLog('aslfglasklfkaslk', { e, j })
+            }}
+            autoFocus={true}
+          />
+          <DefaultTextField
+            name={'two'}
+            onChangeDelay={2000}
+            onChange={(e, j) => {
+              gLog('aslfglasklfkaslk', { e, j })
+            }}
+          />
+        </Box>
       </FormController>
       <Dialog open={open}
               header={false}

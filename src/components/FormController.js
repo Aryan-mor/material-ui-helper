@@ -249,6 +249,18 @@ function FormController(pr) {
              onSubmit()
          }}>
       {props.children}
+
+      {
+        onSubmit &&
+        <input
+          type={'submit'}
+          onClick={() => {
+            //required Error: Dont delete this function
+          }}
+          style={{
+            display: 'none'
+          }}/>
+      }
     </Box>
   )
 }
