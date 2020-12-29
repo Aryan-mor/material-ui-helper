@@ -245,7 +245,7 @@ function TextFieldContainer(pr) {
 
 
 TextFieldContainer.propTypes = {
-  name: PropTypes.any,
+  name: PropTypes.any.isRequired,
   defaultValue: PropTypes.string,
   errorPatterns: PropTypes.array,
   renderGlobalErrorText: PropTypes.string,

@@ -1,11 +1,11 @@
 import React, { useEffect, useLayoutEffect } from 'react'
-import {TextField as MaterialTextField, useTheme } from '@material-ui/core'
+import { TextField as MaterialTextField, useTheme } from '@material-ui/core'
 import _ from 'lodash'
 import Typography from '../Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import Box from '@material-ui/core/Box'
 import PropTypes from 'prop-types'
-
+import { getSafe, gLog, tryIt } from '../..'
 
 function TextField(pr) {
   const {
@@ -13,24 +13,32 @@ function TextField(pr) {
     helperText,
     helperTextIcon,
     defaultValue,
-    requestFocus,
     startAction,
     startAdornment,
     endAction,
     endAdornment,
     containerProps,
+    autoFocus,
+    onFocusIn,
+    onFocusOut,
     ...props
-  } = pr;
+  } = pr
 
   const theme = useTheme()
 
-  useLayoutEffect(() => {
-    try {
-      if (requestFocus)
-        inputRef.current.focus()
-    } catch (e) {
-    }
-  }, [])
+  const onFocusDebounce = _.debounce(e => {
+
+    onFocusIn(e, getSafe(() => {
+      return e.target.value
+    }, ''))
+  }, 300)
+
+  const onBlurDebounce = _.debounce(e => {
+    onFocusOut(e, getSafe(() => {
+      return e.target.value
+    }, ''))
+  }, 300)
+
 
   useEffect(() => {
     try {
@@ -47,6 +55,9 @@ function TextField(pr) {
         <MaterialTextField
           inputRef={inputRef}
           defaultValue={defaultValue}
+          autoFocus={autoFocus}
+          onFocus={onFocusIn ? onFocusDebounce : undefined}
+          onBlur={onFocusOut ? onBlurDebounce : undefined}
           {...props}
           helperText={(
             helperText &&
@@ -84,12 +95,14 @@ TextField.propTypes = {
   helperText: PropTypes.string,
   helperTextIcon: PropTypes.any,
   defaultValue: PropTypes.string,
-  requestFocus: PropTypes.bool,
   startAction: PropTypes.any,
   startAdornment: PropTypes.any,
   endAction: PropTypes.any,
   endAdornment: PropTypes.any,
-  containerProps: PropTypes.object
+  containerProps: PropTypes.object,
+  autoFocus: PropTypes.bool,
+  onFocusIn: PropTypes.func,
+  onFocusOut: PropTypes.func
 }
 
 export default TextField

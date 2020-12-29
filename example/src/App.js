@@ -1,11 +1,13 @@
-import React, { useState } from 'react'
-import { Button, Dialog, Box, IconButton, Typography } from 'material-ui-helper'
+import React, { useRef, useState } from 'react'
+import { FormController, DefaultTextField, Button, Dialog, Box, IconButton, Typography, gLog } from 'material-ui-helper'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useTheme } from '@material-ui/core'
 
 const App = () => {
   const [open, setOpen] = useState(false)
+  const ref = useRef();
+
   return (
     <React.Fragment>
       <Button
@@ -14,10 +16,27 @@ const App = () => {
         }}>
         open Dialog
       </Button>
+      <FormController
+        innerRef={ref}
+        onSubmit={() => {
+          alert('onSubmit')
+        }}
+        m={2}>
+        <DefaultTextField
+          onChangeDelay={2000}
+          multiline={true}
+          rowsMax={5}
+          rows={3}
+          onChange={(e, j) => {
+            gLog('aslfglasklfkaslk', { e, j })
+          }}
+          autoFocus={true}
+        />
+      </FormController>
       <Dialog open={open}
               header={false}
               onOutSideClickClose={false}
-              onBackdropClick={()=>{
+              onBackdropClick={() => {
 
               }}
               onClose={() => {

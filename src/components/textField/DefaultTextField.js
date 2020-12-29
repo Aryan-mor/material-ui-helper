@@ -6,14 +6,32 @@ import PropTypes from 'prop-types'
 
 function DefaultTextField(pr) {
 
-  const { name, defaultValue, variant, label, multiline, rows, rowsMax, required, type, textFieldProps = {}, ...props } = pr
+  const {
+    name,
+    defaultValue,
+    variant,
+    label,
+    multiline,
+    rows,
+    rowsMax,
+    required,
+    type,
+    textFieldProps = {},
+    onChange,
+    onChangeDelay,
+    autoFocus,
+    onFocusIn,
+    onFocusOut,
+    ...props
+  } = pr
 
   return (
     <TextFieldContainer
       name={name}
       defaultValue={defaultValue}
-      onChangeDelay={600}
+      onChangeDelay={onChangeDelay}
       type={type}
+      onChange={onChange}
       render={(ref, { props }) => (
         <TextField
           {...props}
@@ -26,6 +44,9 @@ function DefaultTextField(pr) {
           fullWidth={true}
           label={label}
           required={required}
+          autoFocus={autoFocus}
+          onFocusIn={onFocusIn}
+          onFocusOut={onFocusOut}
           {...textFieldProps}
           style={{
             ...textFieldProps.style
@@ -37,17 +58,26 @@ function DefaultTextField(pr) {
   )
 }
 
+DefaultTextField.defaultProps = {
+  onChangeDelay: 600
+}
+
 DefaultTextField.propTypes = {
-  name:PropTypes.any,
-  defaultValue:PropTypes.string,
-  variant:PropTypes.oneOf(["filled","outlined","standard"]),
+  name: PropTypes.any.isRequired,
+  defaultValue: PropTypes.string,
+  variant: PropTypes.oneOf(['filled', 'outlined', 'standard']),
   label: PropTypes.string,
   multiline: PropTypes.bool,
   rows: PropTypes.number,
   rowsMax: PropTypes.number,
+  onChangeDelay: PropTypes.number,
   required: PropTypes.bool,
   type: PropTypes.any,
   textFieldProps: PropTypes.object,
+  autoFocus: PropTypes.bool,
+  onChange: PropTypes.func,
+  onFocusIn: PropTypes.func,
+  onFocusOut: PropTypes.func
 }
 
 export default DefaultTextField
