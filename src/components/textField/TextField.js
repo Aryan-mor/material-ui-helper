@@ -125,6 +125,7 @@ function TextField(pr) {
     defaultValue,
     color,
     error,
+    placeholder,
     inputStyle,
     inputProps,
     autoComplete,
@@ -176,6 +177,7 @@ function TextField(pr) {
           defaultValue={defaultValue}
           autoFocus={autoFocus}
           disabled={Boolean(disabled)}
+          placeholder={placeholder}
           onFocus={onFocusIn ? onFocusDebounce : undefined}
           onBlur={onFocusOut ? onBlurDebounce : undefined}
           {...props}
@@ -235,7 +237,9 @@ TextField.propTypes = {
   defaultValue: PropTypes.string,
   inputStyle: PropTypes.object,
   inputProps: PropTypes.object,
+  placeholder:PropTypes.string,
   autoComplete: PropTypes.oneOf([
+    "on",
     "off",
     "name",
     "email",

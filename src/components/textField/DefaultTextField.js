@@ -17,6 +17,7 @@ function DefaultTextField(pr) {
     required,
     color,
     type,
+    placeholder,
     inputStyle,
     inputProps,
     autoComplete,
@@ -50,6 +51,7 @@ function DefaultTextField(pr) {
           color={color}
           disabled={disabled}
           multiline={multiline}
+          placeholder={placeholder}
           rows={multiline ? rows : undefined}
           rowsMax={multiline ? rowsMax : undefined}
           fullWidth={true}
@@ -90,10 +92,12 @@ DefaultTextField.propTypes = {
   rowsMax: PropTypes.number,
   onChangeDelay: PropTypes.number,
   required: PropTypes.bool,
+  placeholder:PropTypes.string,
   type: PropTypes.any,
   inputStyle: PropTypes.object,
   inputProps: PropTypes.object,
   autoComplete: PropTypes.oneOf([
+    "on",
     "off",
     "name",
     "email",

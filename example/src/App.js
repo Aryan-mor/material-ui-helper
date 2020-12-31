@@ -29,9 +29,9 @@ const App = () => {
           <DefaultTextField
             name={'one'}
             onChangeDelay={2000}
+            placeholder={"sfas"}
             label={"label"}
-            variant={'outlined'}
-            autoComplete={'name'}
+            autoComplete={'off'}
             inputStyle={{
               textAlign:'center'
             }}
