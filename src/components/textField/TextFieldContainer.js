@@ -3,6 +3,7 @@ import { checkHasErrorPatternArray, isRTL } from '../../utils/Checker'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import DefaultTextField from './DefaultTextField'
+import { getSafe } from '../..'
 
 export const errorList = ['این فیلد اجباری است.']
 
@@ -32,7 +33,21 @@ function getDirType(type) {
 }
 
 function TextFieldContainer(pr) {
-  const { name, defaultValue, errorPatterns = [], renderGlobalErrorText, actived, onChange, onChangeDelay, returnValue, render, type, checkInterval = 1000, dir: d, ...props } = pr
+  const {
+    name,
+    defaultValue,
+    errorPatterns = [],
+    renderGlobalErrorText,
+    actived,
+    onChange,
+    onChangeDelay,
+    returnValue,
+    render,
+    type,
+    checkInterval = 1000,
+    dir: d,
+    ...props
+  } = pr
   const ref = useRef()
   const [error, setError] = useState(-1)
   const [dir, setDir] = useState(d ? d : siteDir)
@@ -213,6 +228,8 @@ function TextFieldContainer(pr) {
   function checkDir(value) {
     try {
       const dir = getDir(value)
+      if (!_.isString(dir))
+        return
       setDir(dir)
       ref.current.setAttribute('input-dir', dir)
     } catch (e) {
@@ -222,6 +239,13 @@ function TextFieldContainer(pr) {
   function getDir(value) {
     return d ? d : (getDirType(type) || ref.current.value ? !isRTL(value ? value : ref.current.value) ? 'ltr' : 'rtl' : siteDir)
   }
+
+  // const borderColor = getSafe(() => {
+  //   const value = getSafe(() => ref.current.value)
+  //   if (error)
+  //     return bColor.error || bColor.main
+  //   return !_.isEmpty(value) ? (bColor.success || bColor.main) : borderColor.main
+  // })
 
   return (
     <React.Fragment>
@@ -233,6 +257,7 @@ function TextFieldContainer(pr) {
         setValue: handleSetValue,
         inputDir: dir,
         props: {
+          renderValue:getSafe(()=>ref.current.value,""),
           name: name,
           defaultValue: defaultValue,
           type: type

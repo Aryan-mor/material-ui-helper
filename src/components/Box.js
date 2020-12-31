@@ -100,7 +100,6 @@ Box.defaultProps = {
   display: 'flex',
   alignCenter: false,
   justifyCenter: false,
-  overflow: 'hidden',
   center: false,
   flexDirectionColumn: false,
   loadingWidth: '25%',

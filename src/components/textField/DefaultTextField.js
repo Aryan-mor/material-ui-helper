@@ -15,8 +15,15 @@ function DefaultTextField(pr) {
     rows,
     rowsMax,
     required,
+    color,
     type,
+    inputStyle,
+    disabled,
     textFieldProps = {},
+    startAction,
+    startAdornment,
+    endAction,
+    endAdornment,
     onChange,
     onChangeDelay,
     autoFocus,
@@ -38,11 +45,18 @@ function DefaultTextField(pr) {
           variant={variant}
           inputRef={ref}
           name={name}
+          color={color}
+          disabled={disabled}
           multiline={multiline}
           rows={multiline ? rows : undefined}
           rowsMax={multiline ? rowsMax : undefined}
           fullWidth={true}
           label={label}
+          startAction={startAction}
+          startAdornment={startAdornment}
+          endAdornment={endAdornment}
+          endAction={endAction}
+          inputStyle={inputStyle}
           required={required}
           autoFocus={autoFocus}
           onFocusIn={onFocusIn}
@@ -73,11 +87,64 @@ DefaultTextField.propTypes = {
   onChangeDelay: PropTypes.number,
   required: PropTypes.bool,
   type: PropTypes.any,
+  inputStyle:PropTypes.string,
+  disabled:PropTypes.bool,
   textFieldProps: PropTypes.object,
   autoFocus: PropTypes.bool,
+  startAction: PropTypes.any,
+  startAdornment: PropTypes.any,
+  endAction: PropTypes.any,
+  endAdornment: PropTypes.any,
   onChange: PropTypes.func,
   onFocusIn: PropTypes.func,
-  onFocusOut: PropTypes.func
+  onFocusOut: PropTypes.func,
+  color: PropTypes.shape({
+    main: PropTypes.string,
+    error: PropTypes.string,
+    success: PropTypes.string,
+    hover: {
+      main: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string
+    },
+    focus: {
+      main: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string
+    },
+
+    border: {
+      main: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string,
+      hover: {
+        main: PropTypes.string,
+        error: PropTypes.string,
+        success: PropTypes.string
+      },
+      focus: {
+        main: PropTypes.string,
+        error: PropTypes.string,
+        success: PropTypes.string
+      }
+    },
+
+    label: {
+      main: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string,
+      hover: {
+        main: PropTypes.string,
+        error: PropTypes.string,
+        success: PropTypes.string
+      },
+      focus: {
+        main: PropTypes.string,
+        error: PropTypes.string,
+        success: PropTypes.string
+      }
+    },
+  })
 }
 
 export default DefaultTextField

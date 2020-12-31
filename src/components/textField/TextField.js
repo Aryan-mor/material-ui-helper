@@ -6,6 +6,119 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 import PropTypes from 'prop-types'
 import { getSafe, gLog, tryIt } from '../..'
 import Box from '../Box'
+import { makeStyles } from '@material-ui/styles'
+
+
+const useStylesTextField = makeStyles((theme) => ({
+  textFieldToot: (({ color, value, error }) => {
+    if (!_.isObject(color))
+      return
+    const getInnerColor = (co = {}, baseColor = color) => {
+      const main = getSafe(() => co.main || baseColor.main, baseColor.main)
+      const success = getSafe(() => co.success || baseColor.success || main, main)
+      const error = getSafe(() => co.error || baseColor.error || main, main)
+      return { main, success, error }
+    }
+
+    const getBaseColor = (co = {}, baseColor = color) => {
+      const main = getSafe(() => {
+        return co.main || baseColor.main
+      }, baseColor.main)
+      const error = getSafe(() => {
+        return co.error || baseColor.error || main
+      }, main)
+      const success = getSafe(() => {
+        return co.success || baseColor.success || main
+      }, main)
+
+
+      const baseProps = { main, error, success }
+      const props = _.cloneDeep(baseProps)
+      props.hover = getInnerColor(co.hover, baseColor.hover)
+      props.focus = getInnerColor(co.focus, baseProps)
+      return props
+    }
+
+    const mainBaseColor = getBaseColor(color)
+    const labelBaseColor = getBaseColor(color.label, mainBaseColor)
+    const borderBaseColor = getBaseColor(color.border, mainBaseColor)
+
+    const getColor = (co = mainBaseColor) => {
+      return getSafe(() => {
+        if (error) {
+          return {
+            mainColor: co.error,
+            hoverColor: co.hover.error,
+            focusColor: co.focus.error
+          }
+        }
+        if (!_.isEmpty(value)) {
+          return {
+            mainColor: co.success,
+            hoverColor: co.hover.success,
+            focusColor: co.focus.success
+          }
+        }
+        throw ''
+      }, {
+        mainColor: co.main,
+        hoverColor: co.hover.main,
+        focusColor: co.focus.main
+      })
+    }
+
+
+    const { mainColor, hoverColor, focusColor } = getColor(mainBaseColor)
+    gLog('safasfas labelBaseColor', labelBaseColor)
+
+    const { mainColor: labelMainColor, hoverColor: labelHoverColor, focusColor: labelFocusColor } = getColor(labelBaseColor)
+    const { mainColor: borderMainColor, hoverColor: borderHoverColor, focusColor: borderFocusColor } = getColor(borderBaseColor)
+
+    gLog('safasfas', { mainColor, hoverColor, focusColor, labelHoverColor,borderHoverColor })
+
+
+    return ({
+      '&:hover':{
+        "& label:not(.Mui-disabled)":{
+          color: labelHoverColor
+        }
+      },
+      '& label': {
+        color: labelMainColor,
+        '&.Mui-focused': {
+          color: labelFocusColor,
+        },
+      },
+      '& label+div:before': {
+        borderColor: borderMainColor
+      },
+      '& label+div:hover:not(.Mui-disabled):before': {
+        borderColor: borderHoverColor
+      },
+      '& label.Mui-focused+div:not(.Mui-disabled):after': {
+        borderColor: borderFocusColor
+      },
+      '& .MuiInput-underline:after': {
+        borderBottomColor: borderFocusColor,
+        '&:hover': {
+          color: borderHoverColor
+        }
+      },
+      '& .MuiOutlinedInput-root': {
+        '& fieldset': {
+          borderColor: borderMainColor
+        },
+        '&:hover fieldset': {
+          borderColor: borderHoverColor
+        },
+        '&.Mui-focused fieldset': {
+          borderColor: borderFocusColor
+        }
+      }
+    })
+  }),
+  focused: {}
+}))
 
 function TextField(pr) {
   const {
@@ -13,17 +126,23 @@ function TextField(pr) {
     helperText,
     helperTextIcon,
     defaultValue,
+    color,
+    error,
+    inputStyle={},
+    disabled,
     startAction,
     startAdornment,
     endAction,
     endAdornment,
     containerProps,
     autoFocus,
+    renderValue,
     onFocusIn,
     onFocusOut,
     ...props
   } = pr
 
+  const classes = color ? useStylesTextField({ color, value: renderValue, error }) : {}
   const theme = useTheme()
 
   const onFocusDebounce = _.debounce(e => {
@@ -49,26 +168,34 @@ function TextField(pr) {
   }, [defaultValue])
 
 
+  gLog("aslfklasklfklas",inputStyle)
+
   return (
-    <Box display={'flex'} width={props.fullWidth ? 1 : null} alignItems="flex-end" {...containerProps}>
+    <Box className={classes.textFieldToot} display={'flex'} width={props.fullWidth ? 1 : null}
+         alignItems="flex-end" {...containerProps}>
       <Box flex={props.fullWidth ? 1 : null}>
         <MaterialTextField
           inputRef={inputRef}
           defaultValue={defaultValue}
           autoFocus={autoFocus}
+          disabled={Boolean(disabled)}
           onFocus={onFocusIn ? onFocusDebounce : undefined}
           onBlur={onFocusOut ? onBlurDebounce : undefined}
           {...props}
           helperText={(
             helperText &&
             <Typography component={'span'} variant={'caption'}
-                        color={props.error ? theme.palette.error.main : null}
+                        color={error ? theme.palette.error.main : null}
                         display={'flex'} alignItems={'center'}>
-              {
-                helperTextIcon && helperTextIcon}
+              {helperTextIcon && helperTextIcon}
               {helperText}
             </Typography>
           )}
+          inputProps={{
+            style:{
+              ...getSafe(()=>props.InputProps.style,{}),
+              ...inputStyle
+            }}}
           InputProps={{
             ...props.InputProps,
             startAdornment: startAdornment && (
@@ -80,14 +207,12 @@ function TextField(pr) {
               <InputAdornment position="end">
                 {endAdornment}
               </InputAdornment>
-            )
+            ),
           }}
         />
       </Box>
     </Box>
-
   )
-
 }
 
 TextField.propTypes = {
@@ -95,6 +220,8 @@ TextField.propTypes = {
   helperText: PropTypes.string,
   helperTextIcon: PropTypes.any,
   defaultValue: PropTypes.string,
+  inputStyle:PropTypes.string,
+  disabled:PropTypes.bool,
   startAction: PropTypes.any,
   startAdornment: PropTypes.any,
   endAction: PropTypes.any,
@@ -102,7 +229,54 @@ TextField.propTypes = {
   containerProps: PropTypes.object,
   autoFocus: PropTypes.bool,
   onFocusIn: PropTypes.func,
-  onFocusOut: PropTypes.func
+  onFocusOut: PropTypes.func,
+  color: PropTypes.shape({
+    main: PropTypes.string,
+    error: PropTypes.string,
+    success: PropTypes.string,
+    hover: {
+      main: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string
+    },
+    focus: {
+      main: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string
+    },
+
+    border: {
+      main: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string,
+      hover: {
+        main: PropTypes.string,
+        error: PropTypes.string,
+        success: PropTypes.string
+      },
+      focus: {
+        main: PropTypes.string,
+        error: PropTypes.string,
+        success: PropTypes.string
+      }
+    },
+
+    label: {
+      main: PropTypes.string,
+      error: PropTypes.string,
+      success: PropTypes.string,
+      hover: {
+        main: PropTypes.string,
+        error: PropTypes.string,
+        success: PropTypes.string
+      },
+      focus: {
+        main: PropTypes.string,
+        error: PropTypes.string,
+        success: PropTypes.string
+      }
+    }
+  }),
 }
 
 export default TextField

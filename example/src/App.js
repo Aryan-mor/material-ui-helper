@@ -29,17 +29,26 @@ const App = () => {
           <DefaultTextField
             name={'one'}
             onChangeDelay={2000}
+            label={"label"}
+            variant={'outlined'}
+            disabled={true}
+            inputStyle={{
+              textAlign:'center'
+            }}
+            color={{
+              main:"blue",
+              error:"error",
+              success:"green",
+              focus:{
+                main: "red",
+                success: "focusSuccess",
+                error: "focusError",
+              },
+            }}
             onChange={(e, j) => {
               gLog('aslfglasklfkaslk', { e, j })
             }}
             autoFocus={true}
-          />
-          <DefaultTextField
-            name={'two'}
-            onChangeDelay={2000}
-            onChange={(e, j) => {
-              gLog('aslfglasklfkaslk', { e, j })
-            }}
           />
         </Box>
       </FormController>
