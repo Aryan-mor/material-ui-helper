@@ -1,10 +1,10 @@
-import React, { useEffect, useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import { TextField as MaterialTextField, useTheme } from '@material-ui/core'
 import _ from 'lodash'
 import Typography from '../Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import PropTypes from 'prop-types'
-import { getSafe, gLog, tryIt } from '../..'
+import { getSafe } from '../..'
 import Box from '../Box'
 import { makeStyles } from '@material-ui/styles'
 
@@ -69,25 +69,22 @@ const useStylesTextField = makeStyles((theme) => ({
 
 
     const { mainColor, hoverColor, focusColor } = getColor(mainBaseColor)
-    gLog('safasfas labelBaseColor', labelBaseColor)
 
     const { mainColor: labelMainColor, hoverColor: labelHoverColor, focusColor: labelFocusColor } = getColor(labelBaseColor)
     const { mainColor: borderMainColor, hoverColor: borderHoverColor, focusColor: borderFocusColor } = getColor(borderBaseColor)
 
-    gLog('safasfas', { mainColor, hoverColor, focusColor, labelHoverColor,borderHoverColor })
-
 
     return ({
-      '&:hover':{
-        "& label:not(.Mui-disabled)":{
+      '&:hover': {
+        '& label:not(.Mui-disabled)': {
           color: labelHoverColor
         }
       },
       '& label': {
         color: labelMainColor,
         '&.Mui-focused': {
-          color: labelFocusColor,
-        },
+          color: labelFocusColor
+        }
       },
       '& label+div:before': {
         borderColor: borderMainColor
@@ -128,7 +125,9 @@ function TextField(pr) {
     defaultValue,
     color,
     error,
-    inputStyle={},
+    inputStyle,
+    inputProps,
+    autoComplete,
     disabled,
     startAction,
     startAdornment,
@@ -168,8 +167,6 @@ function TextField(pr) {
   }, [defaultValue])
 
 
-  gLog("aslfklasklfklas",inputStyle)
-
   return (
     <Box className={classes.textFieldToot} display={'flex'} width={props.fullWidth ? 1 : null}
          alignItems="flex-end" {...containerProps}>
@@ -192,10 +189,18 @@ function TextField(pr) {
             </Typography>
           )}
           inputProps={{
-            style:{
-              ...getSafe(()=>props.InputProps.style,{}),
+            ...inputProps,
+            ...(autoComplete ? {
+              autocomplete: autoComplete,
+              form: {
+                autocomplete: autoComplete
+              }
+            } : {}),
+            style: {
+              ...getSafe(() => props.InputProps.style, {}),
               ...inputStyle
-            }}}
+            }
+          }}
           InputProps={{
             ...props.InputProps,
             startAdornment: startAdornment && (
@@ -207,7 +212,7 @@ function TextField(pr) {
               <InputAdornment position="end">
                 {endAdornment}
               </InputAdornment>
-            ),
+            )
           }}
         />
       </Box>
@@ -215,13 +220,93 @@ function TextField(pr) {
   )
 }
 
+
+TextField.defaultProps = {
+  inputStyle: {},
+  inputProps: {},
+  autoComplete: "on"
+}
+
+
 TextField.propTypes = {
   inputRef: PropTypes.any,
   helperText: PropTypes.string,
   helperTextIcon: PropTypes.any,
   defaultValue: PropTypes.string,
-  inputStyle:PropTypes.string,
-  disabled:PropTypes.bool,
+  inputStyle: PropTypes.object,
+  inputProps: PropTypes.object,
+  autoComplete: PropTypes.oneOf([
+    "off",
+    "name",
+    "email",
+    "tel",
+    "username",
+    "honorific-prefix",
+    "language",
+    "impp",
+    "url",
+    "photo",
+
+    "organization-title",
+    "organization",
+
+    "new-password",
+    "current-password",
+    "one-time-code",
+
+    "given-name",
+    "additional-name",
+    "family-name",
+    "honorific-suffix",
+    "nickname",
+    "bday",
+    "bday-day",
+    "bday-month",
+    "bday-year",
+    "sex",
+
+    "tel",
+    "tel-country-code",
+    "tel-national",
+    "tel-area-code",
+    "tel-local",
+    "tel-extension",
+
+
+    "street-address",
+    "address-line1",
+    "address-line2",
+    "address-line3",
+    "address-level4",
+    "address-level3",
+    "address-level2",
+    "address-level1",
+    "country",
+    "country-name",
+    "postal-code",
+
+    "shipping street-address",
+    "shipping locality",
+    "shipping region",
+    "shipping postal-code",
+    "shipping country",
+
+    "cc-name",
+    "cc-given-name",
+    "cc-additional-name",
+    "cc-family-name",
+    "cc-exp",
+    "cc-exp-month",
+    "cc-exp-year",
+    "cc-number",
+    "cc-csc",
+    "cc-exp",
+    "cc-type",
+
+    "transaction-currency",
+    "transaction-amount",
+  ]),
+  disabled: PropTypes.bool,
   startAction: PropTypes.any,
   startAdornment: PropTypes.any,
   endAction: PropTypes.any,
@@ -276,7 +361,7 @@ TextField.propTypes = {
         success: PropTypes.string
       }
     }
-  }),
+  })
 }
 
 export default TextField

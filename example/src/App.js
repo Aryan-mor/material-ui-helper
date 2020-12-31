@@ -31,7 +31,7 @@ const App = () => {
             onChangeDelay={2000}
             label={"label"}
             variant={'outlined'}
-            disabled={true}
+            autoComplete={'name'}
             inputStyle={{
               textAlign:'center'
             }}
