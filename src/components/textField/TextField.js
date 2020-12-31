@@ -194,9 +194,6 @@ function TextField(pr) {
             ...inputProps,
             ...(autoComplete ? {
               autocomplete: autoComplete,
-              form: {
-                autocomplete: autoComplete
-              }
             } : {}),
             style: {
               ...getSafe(() => props.InputProps.style, {}),
