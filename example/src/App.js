@@ -40,8 +40,8 @@ const App = () => {
             inputStyle={{
               textAlign:'center'
             }}
-            onChange={(e, j) => {
-              gLog('aslfglasklfkaslk', { e, j })
+            onChange={(e, j,f) => {
+              gLog('aslfglasklfkaslk', { e, j,f })
             }}
             autoFocus={true}
           />

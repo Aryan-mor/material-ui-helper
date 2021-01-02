@@ -148,7 +148,7 @@ function TextFieldContainer(pr) {
         if (onChangeDelay) {
           clearTimeout(onChangeTimer[name])
           onChangeTimer[name] = setTimeout(() => {
-            onChange(value, el)
+            onChange(value, el, { error })
           }, onChangeDelay)
         } else {
           onChange(value, el)
@@ -266,6 +266,9 @@ function TextFieldContainer(pr) {
 }
 
 
+TextFieldContainer.defaultProps = {
+  onChangeDelay: 600,
+}
 TextFieldContainer.propTypes = {
   name: PropTypes.any.isRequired,
   defaultValue: PropTypes.string,
