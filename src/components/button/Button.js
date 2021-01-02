@@ -29,6 +29,7 @@ function Button(pr) {
 
   return (
     <Box
+      width={fullWidth ? 1 : 0}
       {...props}>
       <MButton
         component={component}
