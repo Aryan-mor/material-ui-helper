@@ -317,7 +317,7 @@ TextField.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   startAction: PropTypes.any,
-  startAdornment: PropTypes.any,
+  startAdornment: PropTypes.func,
   endAction: PropTypes.any,
   endAdornment: PropTypes.any,
   containerProps: PropTypes.object,

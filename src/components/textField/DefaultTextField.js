@@ -53,6 +53,7 @@ function DefaultTextField(pr) {
             variant={variant}
             inputRef={ref}
             name={name}
+            defaultValue={defaultValue}
             color={color}
             type={type}
             disabled={disabled}
@@ -81,8 +82,7 @@ function DefaultTextField(pr) {
         )
       }}
       {...props}
-      {...props.containerProps}
-    />
+      {...props.containerProps}/>
   )
 
 }

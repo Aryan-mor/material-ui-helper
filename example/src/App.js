@@ -1,61 +1,26 @@
 import React, { useRef, useState } from 'react'
-import { FormController, DefaultTextField, Button, Dialog, Box, IconButton, Typography, gLog } from 'material-ui-helper'
+import { Random,FormController, DefaultTextField, Button, Dialog, Box, IconButton, Typography, gLog } from 'material-ui-helper'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useTheme } from '@material-ui/core'
 
 const App = () => {
   const [open, setOpen] = useState(false)
-  const ref = useRef()
+  const [value, setValue] = useState('sss')
 
   return (
     <React.Fragment>
-      <Button
-        onClick={() => {
-          gLog("aslfglasklfkaslk form hasError",ref.current.hasError())
-          gLog("aslfglasklfkaslk form serialize",ref.current.serialize())
-          // setOpen(true)
-        }}>
-        open Dialog
+      <Typography color={"#ccc"}>
+        safasf
+      </Typography>
+      <Button onClick={()=>{
+        setValue(Random.randomString(5))
+      }}>
+        clear
       </Button>
-      <FormController
-        innerRef={ref}
-        onChange={()=>{
-          gLog("pa")
-        }}
-        onSubmit={() => {
-          // gLog("aslfglasklfkaslk form hasError",ref.current.hasError())
-          // gLog("aslfglasklfkaslk form serialize",ref.current.serialize())
-        }}
-        m={2}>
-        <Box flexDirection={'column'}>
-          <DefaultTextField
-            name={'one'}
-            onChangeDelay={2000}
-            placeholder={"sfas"}
-            label={"label"}
-            autoComplete={'off'}
-            errorPatterns={['^\\d+$']}
-            onChange={(e, j,f) => {
-              gLog('aslfglasklfkaslk', { e, j,f })
-            }}
-            autoFocus={true}
-          />
-        </Box>
-      </FormController>
-      <Dialog open={open}
-              header={false}
-              onOutSideClickClose={false}
-              onBackdropClick={() => {
-
-              }}
-              onClose={() => {
-                setOpen(false)
-              }}>
-        <Box p={5}>
-          diallllllllllllllllog
-        </Box>
-      </Dialog>
+      <DefaultTextField
+        name={'safas'}
+        defaultValue={value}/>
     </React.Fragment>
   )
 }

@@ -176,7 +176,6 @@ function FormController(pr) {
       const callback = function(mutationsList, observer) {
         for (const mutation of mutationsList) {
           try {
-
             if (getSafe(()=>mutation.target.attributes.type.name !== "attributes",false)|| mutation.attributeName === textFieldNewValue) {
               if (mutation.attributeName === notValidTextField) {
                 clearTimeout(timer[name])
