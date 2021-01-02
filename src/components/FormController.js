@@ -8,7 +8,7 @@ import {
 } from './textField/TextFieldContainer'
 import PropTypes from 'prop-types'
 import Box from './Box'
-import { gLog } from '..'
+import { getSafe, gLog } from '..'
 
 
 function getGroup(text) {
@@ -176,7 +176,8 @@ function FormController(pr) {
       const callback = function(mutationsList, observer) {
         for (const mutation of mutationsList) {
           try {
-            if (mutation.target.attributes.inputType || mutation.attributeName === textFieldNewValue) {
+
+            if (getSafe(()=>mutation.target.attributes.type.name !== "attributes",false)|| mutation.attributeName === textFieldNewValue) {
               if (mutation.attributeName === notValidTextField) {
                 clearTimeout(timer[name])
                 timer[name] = setTimeout(() => {

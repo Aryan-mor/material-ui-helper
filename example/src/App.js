@@ -21,7 +21,7 @@ const App = () => {
       <FormController
         innerRef={ref}
         onChange={()=>{
-          gLog("asfkasjkfjksajkfs")
+          gLog("pa")
         }}
         onSubmit={() => {
           // gLog("aslfglasklfkaslk form hasError",ref.current.hasError())
