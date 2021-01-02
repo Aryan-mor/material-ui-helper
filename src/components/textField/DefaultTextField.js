@@ -2,7 +2,7 @@ import React from 'react'
 import TextField from './TextField'
 import TextFieldContainer from './TextFieldContainer'
 import PropTypes from 'prop-types'
-
+import _ from 'lodash'
 
 function DefaultTextField(pr) {
 
@@ -17,6 +17,7 @@ function DefaultTextField(pr) {
     required,
     color,
     type,
+    error,
     placeholder,
     inputStyle,
     inputProps,
@@ -27,6 +28,8 @@ function DefaultTextField(pr) {
     startAdornment,
     endAction,
     endAdornment,
+    errorPatterns,
+    renderGlobalErrorText,
     onChange,
     onChangeDelay,
     autoFocus,
@@ -34,7 +37,6 @@ function DefaultTextField(pr) {
     onFocusOut,
     ...props
   } = pr
-
   return (
     <TextFieldContainer
       name={name}
@@ -42,40 +44,46 @@ function DefaultTextField(pr) {
       onChangeDelay={onChangeDelay}
       type={type}
       onChange={onChange}
-      render={(ref, { props }) => (
-        <TextField
-          {...props}
-          variant={variant}
-          inputRef={ref}
-          name={name}
-          color={color}
-          disabled={disabled}
-          multiline={multiline}
-          placeholder={placeholder}
-          rows={multiline ? rows : undefined}
-          rowsMax={multiline ? rowsMax : undefined}
-          fullWidth={true}
-          label={label}
-          startAction={startAction}
-          startAdornment={startAdornment}
-          endAdornment={endAdornment}
-          endAction={endAction}
-          inputStyle={inputStyle}
-          required={required}
-          autoFocus={autoFocus}
-          inputProps={inputProps}
-          autoComplete={autoComplete}
-          onFocusIn={onFocusIn}
-          onFocusOut={onFocusOut}
-          {...textFieldProps}
-          style={{
-            ...textFieldProps.style
-          }}/>
-      )}
+      errorPatterns={errorPatterns}
+      renderGlobalErrorText={renderGlobalErrorText}
+      render={(ref, { errorIndex, props }) => {
+        return (
+          <TextField
+            {...props}
+            variant={variant}
+            inputRef={ref}
+            name={name}
+            color={color}
+            disabled={disabled}
+            multiline={multiline}
+            placeholder={placeholder}
+            rows={multiline ? rows : undefined}
+            rowsMax={multiline ? rowsMax : undefined}
+            fullWidth={true}
+            label={label}
+            startAction={startAction}
+            startAdornment={startAdornment}
+            endAdornment={endAdornment}
+            endAction={endAction}
+            inputStyle={inputStyle}
+            required={required}
+            autoFocus={autoFocus}
+            inputProps={inputProps}
+            autoComplete={autoComplete}
+            onFocusIn={onFocusIn}
+            onFocusOut={onFocusOut}
+            error={error || (_.isNumber(errorIndex) && errorIndex !== -1)}
+            {...textFieldProps}
+            style={{
+              ...textFieldProps.style
+            }}/>
+        )
+      }}
       {...props}
       {...props.containerProps}
     />
   )
+
 }
 
 DefaultTextField.defaultProps = {
@@ -92,89 +100,92 @@ DefaultTextField.propTypes = {
   rowsMax: PropTypes.number,
   onChangeDelay: PropTypes.number,
   required: PropTypes.bool,
-  placeholder:PropTypes.string,
+  error: PropTypes.bool,
+  placeholder: PropTypes.string,
   type: PropTypes.any,
   inputStyle: PropTypes.object,
   inputProps: PropTypes.object,
   autoComplete: PropTypes.oneOf([
-    "on",
-    "off",
-    "name",
-    "email",
-    "tel",
-    "username",
-    "honorific-prefix",
-    "language",
-    "impp",
-    "url",
-    "photo",
+    'on',
+    'off',
+    'name',
+    'email',
+    'tel',
+    'username',
+    'honorific-prefix',
+    'language',
+    'impp',
+    'url',
+    'photo',
 
-    "organization-title",
-    "organization",
+    'organization-title',
+    'organization',
 
-    "new-password",
-    "current-password",
-    "one-time-code",
+    'new-password',
+    'current-password',
+    'one-time-code',
 
-    "given-name",
-    "additional-name",
-    "family-name",
-    "honorific-suffix",
-    "nickname",
-    "bday",
-    "bday-day",
-    "bday-month",
-    "bday-year",
-    "sex",
+    'given-name',
+    'additional-name',
+    'family-name',
+    'honorific-suffix',
+    'nickname',
+    'bday',
+    'bday-day',
+    'bday-month',
+    'bday-year',
+    'sex',
 
-    "tel",
-    "tel-country-code",
-    "tel-national",
-    "tel-area-code",
-    "tel-local",
-    "tel-extension",
+    'tel',
+    'tel-country-code',
+    'tel-national',
+    'tel-area-code',
+    'tel-local',
+    'tel-extension',
 
 
-    "street-address",
-    "address-line1",
-    "address-line2",
-    "address-line3",
-    "address-level4",
-    "address-level3",
-    "address-level2",
-    "address-level1",
-    "country",
-    "country-name",
-    "postal-code",
+    'street-address',
+    'address-line1',
+    'address-line2',
+    'address-line3',
+    'address-level4',
+    'address-level3',
+    'address-level2',
+    'address-level1',
+    'country',
+    'country-name',
+    'postal-code',
 
-    "shipping street-address",
-    "shipping locality",
-    "shipping region",
-    "shipping postal-code",
-    "shipping country",
+    'shipping street-address',
+    'shipping locality',
+    'shipping region',
+    'shipping postal-code',
+    'shipping country',
 
-    "cc-name",
-    "cc-given-name",
-    "cc-additional-name",
-    "cc-family-name",
-    "cc-exp",
-    "cc-exp-month",
-    "cc-exp-year",
-    "cc-number",
-    "cc-csc",
-    "cc-exp",
-    "cc-type",
+    'cc-name',
+    'cc-given-name',
+    'cc-additional-name',
+    'cc-family-name',
+    'cc-exp',
+    'cc-exp-month',
+    'cc-exp-year',
+    'cc-number',
+    'cc-csc',
+    'cc-exp',
+    'cc-type',
 
-    "transaction-currency",
-    "transaction-amount",
+    'transaction-currency',
+    'transaction-amount'
   ]),
-  disabled:PropTypes.bool,
+  disabled: PropTypes.bool,
   textFieldProps: PropTypes.object,
   autoFocus: PropTypes.bool,
   startAction: PropTypes.any,
   startAdornment: PropTypes.any,
   endAction: PropTypes.any,
   endAdornment: PropTypes.any,
+  errorPatterns: PropTypes.array,
+  renderGlobalErrorText: PropTypes.func,
   onChange: PropTypes.func,
   onFocusIn: PropTypes.func,
   onFocusOut: PropTypes.func,
@@ -223,7 +234,7 @@ DefaultTextField.propTypes = {
         error: PropTypes.string,
         success: PropTypes.string
       }
-    },
+    }
   })
 }
 

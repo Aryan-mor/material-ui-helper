@@ -180,6 +180,7 @@ function TextField(pr) {
           placeholder={placeholder}
           onFocus={onFocusIn ? onFocusDebounce : undefined}
           onBlur={onFocusOut ? onBlurDebounce : undefined}
+          error={error}
           {...props}
           helperText={(
             helperText &&
@@ -308,6 +309,7 @@ TextField.propTypes = {
     "transaction-amount",
   ]),
   disabled: PropTypes.bool,
+  error: PropTypes.bool,
   startAction: PropTypes.any,
   startAdornment: PropTypes.any,
   endAction: PropTypes.any,

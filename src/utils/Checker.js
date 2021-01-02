@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { gLog } from './Helper'
 
 export function checkPattern(pattern, text) {
     return !checkHasErrorPatternReturnBool(pattern, text)

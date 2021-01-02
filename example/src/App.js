@@ -12,17 +12,17 @@ const App = () => {
     <React.Fragment>
       <Button
         onClick={() => {
-          setOpen(true)
+          gLog("aslfglasklfkaslk form hasError",ref.current.hasError())
+          gLog("aslfglasklfkaslk form serialize",ref.current.serialize())
+          // setOpen(true)
         }}>
         open Dialog
       </Button>
       <FormController
         innerRef={ref}
         onSubmit={() => {
-          alert('onSubmit')
-        }}
-        onError={() => {
-          alert('onError')
+          gLog("aslfglasklfkaslk form hasError",ref.current.hasError())
+          gLog("aslfglasklfkaslk form serialize",ref.current.serialize())
         }}
         m={2}>
         <Box flexDirection={'column'}>
@@ -32,18 +32,9 @@ const App = () => {
             placeholder={"sfas"}
             label={"label"}
             autoComplete={'off'}
+            errorPatterns={['^\\d+$']}
             inputStyle={{
               textAlign:'center'
-            }}
-            color={{
-              main:"blue",
-              error:"error",
-              success:"green",
-              focus:{
-                main: "red",
-                success: "focusSuccess",
-                error: "focusError",
-              },
             }}
             onChange={(e, j) => {
               gLog('aslfglasklfkaslk', { e, j })

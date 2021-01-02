@@ -3,7 +3,7 @@ import { checkHasErrorPatternArray, isRTL } from '../../utils/Checker'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import DefaultTextField from './DefaultTextField'
-import { getSafe } from '../..'
+import { getSafe, gLog } from '../..'
 
 export const errorList = ['این فیلد اجباری است.']
 
@@ -48,6 +48,8 @@ function TextFieldContainer(pr) {
     dir: d,
     ...props
   } = pr
+
+
   const ref = useRef()
   const [error, setError] = useState(-1)
   const [dir, setDir] = useState(d ? d : siteDir)
@@ -240,12 +242,6 @@ function TextFieldContainer(pr) {
     return d ? d : (getDirType(type) || ref.current.value ? !isRTL(value ? value : ref.current.value) ? 'ltr' : 'rtl' : siteDir)
   }
 
-  // const borderColor = getSafe(() => {
-  //   const value = getSafe(() => ref.current.value)
-  //   if (error)
-  //     return bColor.error || bColor.main
-  //   return !_.isEmpty(value) ? (bColor.success || bColor.main) : borderColor.main
-  // })
 
   return (
     <React.Fragment>
@@ -273,7 +269,7 @@ TextFieldContainer.propTypes = {
   name: PropTypes.any.isRequired,
   defaultValue: PropTypes.string,
   errorPatterns: PropTypes.array,
-  renderGlobalErrorText: PropTypes.string,
+  renderGlobalErrorText: PropTypes.func,
   actived: PropTypes.bool,
   onChange: PropTypes.func,
   onChangeDelay: PropTypes.number,
