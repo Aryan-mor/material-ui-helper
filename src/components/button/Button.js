@@ -1,11 +1,9 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 import Box from '../Box'
 import MButton from '@material-ui/core/Button'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import Typography from '../Typography'
-import { useTheme } from '@material-ui/core'
-import { gLog } from '../..'
 
 function Button(pr) {
   const {
@@ -28,11 +26,6 @@ function Button(pr) {
     ...props
   } = pr
 
-
-  const {
-    component: typoComponent,
-    ...typoProps
-  } = typography
 
   return (
     <Box
@@ -57,11 +50,14 @@ function Button(pr) {
           ...buttonProps.style,
           ...styleProps
         }}>
-        <Typography
-          component={typoComponent || 'span'}
-          {...typoProps}>
-          {props.children}
-        </Typography>
+        {_.isObject(typography) ?
+          <Typography
+            {...typography}
+            component={typography.component || 'span'}>
+            {props.children}
+          </Typography> :
+          props.children
+        }
       </MButton>
     </Box>
   )
@@ -69,7 +65,7 @@ function Button(pr) {
 
 
 Button.defaultProps = {
-  variant: 'text',
+  variant: 'contained',
   colorDef: 'default',
   disabled: false,
   disableElevation: false,
@@ -80,7 +76,7 @@ Button.defaultProps = {
     component: 'span'
   },
   buttonProps: {},
-  styleProps: {},
+  styleProps: {}
 }
 
 
@@ -100,7 +96,7 @@ export const buttonPropType = {
   href: PropTypes.string,
   buttonProps: PropTypes.object,
   styleProps: PropTypes.object,
-  onClick:PropTypes.func,
+  onClick: PropTypes.func,
   typography: PropTypes.shape({
     component: PropTypes.string,
     variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
@@ -126,7 +122,7 @@ Button.propTypes = {
   fullWidth: PropTypes.bool,
   href: PropTypes.string,
   buttonProps: PropTypes.object,
-  onClick:PropTypes.func,
+  onClick: PropTypes.func,
   typography: PropTypes.shape({
     component: PropTypes.string,
     variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
