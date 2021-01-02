@@ -54,6 +54,7 @@ function DefaultTextField(pr) {
             inputRef={ref}
             name={name}
             color={color}
+            type={type}
             disabled={disabled}
             multiline={multiline}
             placeholder={placeholder}
@@ -102,7 +103,7 @@ DefaultTextField.propTypes = {
   required: PropTypes.bool,
   error: PropTypes.bool,
   placeholder: PropTypes.string,
-  type: PropTypes.any,
+  type: PropTypes.oneOf(['text', 'number', 'email', 'hidden', 'password', 'search', 'tel', 'url']),
   inputStyle: PropTypes.object,
   inputProps: PropTypes.object,
   autoComplete: PropTypes.oneOf([

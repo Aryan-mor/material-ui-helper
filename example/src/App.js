@@ -20,6 +20,9 @@ const App = () => {
       </Button>
       <FormController
         innerRef={ref}
+        onChange={()=>{
+          gLog("asfkasjkfjksajkfs")
+        }}
         onSubmit={() => {
           // gLog("aslfglasklfkaslk form hasError",ref.current.hasError())
           // gLog("aslfglasklfkaslk form serialize",ref.current.serialize())
@@ -33,13 +36,6 @@ const App = () => {
             label={"label"}
             autoComplete={'off'}
             errorPatterns={['^\\d+$']}
-            bottomElement={(value)=>
-            <Typography pt={2} variant={"body1"}>
-              {value}
-            </Typography>}
-            inputStyle={{
-              textAlign:'center'
-            }}
             onChange={(e, j,f) => {
               gLog('aslfglasklfkaslk', { e, j,f })
             }}

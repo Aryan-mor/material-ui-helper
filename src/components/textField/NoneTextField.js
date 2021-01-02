@@ -15,6 +15,7 @@ function NoneTextField({name,defaultValue,containerProps={},textFieldProps={},..
                     {...props}
                     inputRef={ref}
                     name={name}
+                    type={'hidden'}
                     {...textFieldProps}
                     style={{
                         display: 'none',

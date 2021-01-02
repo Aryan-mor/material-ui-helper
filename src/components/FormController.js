@@ -8,6 +8,7 @@ import {
 } from './textField/TextFieldContainer'
 import PropTypes from 'prop-types'
 import Box from './Box'
+import { gLog } from '..'
 
 
 function getGroup(text) {
@@ -173,20 +174,23 @@ function FormController(pr) {
       setAttr(checkError())
       const config = { attributes: true, childList: true, subtree: true }
       const callback = function(mutationsList, observer) {
-        for (let mutation of mutationsList) {
-          if (mutation.type !== 'attributes' || mutation.attributeName === textFieldNewValue) {
-            if (mutation.attributeName === notValidTextField) {
-              clearTimeout(timer[name])
-              timer[name] = setTimeout(() => {
-                setAttr(checkError())
-              }, checkInterval)
+        for (const mutation of mutationsList) {
+          try {
+            if (mutation.target.attributes.inputType || mutation.attributeName === textFieldNewValue) {
+              if (mutation.attributeName === notValidTextField) {
+                clearTimeout(timer[name])
+                timer[name] = setTimeout(() => {
+                }, checkInterval)
+              }
+              clearTimeout(onChangeTimer[name])
+              setAttr(checkError())
+              if (onChange) {
+                onChangeTimer[name] = setTimeout(() => {
+                  onChange()
+                }, onChangeInterval)
+              }
             }
-            clearTimeout(onChangeTimer[name])
-            if (onChange) {
-              onChangeTimer[name] = setTimeout(() => {
-                onChange()
-              }, onChangeInterval)
-            }
+          } catch (e) {
           }
         }
       }

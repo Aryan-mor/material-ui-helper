@@ -130,6 +130,7 @@ function TextField(pr) {
     inputProps,
     autoComplete,
     disabled,
+    type,
     startAction,
     startAdornment,
     endAction,
@@ -181,6 +182,8 @@ function TextField(pr) {
           autoFocus={autoFocus}
           disabled={Boolean(disabled)}
           placeholder={placeholder}
+          input-type={type}
+          type={type}
           onFocus={onFocusIn ? onFocusDebounce : undefined}
           onBlur={onFocusOut ? onBlurDebounce : undefined}
           error={error}

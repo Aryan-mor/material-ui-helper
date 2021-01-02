@@ -94,7 +94,8 @@ function TextFieldContainer(pr) {
         setAttr(0)
       }
       checkDir(defaultValue)
-      //region init
+      ref.current.setAttribute('inputType', type)
+      //endregion init
 
 
       el.addEventListener('keyup', keyUp)
@@ -267,6 +268,7 @@ function TextFieldContainer(pr) {
 
 
 TextFieldContainer.defaultProps = {
+  type:"text",
   onChangeDelay: 600,
 }
 TextFieldContainer.propTypes = {
@@ -275,11 +277,11 @@ TextFieldContainer.propTypes = {
   errorPatterns: PropTypes.array,
   renderGlobalErrorText: PropTypes.func,
   actived: PropTypes.bool,
+  type: PropTypes.oneOf(['text', 'number', 'email', 'hidden', 'password', 'search', 'tel', 'url']),
   onChange: PropTypes.func,
   onChangeDelay: PropTypes.number,
   returnValue: PropTypes.func,
   render: PropTypes.func,
-  type: PropTypes.any,
   checkInterval: PropTypes.number,
   dir: PropTypes.string
 }
