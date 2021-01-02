@@ -21,8 +21,8 @@ const App = () => {
       <FormController
         innerRef={ref}
         onSubmit={() => {
-          gLog("aslfglasklfkaslk form hasError",ref.current.hasError())
-          gLog("aslfglasklfkaslk form serialize",ref.current.serialize())
+          // gLog("aslfglasklfkaslk form hasError",ref.current.hasError())
+          // gLog("aslfglasklfkaslk form serialize",ref.current.serialize())
         }}
         m={2}>
         <Box flexDirection={'column'}>
@@ -33,6 +33,10 @@ const App = () => {
             label={"label"}
             autoComplete={'off'}
             errorPatterns={['^\\d+$']}
+            bottomElement={(value)=>
+            <Typography pt={2} variant={"body1"}>
+              {value}
+            </Typography>}
             inputStyle={{
               textAlign:'center'
             }}

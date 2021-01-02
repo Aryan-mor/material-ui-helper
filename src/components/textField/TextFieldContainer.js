@@ -249,11 +249,12 @@ function TextFieldContainer(pr) {
         name: name,
         initialize: (ref.current && ref.current.attributes[textFieldInitialize]),
         valid: (!focused || error <= -1),
+        value: getSafe(() => ref.current.value, ''),
         errorIndex: (focused) ? error : -1,
         setValue: handleSetValue,
         inputDir: dir,
         props: {
-          renderValue:getSafe(()=>ref.current.value,""),
+          renderValue: getSafe(() => ref.current.value, ''),
           name: name,
           defaultValue: defaultValue,
           type: type
@@ -277,7 +278,7 @@ TextFieldContainer.propTypes = {
   render: PropTypes.func,
   type: PropTypes.any,
   checkInterval: PropTypes.number,
-  dir: PropTypes.string,
+  dir: PropTypes.string
 }
 
 

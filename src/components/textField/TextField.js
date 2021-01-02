@@ -4,7 +4,7 @@ import _ from 'lodash'
 import Typography from '../Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import PropTypes from 'prop-types'
-import { getSafe } from '../..'
+import { getSafe, gLog } from '../..'
 import Box from '../Box'
 import { makeStyles } from '@material-ui/styles'
 
@@ -148,14 +148,17 @@ function TextField(pr) {
   const onFocusDebounce = _.debounce(e => {
 
     onFocusIn(e, getSafe(() => {
-      return e.target.value
-    }, ''))
+        return e.target.value
+      }, ''),
+      { error })
   }, 300)
 
   const onBlurDebounce = _.debounce(e => {
-    onFocusOut(e, getSafe(() => {
-      return e.target.value
-    }, ''))
+    onFocusOut(e,
+      getSafe(() => {
+        return e.target.value
+      }, ''),
+      { error })
   }, 300)
 
 
@@ -194,7 +197,7 @@ function TextField(pr) {
           inputProps={{
             ...inputProps,
             ...(autoComplete ? {
-              autocomplete: autoComplete,
+              autocomplete: autoComplete
             } : {}),
             style: {
               ...getSafe(() => props.InputProps.style, {}),
@@ -224,7 +227,7 @@ function TextField(pr) {
 TextField.defaultProps = {
   inputStyle: {},
   inputProps: {},
-  autoComplete: "on"
+  autoComplete: 'on'
 }
 
 
@@ -235,78 +238,78 @@ TextField.propTypes = {
   defaultValue: PropTypes.string,
   inputStyle: PropTypes.object,
   inputProps: PropTypes.object,
-  placeholder:PropTypes.string,
+  placeholder: PropTypes.string,
   autoComplete: PropTypes.oneOf([
-    "on",
-    "off",
-    "name",
-    "email",
-    "tel",
-    "username",
-    "honorific-prefix",
-    "language",
-    "impp",
-    "url",
-    "photo",
+    'on',
+    'off',
+    'name',
+    'email',
+    'tel',
+    'username',
+    'honorific-prefix',
+    'language',
+    'impp',
+    'url',
+    'photo',
 
-    "organization-title",
-    "organization",
+    'organization-title',
+    'organization',
 
-    "new-password",
-    "current-password",
-    "one-time-code",
+    'new-password',
+    'current-password',
+    'one-time-code',
 
-    "given-name",
-    "additional-name",
-    "family-name",
-    "honorific-suffix",
-    "nickname",
-    "bday",
-    "bday-day",
-    "bday-month",
-    "bday-year",
-    "sex",
+    'given-name',
+    'additional-name',
+    'family-name',
+    'honorific-suffix',
+    'nickname',
+    'bday',
+    'bday-day',
+    'bday-month',
+    'bday-year',
+    'sex',
 
-    "tel",
-    "tel-country-code",
-    "tel-national",
-    "tel-area-code",
-    "tel-local",
-    "tel-extension",
+    'tel',
+    'tel-country-code',
+    'tel-national',
+    'tel-area-code',
+    'tel-local',
+    'tel-extension',
 
 
-    "street-address",
-    "address-line1",
-    "address-line2",
-    "address-line3",
-    "address-level4",
-    "address-level3",
-    "address-level2",
-    "address-level1",
-    "country",
-    "country-name",
-    "postal-code",
+    'street-address',
+    'address-line1',
+    'address-line2',
+    'address-line3',
+    'address-level4',
+    'address-level3',
+    'address-level2',
+    'address-level1',
+    'country',
+    'country-name',
+    'postal-code',
 
-    "shipping street-address",
-    "shipping locality",
-    "shipping region",
-    "shipping postal-code",
-    "shipping country",
+    'shipping street-address',
+    'shipping locality',
+    'shipping region',
+    'shipping postal-code',
+    'shipping country',
 
-    "cc-name",
-    "cc-given-name",
-    "cc-additional-name",
-    "cc-family-name",
-    "cc-exp",
-    "cc-exp-month",
-    "cc-exp-year",
-    "cc-number",
-    "cc-csc",
-    "cc-exp",
-    "cc-type",
+    'cc-name',
+    'cc-given-name',
+    'cc-additional-name',
+    'cc-family-name',
+    'cc-exp',
+    'cc-exp-month',
+    'cc-exp-year',
+    'cc-number',
+    'cc-csc',
+    'cc-exp',
+    'cc-type',
 
-    "transaction-currency",
-    "transaction-amount",
+    'transaction-currency',
+    'transaction-amount'
   ]),
   disabled: PropTypes.bool,
   error: PropTypes.bool,
