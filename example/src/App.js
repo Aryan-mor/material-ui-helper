@@ -26,6 +26,21 @@ const App = () => {
         }}>
         clear
       </Button>
+
+      <Button
+        pt={5}
+        id={"login_first_step_submit_button"}
+        fullWidth={true}
+        colorDef={"primary"}
+        loading={true}
+        disableElevation={true}
+        typography={{
+          py: 1,
+          variant: "body1",
+          color: "#fff"
+        }}>
+        ادامخ
+      </Button>
       <DefaultTextField
         name={'safas'}
         defaultValue={value}/>

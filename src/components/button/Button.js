@@ -35,11 +35,7 @@ function Button(pr) {
   return (
     <Box
       width={fullWidth ? 1 : 0}
-      {...props}
-      style={{
-        position: 'relative',
-        ...props.style
-      }}>
+      {...props}>
       <MButton
         component={component}
         variant={variant}
@@ -55,6 +51,7 @@ function Button(pr) {
         href={href}
         {...buttonProps}
         style={{
+          position: 'relative',
           backgroundColor: (!disabledRenderVal && variant === 'contained') ? color : undefined,
           borderColor: (!disabledRenderVal && variant === 'outlined') ? color : undefined,
           ...buttonProps.style,
@@ -69,19 +66,25 @@ function Button(pr) {
           </Typography> :
           props.children
         }
+
+        {loading &&
+        <Box
+          center={true}
+          style={{
+            position: 'absolute',
+            top:0,
+            left:0,
+            right:0,
+            bottom:0
+          }}>
+          <CircularProgress
+            size={24}
+            {...loadingProps}
+            style={{
+              ...loadingProps.style
+            }}/>
+        </Box>}
       </MButton>
-      {loading &&
-      <CircularProgress
-        size={24}
-        {...loadingProps}
-        style={{
-          position: 'absolute',
-          top: '50%',
-          left: '50%',
-          marginTop: -12,
-          marginLeft: -12,
-          ...loadingProps.style
-        }}/>}
     </Box>
   )
 }
@@ -140,6 +143,8 @@ Button.propTypes = {
   colorDef: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
   color: PropTypes.string,
   size: PropTypes.oneOf(['large', 'medium', 'small']),
+  loading: PropTypes.bool,
+  loadingProps: PropTypes.object,
   disabled: PropTypes.bool,
   disableElevation: PropTypes.bool,
   disableFocusRipple: PropTypes.bool,
