@@ -8,6 +8,7 @@ function DefaultTextField(pr) {
 
   const {
     name,
+    value,
     defaultValue,
     variant,
     label,
@@ -32,9 +33,13 @@ function DefaultTextField(pr) {
     renderGlobalErrorText,
     onChange,
     onChangeDelay,
+    onChangeTextField,
+    onChangeTextFieldDelay,
     autoFocus,
     onFocusIn,
+    onFocusInDelay,
     onFocusOut,
+    onFocusOutDelay,
     ...props
   } = pr
   return (
@@ -52,6 +57,7 @@ function DefaultTextField(pr) {
             {...props}
             variant={variant}
             inputRef={ref}
+            value={value}
             name={name}
             defaultValue={defaultValue}
             color={color}
@@ -72,8 +78,12 @@ function DefaultTextField(pr) {
             autoFocus={autoFocus}
             inputProps={inputProps}
             autoComplete={autoComplete}
+            onChange={onChangeTextField}
+            onChangeDelay={onChangeTextFieldDelay}
             onFocusIn={onFocusIn}
+            onFocusInDelay={onFocusInDelay}
             onFocusOut={onFocusOut}
+            onFocusOutDelay={onFocusOutDelay}
             error={error || (_.isNumber(errorIndex) && errorIndex !== -1)}
             {...textFieldProps}
             style={{
@@ -94,12 +104,12 @@ DefaultTextField.defaultProps = {
 DefaultTextField.propTypes = {
   name: PropTypes.any.isRequired,
   defaultValue: PropTypes.string,
+  value:PropTypes.string,
   variant: PropTypes.oneOf(['filled', 'outlined', 'standard']),
   label: PropTypes.string,
   multiline: PropTypes.bool,
   rows: PropTypes.number,
   rowsMax: PropTypes.number,
-  onChangeDelay: PropTypes.number,
   required: PropTypes.bool,
   error: PropTypes.bool,
   placeholder: PropTypes.string,
@@ -188,8 +198,13 @@ DefaultTextField.propTypes = {
   errorPatterns: PropTypes.array,
   renderGlobalErrorText: PropTypes.func,
   onChange: PropTypes.func,
+  onChangeDelay: PropTypes.number,
+  onChangeTextField: PropTypes.func,
+  onChangeTextFieldDelay: PropTypes.func,
   onFocusIn: PropTypes.func,
+  onFocusInDelay: PropTypes.func,
   onFocusOut: PropTypes.func,
+  onFocusOutDelay: PropTypes.func,
   color: PropTypes.shape({
     main: PropTypes.string,
     error: PropTypes.string,

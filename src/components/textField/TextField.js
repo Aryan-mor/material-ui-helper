@@ -122,6 +122,7 @@ function TextField(pr) {
     inputRef,
     helperText,
     helperTextIcon,
+    value,
     defaultValue,
     color,
     error,
@@ -138,8 +139,12 @@ function TextField(pr) {
     containerProps,
     autoFocus,
     renderValue,
+    onChange,
+    onChangeDelay,
     onFocusIn,
+    onFocusInDelay,
     onFocusOut,
+    onFocusOutDelay,
     ...props
   } = pr
 
@@ -152,7 +157,7 @@ function TextField(pr) {
         return e.target.value
       }, ''),
       { error })
-  }, 300)
+  }, onFocusInDelay)
 
   const onBlurDebounce = _.debounce(e => {
     onFocusOut(e,
@@ -160,7 +165,22 @@ function TextField(pr) {
         return e.target.value
       }, ''),
       { error })
-  }, 300)
+  }, onFocusOutDelay)
+  const onChangeDebounce = _.debounce(e => {
+    onChange(e,
+      getSafe(() => {
+        return e.target.value
+      }, ''),
+      { error })
+  }, onChangeDelay)
+
+  const onChangeNoDebounce = (e) => {
+    onChange(e,
+      getSafe(() => {
+        return e.target.value
+      }, ''),
+      { error })
+  }
 
 
   useEffect(() => {
@@ -178,6 +198,7 @@ function TextField(pr) {
       <Box flex={props.fullWidth ? 1 : null}>
         <MaterialTextField
           inputRef={inputRef}
+          value={value}
           defaultValue={defaultValue}
           autoFocus={autoFocus}
           disabled={Boolean(disabled)}
@@ -186,6 +207,7 @@ function TextField(pr) {
           type={type}
           onFocus={onFocusIn ? onFocusDebounce : undefined}
           onBlur={onFocusOut ? onBlurDebounce : undefined}
+          onChange={onChange ? (_.isString(value) ? onChangeNoDebounce : onChangeDebounce) : undefined}
           error={error}
           {...props}
           helperText={(
@@ -200,7 +222,7 @@ function TextField(pr) {
           inputProps={{
             ...inputProps,
             ...(autoComplete ? {
-              autocomplete: autoComplete
+              autoComplete: autoComplete
             } : {}),
             style: {
               ...getSafe(() => props.InputProps.style, {}),
@@ -230,7 +252,10 @@ function TextField(pr) {
 TextField.defaultProps = {
   inputStyle: {},
   inputProps: {},
-  autoComplete: 'on'
+  autoComplete: 'on',
+  onChangeDelay: 300,
+  onFocusInDelay: 300,
+  onFocusOutDelay: 300
 }
 
 
@@ -238,6 +263,7 @@ TextField.propTypes = {
   inputRef: PropTypes.any,
   helperText: PropTypes.string,
   helperTextIcon: PropTypes.any,
+  value: PropTypes.string,
   defaultValue: PropTypes.string,
   inputStyle: PropTypes.object,
   inputProps: PropTypes.object,
@@ -247,7 +273,6 @@ TextField.propTypes = {
     'off',
     'name',
     'email',
-    'tel',
     'username',
     'honorific-prefix',
     'language',
@@ -322,8 +347,12 @@ TextField.propTypes = {
   endAdornment: PropTypes.any,
   containerProps: PropTypes.object,
   autoFocus: PropTypes.bool,
+  onChange: PropTypes.func,
+  onChangeDelay: PropTypes.number,
   onFocusIn: PropTypes.func,
+  onFocusInDelay: PropTypes.number,
   onFocusOut: PropTypes.func,
+  onFocusOutDelay: PropTypes.number,
   color: PropTypes.shape({
     main: PropTypes.string,
     error: PropTypes.string,

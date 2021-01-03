@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Button, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
+import { gLog, Box, Button, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useTheme } from '@material-ui/core'
@@ -19,7 +19,7 @@ const App = () => {
         disableElevation={true}
         loading={true}
         typography={{
-          variant:"h1",
+          variant: 'h1'
         }}
         onClick={() => {
           setValue(Random.randomString(5))
@@ -29,21 +29,24 @@ const App = () => {
 
       <Button
         pt={5}
-        id={"login_first_step_submit_button"}
+        id={'login_first_step_submit_button'}
         fullWidth={true}
-        colorDef={"primary"}
+        colorDef={'primary'}
         loading={true}
         disableElevation={true}
         typography={{
           py: 1,
-          variant: "body1",
-          color: "#fff"
+          variant: 'body1',
+          color: '#fff'
         }}>
         ادامخ
       </Button>
       <DefaultTextField
         name={'safas'}
-        defaultValue={value}/>
+        value={value}
+        onChangeTextField={(e, v) => {
+          setValue(v)
+        }}/>
     </React.Fragment>
   )
 }
