@@ -1,5 +1,5 @@
-import React, { useRef, useState } from 'react'
-import { Random,FormController, DefaultTextField, Button, Dialog, Box, IconButton, Typography, gLog } from 'material-ui-helper'
+import React, { useState } from 'react'
+import { Box, Button, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useTheme } from '@material-ui/core'
@@ -10,12 +10,20 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <Typography color={"#ccc"}>
+      <Typography color={'#ccc'}>
         safasf
       </Typography>
-      <Button onClick={()=>{
-        setValue(Random.randomString(5))
-      }}>
+      <Button
+        fullWidth={true}
+        variant={'contained'}
+        disableElevation={true}
+        loading={true}
+        typography={{
+          variant:"h1",
+        }}
+        onClick={() => {
+          setValue(Random.randomString(5))
+        }}>
         clear
       </Button>
       <DefaultTextField

@@ -4,6 +4,7 @@ import MButton from '@material-ui/core/Button'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import Typography from '../Typography'
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 function Button(pr) {
   const {
@@ -12,6 +13,8 @@ function Button(pr) {
     colorDef,
     color,
     size,
+    loading,
+    loadingProps,
     disabled,
     disableElevation,
     disableFocusRipple,
@@ -27,16 +30,22 @@ function Button(pr) {
   } = pr
 
 
+  const disabledRenderVal = loading || disabled
+
   return (
     <Box
       width={fullWidth ? 1 : 0}
-      {...props}>
+      {...props}
+      style={{
+        position: 'relative',
+        ...props.style
+      }}>
       <MButton
         component={component}
         variant={variant}
         size={size}
         color={colorDef}
-        disabled={disabled}
+        disabled={disabledRenderVal}
         disableElevation={disableElevation}
         disableFocusRipple={disableFocusRipple}
         disableRipple={disableRipple}
@@ -46,20 +55,33 @@ function Button(pr) {
         href={href}
         {...buttonProps}
         style={{
-          backgroundColor: variant === 'contained' ? color : undefined,
-          borderColor: variant === 'outlined' ? color : undefined,
+          backgroundColor: (!disabledRenderVal && variant === 'contained') ? color : undefined,
+          borderColor: (!disabledRenderVal && variant === 'outlined') ? color : undefined,
           ...buttonProps.style,
           ...styleProps
         }}>
         {_.isObject(typography) ?
           <Typography
             {...typography}
-            component={typography.component || 'span'}>
+            component={typography.component || 'span'}
+            color={!disabledRenderVal ? typography.color : undefined}>
             {props.children}
           </Typography> :
           props.children
         }
       </MButton>
+      {loading &&
+      <CircularProgress
+        size={24}
+        {...loadingProps}
+        style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          marginTop: -12,
+          marginLeft: -12,
+          ...loadingProps.style
+        }}/>}
     </Box>
   )
 }
@@ -68,6 +90,8 @@ function Button(pr) {
 Button.defaultProps = {
   variant: 'contained',
   colorDef: 'default',
+  loading: false,
+  loadingProps: {},
   disabled: false,
   disableElevation: false,
   disableFocusRipple: false,
@@ -87,6 +111,8 @@ export const buttonPropType = {
   colorDef: PropTypes.oneOf(['default', 'inherit', 'primary', 'secondary']),
   color: PropTypes.string,
   size: PropTypes.oneOf(['large', 'medium', 'small']),
+  loading: PropTypes.bool,
+  loadingProps: PropTypes.object,
   disabled: PropTypes.bool,
   disableElevation: PropTypes.bool,
   disableFocusRipple: PropTypes.bool,
