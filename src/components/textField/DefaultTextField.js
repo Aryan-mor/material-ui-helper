@@ -22,6 +22,7 @@ function DefaultTextField(pr) {
     placeholder,
     inputStyle,
     inputProps,
+    InputProps,
     autoComplete,
     disabled,
     textFieldProps = {},
@@ -77,6 +78,7 @@ function DefaultTextField(pr) {
             required={required}
             autoFocus={autoFocus}
             inputProps={inputProps}
+            InputProps={InputProps}
             autoComplete={autoComplete}
             onChange={onChangeTextField}
             onChangeDelay={onChangeTextFieldDelay}
@@ -98,7 +100,9 @@ function DefaultTextField(pr) {
 }
 
 DefaultTextField.defaultProps = {
-  onChangeDelay: 600
+  onChangeDelay: 600,
+  inputProps: {},
+  InputProps: {},
 }
 
 DefaultTextField.propTypes = {
@@ -116,6 +120,7 @@ DefaultTextField.propTypes = {
   type: PropTypes.oneOf(['text', 'number', 'email', 'hidden', 'password', 'search', 'tel', 'url']),
   inputStyle: PropTypes.object,
   inputProps: PropTypes.object,
+  InputProps: PropTypes.object,
   autoComplete: PropTypes.oneOf([
     'on',
     'off',

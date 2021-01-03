@@ -129,6 +129,7 @@ function TextField(pr) {
     placeholder,
     inputStyle,
     inputProps,
+    InputProps,
     autoComplete,
     disabled,
     type,
@@ -225,12 +226,13 @@ function TextField(pr) {
               autoComplete: autoComplete
             } : {}),
             style: {
-              ...getSafe(() => props.InputProps.style, {}),
+              ...getSafe(() => inputProps.style, {}),
+              ...getSafe(() => InputProps.style, {}),
               ...inputStyle
             }
           }}
           InputProps={{
-            ...props.InputProps,
+            ...InputProps,
             startAdornment: startAdornment && (
               <InputAdornment position="start">
                 {startAdornment}
@@ -267,6 +269,7 @@ TextField.propTypes = {
   defaultValue: PropTypes.string,
   inputStyle: PropTypes.object,
   inputProps: PropTypes.object,
+  InputProps: PropTypes.object,
   placeholder: PropTypes.string,
   autoComplete: PropTypes.oneOf([
     'on',
