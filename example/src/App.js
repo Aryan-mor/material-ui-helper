@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { gLog, Box, Button, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
+import React, { useEffect, useState } from 'react'
+import { Box, Button, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
+import 'material-ui-helper/src/style/material-ui-helper.css'
+
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useTheme } from '@material-ui/core'
@@ -7,6 +9,16 @@ import { useTheme } from '@material-ui/core'
 const App = () => {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('sss')
+
+  const [shake, setShake] = useState(false)
+
+
+  useEffect(() => {
+    if (shake)
+      setTimeout(() => {
+        setShake(false)
+      }, 600)
+  }, [shake])
 
   return (
     <React.Fragment>
@@ -17,15 +29,18 @@ const App = () => {
         fullWidth={true}
         variant={'contained'}
         disableElevation={true}
-        loading={true}
         typography={{
           variant: 'h1'
         }}
         onClick={() => {
+          setShake(true)
           setValue(Random.randomString(5))
         }}>
         clear
       </Button>
+      <Box m={12} transform={shake ? 'shake2' : undefined} style={{ backgroundColor: 'red' }}>
+        transssssssssssssssfooorrrmmmm
+      </Box>
 
       <Button
         pt={5}

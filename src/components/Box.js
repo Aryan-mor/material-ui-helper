@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import Skeleton from '@material-ui/lab/Skeleton'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PropTypes from 'prop-types'
-import { gLog, UtilsStyle } from '..'
+import { UtilsStyle } from '..'
 
 
 const Box = React.forwardRef((pr, ref) => {
@@ -23,6 +23,10 @@ const Box = React.forwardRef((pr, ref) => {
     flexDirection,
     flexDirectionColumn,
     borderRadius,
+    transform,
+    hoverTransform,
+    transformCount,
+    hoverTransformCount,
     skeleton,
     loading,
     loadingWidth,
@@ -34,9 +38,25 @@ const Box = React.forwardRef((pr, ref) => {
   } = pr
   //endregion props
 
-  return(
+  const getTransformStyle = (forHover = false) => {
+    const tr = forHover ? hoverTransform : transform
+    if (!tr) {
+      return {}
+    }
+    const trCount = forHover ? hoverTransformCount : transformCount
+    return {
+      animation: tr === 'shake' ? 'shakeAnimationMaterialHelper 0.5s' :tr==="shake2"? 'shake2AnimationMaterialHelper 0.5s':undefined,
+      animationIterationCount: trCount
+    }
+  }
+
+
+  return (
     <HoverStyle
-      hoverStyle={hoverStyle}
+      hoverStyle={{
+        ...hoverStyle,
+        ...getTransformStyle(true)
+      }}
       component={component}
       overflow={overflow}
       display={display}
@@ -56,6 +76,7 @@ const Box = React.forwardRef((pr, ref) => {
           userSelect: 'none'
         } : {}),
         ...UtilsStyle.borderRadius(borderRadius),
+        ...getTransformStyle(),
         ...props.style
       }}>
       <LoadingContainer skeleton={skeleton} loading={loading}>
@@ -86,6 +107,10 @@ export const boxPropType = {
   flexDirection: PropTypes.oneOf(['row', 'row-reverse', 'column', 'column-reverse', 'initial', 'inherit']),
   flexDirectionColumn: PropTypes.bool,
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  transform: PropTypes.oneOf(['shake']),
+  hoverTransform: PropTypes.oneOf(['shake']),
+  transformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  hoverTransformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hoverStyle: PropTypes.object,
   skeleton: PropTypes.bool,
   loading: PropTypes.bool,
@@ -103,7 +128,8 @@ Box.defaultProps = {
   center: false,
   flexDirectionColumn: false,
   loadingWidth: '25%',
-  textSelectable: true
+  textSelectable: true,
+  hoverStyle: {}
 }
 
 Box.propTypes = {
@@ -122,6 +148,10 @@ Box.propTypes = {
   flexWrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse', 'initial', 'inherit']),
   flexDirectionColumn: PropTypes.bool,
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  transform: PropTypes.oneOf(['shake','shake2']),
+  hoverTransform: PropTypes.oneOf(['shake','shake2']),
+  transformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+  hoverTransformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hoverStyle: PropTypes.object,
   skeleton: PropTypes.bool,
   loading: PropTypes.bool,
