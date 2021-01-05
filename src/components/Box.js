@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import Skeleton from '@material-ui/lab/Skeleton'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PropTypes from 'prop-types'
-import { UtilsStyle } from '..'
+import { gLog, UtilsStyle } from '..'
 
 
 const Box = React.forwardRef((pr, ref) => {
@@ -50,6 +50,7 @@ const Box = React.forwardRef((pr, ref) => {
     }
   }
 
+  gLog("asflkaslkflakslf",props.className)
 
   return (
     <HoverStyle
@@ -176,6 +177,8 @@ const useBoxHoverStyles = makeStyles({
 
 function HoverStyle({ hoverStyle, children, ...props }) {
   const classes = hoverStyle ? useBoxHoverStyles({ hoverStyle }) : undefined
+
+
   return (
     classes ?
       React.cloneElement(children, { ...props, className: clsx(classes.hoverStyleGenerator, props.className) }) :

@@ -1,17 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import { Box, Button, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
+import {getSafe, Box, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
 import 'material-ui-helper/src/style/material-ui-helper.css'
-
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useTheme } from '@material-ui/core'
+import Button from '@material-ui/core/Button'
+import { makeStyles } from '@material-ui/styles'
+
+
+
+
+
+const useTypographyStyle = makeStyles({
+  root: props => ({
+    backgroundColor:"yellow",
+    '&:before': {
+      content: ' ',
+      right: 0,
+      left: 0,
+      bottom: 0,
+      borderBottom: `${getSafe(() => props.textDecorationBottom.width || '2px', '2px')} solid ${getSafe(() => props.textDecorationBottom.color || '#000', '#000')}`
+    },
+    '& p:after': {
+      content: "",
+      position: 'relative',
+      right: 0,
+      left: 0,
+      bottom: 0,
+      borderBottom: `${getSafe(() => props.textDecorationBottom.width || '2px', '2px')} solid ${getSafe(() => props.textDecorationBottom.color || '#000', '#000')}`
+    }
+  })
+})
 
 const App = () => {
   const [open, setOpen] = useState(false)
   const [value, setValue] = useState('sss')
 
   const [shake, setShake] = useState(false)
-
+const classes = useTypographyStyle()
 
   useEffect(() => {
     if (shake)
@@ -22,46 +48,31 @@ const App = () => {
 
   return (
     <React.Fragment>
-      <Typography color={'#ccc'}>
-        safasf
-      </Typography>
+
       <Button
         fullWidth={true}
         variant={'contained'}
-        disableElevation={true}
-        typography={{
-          variant: 'h1'
-        }}
         onClick={() => {
           setShake(true)
           setValue(Random.randomString(5))
         }}>
         clear
       </Button>
-      <Box m={12} transform={shake ? 'shake2' : undefined} style={{ backgroundColor: 'red' }}>
+      <Typography variant={'h1'} m={12} p={12} transform={shake ? 'shake' : undefined}
+                  style={{ backgroundColor: 'red' }}>
         transssssssssssssssfooorrrmmmm
-      </Box>
-
-      <Button
-        pt={5}
-        id={'login_first_step_submit_button'}
-        fullWidth={true}
-        colorDef={'primary'}
-        loading={true}
-        disableElevation={true}
-        typography={{
-          py: 1,
-          variant: 'body1',
-          color: '#fff'
-        }}>
-        ادامخ
-      </Button>
-      <DefaultTextField
-        name={'safas'}
-        value={value}
-        onChangeTextField={(e, v) => {
-          setValue(v)
-        }}/>
+      </Typography>
+      <Typography variant={'h6'} py={1}
+                  textDecorationBottom={{
+                    color: 'red'
+                  }}>
+        salam
+      </Typography>
+      <div className={classes.root}>
+        <p>
+          sfafas
+        </p>
+      </div>
     </React.Fragment>
   )
 }

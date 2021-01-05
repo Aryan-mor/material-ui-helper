@@ -1,1 +1,6 @@
 @import url(Box.css);
+
+
+.hasBefore:before{
+    content: "";
+}

@@ -6,6 +6,25 @@ import useMediaQuery from '@material-ui/core/useMediaQuery'
 import PropTypes from 'prop-types'
 import Box, { boxPropType } from './Box'
 import Box2 from '../Box2'
+import { getSafe, gLog } from '..'
+import { makeStyles } from '@material-ui/styles'
+import clsx from 'clsx'
+
+
+const useTypographyStyle = makeStyles({
+  root: props => ({
+    position:'relative',
+    '&:before': {
+      content: '',
+      position: 'absolute',
+      right: 0,
+      left: 0,
+      bottom: 0,
+      borderBottom: `${getSafe(() => props.textDecorationBottom.width || '2px', '2px')} solid ${getSafe(() => props.textDecorationBottom.color || '#000', '#000')}`
+    }
+  })
+})
+
 
 function ResponsiveTypo({ children, variant: vari, ...props }) {
   const theme = useTheme()
@@ -51,8 +70,8 @@ function ResponsiveTypo({ children, variant: vari, ...props }) {
 }
 
 function Typo({ cm = 'div', children, variant, ...props }) {
-
   const theme = useTheme()
+
 
   return (
     <Tp component={cm} variant={variant} {...props}>
@@ -62,35 +81,46 @@ function Typo({ cm = 'div', children, variant, ...props }) {
 }
 
 const CM = forwardRef(
-  ({ component, variant, fontWeight,textAlign,color, ...props }, ref) => (
-    <Box
-      ref={ref}
-      component={_.isObject(variant) ? ResponsiveTypo : Typo}
-      display={'flex'}
-      cm={component}
-      variant={variant}
-      {...props}
-      style={{
-        color:color,
-        fontWeight: fontWeight,
-        textAlign:textAlign,
-        ...props.style
-      }}>
-      {props.children}
-    </Box>
-  ))
+  ({ className, component, variant, fontWeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
+    const classes = textDecorationBottom ? useTypographyStyle({ textDecorationBottom }) : {};
+
+
+    return (
+      <Box
+        ref={ref}
+        className={clsx(["hasBefore",classes.root, className])}
+        component={_.isObject(variant) ? ResponsiveTypo : Typo}
+        display={'flex'}
+        cm={component}
+        variant={variant}
+        {...props}
+        style={{
+          color: color,
+          fontWeight: fontWeight,
+          textAlign: textAlign,
+          ...props.style
+        }}>
+        {props.children}
+      </Box>
+    )
+  })
 
 function Typography(props) {
   return <CM {...props}>{props.children}</CM>
 }
+
 
 Typography.propTypes = {
   component: PropTypes.string,
   variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
   fontWeight: PropTypes.oneOf(['normal', 'bold', 'bolder', 'lighter', 100, 200, 300, 400, 500, 600, 700, 800, 900]),
   textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify', 'initial', 'inherit']),
-  textSelectable:PropTypes.bool,
-  color:PropTypes.string,
+  textSelectable: PropTypes.bool,
+  color: PropTypes.string,
+  textDecorationBottom: PropTypes.shape({
+    color: PropTypes.string,
+    width: PropTypes.string
+  })
 }
 
-export default Typography;
+export default Typography
