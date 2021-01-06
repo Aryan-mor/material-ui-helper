@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import MaterialBox from '@material-ui/core/Box'
 import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
@@ -6,12 +6,14 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PropTypes from 'prop-types'
 import { gLog, UtilsStyle } from '..'
+import styles from '../styles.module.css'
 
 
 const Box = React.forwardRef((pr, ref) => {
   //region props
   const {
     component,
+    className,
     hoverStyle,
     display,
     overflow,
@@ -45,41 +47,58 @@ const Box = React.forwardRef((pr, ref) => {
     }
     const trCount = forHover ? hoverTransformCount : transformCount
     return {
-      animation: tr === 'shake' ? 'shakeAnimationMaterialHelper 0.5s' :tr==="shake2"? 'shake2AnimationMaterialHelper 0.5s':undefined,
+      animClass: tr === 'shake' ? styles.shakeAnimationMaterialHelper : tr === 'shake2' ? styles.shake2AnimationMaterialHelper : undefined,
       animationIterationCount: trCount
     }
   }
 
-  gLog("asflkaslkflakslf",props.className)
+  //region Memos
+  const { animClass, animationIterationCount } = useMemo(() => {
+    return getTransformStyle(false)
+  }, [transform, transformCount])
+  const { animHoverClass, animationHoverIterationCount } = useMemo(() => {
+    return getTransformStyle(true)
+  }, [hoverTransform, hoverTransformCount])
+  const style = useMemo(() => {
+    return {
+      animationIterationCount: animationIterationCount,
+      ...(!textSelectable ? {
+        WebkitTouchCallout: 'none', /* iOS Safari */
+        WebkitUserSelect: 'none', /* Safari */
+        MozUserSelect: 'none', /* Old versions of Firefox */
+        MsUserSelect: 'none', /* Internet Explorer/Edge */
+        userSelect: 'none'
+      } : {}),
+      ...UtilsStyle.borderRadius(borderRadius),
+      ...props.style
+    }
+  }, [animationIterationCount, textSelectable, borderRadius, props.style])
+  const hoverStyleMemo = useMemo(() => {
+    return {
+      ...hoverStyle,
+      animationIterationCount: animationHoverIterationCount
+    }
+  }, [animationIterationCount, textSelectable, borderRadius, props.style])
+  const alignItemsMemo = useMemo(() => alignItems || ((alignCenter || center) ? 'center' : undefined), [alignItems, alignCenter, center])
+  const justifyContentMemo = useMemo(() => justifyContent || ((justifyCenter || center) ? 'center' : undefined), [justifyContent, justifyCenter, center])
+  const flexDirectionMemo = useMemo(() => flexDirection || ((flexDirectionColumn) ? 'column' : undefined), [flexDirection, flexDirectionColumn])
+  //endregion Memos
 
   return (
     <HoverStyle
-      hoverStyle={{
-        ...hoverStyle,
-        ...getTransformStyle(true)
-      }}
+      hoverStyle={hoverStyleMemo}
+      className={clsx([animClass, animHoverClass, className])}
       component={component}
       overflow={overflow}
       display={display}
-      alignItems={alignItems || ((alignCenter || center) ? 'center' : undefined)}
-      justifyContent={justifyContent || ((justifyCenter || center) ? 'center' : undefined)}
-      flexDirection={flexDirection || ((flexDirectionColumn) ? 'column' : undefined)}
+      alignItems={alignItemsMemo}
+      justifyContent={justifyContentMemo}
+      flexDirection={flexDirectionMemo}
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       {...props}
-      style={{
-        ...(!textSelectable ? {
-          WebkitTouchCallout: 'none', /* iOS Safari */
-          WebkitUserSelect: 'none', /* Safari */
-          MozUserSelect: 'none', /* Old versions of Firefox */
-          MsUserSelect: 'none', /* Internet Explorer/Edge */
-          userSelect: 'none'
-        } : {}),
-        ...UtilsStyle.borderRadius(borderRadius),
-        ...getTransformStyle(),
-        ...props.style
-      }}>
+      style={style}>
       <LoadingContainer skeleton={skeleton} loading={loading}>
         <MaterialBox ref={ref}>
           {props.children}
@@ -149,8 +168,8 @@ Box.propTypes = {
   flexWrap: PropTypes.oneOf(['nowrap', 'wrap', 'wrap-reverse', 'initial', 'inherit']),
   flexDirectionColumn: PropTypes.bool,
   borderRadius: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  transform: PropTypes.oneOf(['shake','shake2']),
-  hoverTransform: PropTypes.oneOf(['shake','shake2']),
+  transform: PropTypes.oneOf(['shake', 'shake2']),
+  hoverTransform: PropTypes.oneOf(['shake', 'shake2']),
   transformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hoverTransformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hoverStyle: PropTypes.object,
@@ -195,7 +214,7 @@ function LoadingContainer({ children, loading, skeleton, ...props }) {
   )
 }
 
-function Loading({ children, loading, loadingWidth, skeleton, ...props }) {
+function Loading({ children, loading, loadingWidth, skeleton }) {
 
   return (
     <React.Fragment>

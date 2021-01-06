@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import {getSafe, Box, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
-import 'material-ui-helper/src/style/material-ui-helper.css'
+import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
 import { useTheme } from '@material-ui/core'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/styles'
-
-
-
+import 'material-ui-helper/src/styles.module.css'
 
 
 const useTypographyStyle = makeStyles({
@@ -64,7 +62,8 @@ const classes = useTypographyStyle()
       </Typography>
       <Typography variant={'h6'} py={1}
                   textDecorationBottom={{
-                    color: 'red'
+                    color: 'red',
+                    width:5
                   }}>
         salam
       </Typography>

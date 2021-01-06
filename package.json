@@ -1,6 +1,6 @@
 {
   "name": "material-ui-helper",
-  "version": "1.0.40",
+  "version": "1.0.49",
   "description": "Material-Ui component with more option",
   "author": "Aryan-mor",
   "license": "ISC",
@@ -17,6 +17,8 @@
   "scripts": {
     "build": "microbundle-crl --no-compress --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --format modern,cjs",
+    "lint": "concurrently \"eslint src\" \"prettier --check \"./src/**/*.css\"\" ",
+    "lint:write": "prettier --write \"./src/**/*.js\"  \"./src/**/*.css\"",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
@@ -26,6 +28,11 @@
     "predeploy": "cd example && yarn install && yarn run build",
     "deploy": "gh-pages -d example/build"
   },
+  "files": [
+    "dist",
+    "lib",
+    "index.d.ts"
+  ],
   "dependencies": {},
   "peerDependencies": {
     "react": "^16.0.0",
@@ -38,6 +45,8 @@
   },
   "devDependencies": {
     "eslint": "latest",
+    "css-loader": "^2.1.1",
+    "style-loader": "^0.23.1",
     "eslint-config-prettier": "latest",
     "eslint-config-standard": "latest",
     "eslint-config-standard-react": "latest",
@@ -63,9 +72,6 @@
     "@material-ui/icons": "^4.9.1",
     "clsx": "^1.1.1"
   },
-  "files": [
-    "dist"
-  ],
   "bugs": {
     "url": "https://github.com/Aryan-mor/material-ui-helper/issues"
   },

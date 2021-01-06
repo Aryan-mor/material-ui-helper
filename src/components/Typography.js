@@ -4,23 +4,23 @@ import _ from 'lodash'
 import { useTheme } from '@material-ui/core'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import PropTypes from 'prop-types'
-import Box, { boxPropType } from './Box'
-import Box2 from '../Box2'
-import { getSafe, gLog } from '..'
+import Box from './Box'
+import { getSafe } from '..'
 import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
+import styles from '../styles.module.css'
 
 
 const useTypographyStyle = makeStyles({
   root: props => ({
-    position:'relative',
+    position: 'relative',
     '&:before': {
       content: '',
       position: 'absolute',
       right: 0,
       left: 0,
       bottom: 0,
-      borderBottom: `${getSafe(() => props.textDecorationBottom.width || '2px', '2px')} solid ${getSafe(() => props.textDecorationBottom.color || '#000', '#000')}`
+      borderBottom: `${getSafe(() => (_.isNumber(props.textDecorationBottom.width) ? `${props.textDecorationBottom.width}px` : props.textDecorationBottom.width) || '2px', '2px')} solid ${getSafe(() => props.textDecorationBottom.color || '#000', '#000')}`
     }
   })
 })
@@ -82,13 +82,13 @@ function Typo({ cm = 'div', children, variant, ...props }) {
 
 const CM = forwardRef(
   ({ className, component, variant, fontWeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
-    const classes = textDecorationBottom ? useTypographyStyle({ textDecorationBottom }) : {};
+    const classes = textDecorationBottom ? useTypographyStyle({ textDecorationBottom }) : {}
 
 
     return (
       <Box
         ref={ref}
-        className={clsx(["hasBefore",classes.root, className])}
+        className={clsx([styles.hasBefore, classes.root, className])}
         component={_.isObject(variant) ? ResponsiveTypo : Typo}
         display={'flex'}
         cm={component}
