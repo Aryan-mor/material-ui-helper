@@ -39,6 +39,7 @@ const Box = React.forwardRef((pr, ref) => {
     ...props
   } = pr
   //endregion props
+  gLog("aslfklskalfklask", { ...props })
 
   const getTransformStyle = (forHover = false) => {
     const tr = forHover ? hoverTransform : transform
@@ -83,6 +84,7 @@ const Box = React.forwardRef((pr, ref) => {
   const justifyContentMemo = useMemo(() => justifyContent || ((justifyCenter || center) ? 'center' : undefined), [justifyContent, justifyCenter, center])
   const flexDirectionMemo = useMemo(() => flexDirection || ((flexDirectionColumn) ? 'column' : undefined), [flexDirection, flexDirectionColumn])
   //endregion Memos
+
 
   return (
     <HoverStyle
