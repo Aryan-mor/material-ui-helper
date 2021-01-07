@@ -195,21 +195,29 @@ function Item({ item: it, primaryKey, active, onClick, ...props }) {
 const src = 'https://api.mehrtakhfif.com/media/boxes/14/2020-11-01/category/10-57-24-70-has-ph.jpg'
 
 function App2({ ...props }) {
-  gLog('asgasgsag', images)
 
   return (
     <Box m={5}
          center={true}
-         flexDirectionColumn={true}>
+         flexWrap={'wrap'}>
       {
-        images.map(im=>
-        <Img
-          key={im.id}
-          alt={im.alt_description}
-          src={im.urls.regular}
-          thumbnail={im.urls.small}
-          width={_.toInteger(im.width)/8}
-          height={_.toInteger(im.height)/8}/>
+        [...images.categories, ...images.categories].map(({ media, ...im }) =>
+          <Box width={1 / 4} p={2}>
+            <Box width={1} flexDirectionColumn={true}>
+              <Img
+                key={im.id}
+                height={{
+                  xs:200,
+                  md:800,
+                  lg:20
+                }}
+                alt={media.title}
+                src={media.image}/>
+              <Typography center={true} variant={'body1'} pt={1}>
+                {im.name}
+              </Typography>
+            </Box>
+          </Box>
         )
       }
     </Box>

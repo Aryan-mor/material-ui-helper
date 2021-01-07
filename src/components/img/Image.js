@@ -5,34 +5,33 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import Box from '../Box'
 
 
-
 const skeletonStyle = {
   width: '100%',
   height: '100%'
 }
 
 
-const Image = ({src,thumb,alt,...props}) => {
+const Image = ({ src, thumb, alt, ...props }) => {
   const [isThumbLoaded, setIsThumbLoaded] = React.useState(!Boolean(thumb))
   const [thumbVisibility, setThumbVisibility] = React.useState(true)
   const [isLoaded, setIsLoaded] = React.useState(false)
 
-  useEffect(()=>{
+  useEffect(() => {
     if (!isLoaded)
       return
-    setTimeout(()=>{
+    setTimeout(() => {
       setThumbVisibility(false)
-    },1000)
-  },[isLoaded])
+    }, 1000)
+  }, [isLoaded])
 
   return (
     <React.Fragment>
       {
-        (!isLoaded && thumb && !isThumbLoaded) &&
+        ((!isLoaded && thumb && !isThumbLoaded)) &&
         <Skeleton variant={'rect'} style={skeletonStyle}/>
       }
       {
-        (thumbVisibility && thumb)&&
+        ((thumbVisibility && thumb)) &&
         <img
           className={clsx([styles.image, styles.thumb])}
           alt={alt}
@@ -40,7 +39,10 @@ const Image = ({src,thumb,alt,...props}) => {
           onLoad={() => {
             setIsThumbLoaded(true)
           }}
-          style={{ visibility: isLoaded ? 'hidden' : 'visible' }}
+          style={{
+            position: 'absolute',
+            visibility: isLoaded ? 'hidden' : 'visible'
+          }}
         />
       }
       {
@@ -51,7 +53,9 @@ const Image = ({src,thumb,alt,...props}) => {
           }}
           className={clsx([styles.image, styles.full])}
           style={{
-            opacity: isLoaded ? 1 : 0 ,
+            opacity: isLoaded ? 1 : 0,
+            zIndex: 4,
+            position: thumbVisibility ? 'absolute' : undefined
           }}
           alt={alt}
           src={src}

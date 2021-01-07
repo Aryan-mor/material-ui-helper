@@ -25,6 +25,7 @@ const ImageContainer = ({ src, thumb, alt, width, height,imageProps={}, onIsVisi
   return (
     <Box
       ref={ref}
+      display={"block"}
       className={styles.imageContainer}
       width={width}
       height={height}
@@ -38,7 +39,7 @@ const ImageContainer = ({ src, thumb, alt, width, height,imageProps={}, onIsVisi
         <Image src={src} thumb={thumb} alt={alt} {...imageProps}/>
       )}
       <noscript>
-        <img src={src} alt={alt} width={width} height={height}/>
+        <img src={src} alt={alt}/>
       </noscript>
     </Box>
   )

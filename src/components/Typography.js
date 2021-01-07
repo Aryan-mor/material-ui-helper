@@ -85,7 +85,7 @@ const CM = forwardRef(
     return (
       <Box
         ref={ref}
-        className={clsx([styles.hasBefore, classes.root, className])}
+        className={clsx([textDecorationBottom?styles.hasBefore:"", classes.root, className])}
         component={_.isObject(variant) ? ResponsiveTypo : Typo}
         display={'flex'}
         cm={component}
