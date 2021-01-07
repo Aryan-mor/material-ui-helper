@@ -33,14 +33,14 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, autoSize, im
       if (imageWidth > imageHeight) {
         const offsetWidth = ref.current.offsetWidth
         return {
-          width: offsetWidth,
+          width: "100%",
           height: (offsetWidth / imageWidth) * imageHeight
         }
       }
       const offsetHeight = ref.current.offsetHeight
       return {
         width: (offsetHeight / imageHeight) * imageWidth,
-        height: offsetHeight
+        height: "100%"
       }
     }, imageSizeDef)
 
