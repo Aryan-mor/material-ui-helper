@@ -206,11 +206,9 @@ function App2({ ...props }) {
             <Box width={1} flexDirectionColumn={true}>
               <Img
                 key={im.id}
-                height={{
-                  xs:200,
-                  md:800,
-                  lg:20
-                }}
+                minHeight={20}
+                imageWidth={800}
+                imageHeight={500}
                 alt={media.title}
                 src={media.image}/>
               <Typography center={true} variant={'body1'} pt={1}>

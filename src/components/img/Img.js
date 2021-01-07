@@ -6,7 +6,17 @@ import ImageContainer from './ImageContainer'
 import PropTypes from 'prop-types'
 
 
-function Img({ alt: al, src: sr, thumbnail: th, width , height ,imageProps,onIsVisible,...props}) {
+function Img({
+               alt: al,
+               src: sr,
+               thumbnail: th,
+               autoSize,
+               imageWidth,
+               imageHeight,
+               imageProps,
+               onIsVisible,
+               ...props
+             }) {
 
   const src = useMemo(() => _.isObject(sr) ? sr.image : sr, [sr])
   const alt = useMemo(() => {
@@ -18,8 +28,8 @@ function Img({ alt: al, src: sr, thumbnail: th, width , height ,imageProps,onIsV
         return src.title || src.name
       }
 
-      throw ""
-    },"")
+      throw ''
+    }, '')
   }, [al, sr])
 
   const thumbnail = useMemo(() => {
@@ -37,8 +47,9 @@ function Img({ alt: al, src: sr, thumbnail: th, width , height ,imageProps,onIsV
       src={src}
       thumb={thumbnail}
       alt={alt}
-      width={width}
-      height={height}
+      autoSize={autoSize}
+      imageWidth={imageWidth}
+      imageHeight={imageHeight}
       imageProps={imageProps}
       onIsVisible={onIsVisible}
       {...props}/>
@@ -46,21 +57,20 @@ function Img({ alt: al, src: sr, thumbnail: th, width , height ,imageProps,onIsV
 }
 
 
-
 Img.defaultProps = {
-  width:"100%",
-  height:"100%"
+  autoSize: true
 }
 
 
-Img.propTypes={
-  width:PropTypes.any,
-  height:PropTypes.any,
-  alt:PropTypes.string,
-  src:PropTypes.string,
-  thumbnail:PropTypes.string,
-  imageProps:PropTypes.object,
-  onIsVisible:PropTypes.func,
+Img.propTypes = {
+  imageWidth: PropTypes.any,
+  imageHeight: PropTypes.any,
+  alt: PropTypes.string,
+  src: PropTypes.string,
+  autoSize: PropTypes.bool,
+  thumbnail: PropTypes.string,
+  imageProps: PropTypes.object,
+  onIsVisible: PropTypes.func
 }
 
-export default Img;
+export default Img

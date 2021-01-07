@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import Image from './image'
 import styles from './imageContainer.css'
 import useIntersectionObserver from '../../helper/useIntersectionObserver'
-import { tryIt } from '../..'
+import { getSafe, gLog, tryIt } from '../..'
 import Box from '../Box'
 
-const ImageContainer = ({ src, thumb, alt, width, height,imageProps={}, onIsVisible, ...props }) => {
-  const ref = React.useRef()
-  const [isVisible, setIsVisible] = React.useState(false)
+const imageSizeDef = { width: '100%', height: 'auto' }
+const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, autoSize, imageProps = {}, onIsVisible, ...props }) => {
+  const ref = useRef()
+  const [isVisible, setIsVisible] = useState(false)
+  const [imageSize, setImageSize] = useState(imageSizeDef)
+
+
 
   useIntersectionObserver({
     target: ref,
@@ -22,13 +26,35 @@ const ImageContainer = ({ src, thumb, alt, width, height,imageProps={}, onIsVisi
     }
   })
 
+  useEffect(() => {
+    const imageSize = getSafe(() => {
+      if (!autoSize || !(imageWidth && imageHeight))
+        throw ''
+      if (imageWidth > imageHeight) {
+        const offsetWidth = ref.current.offsetWidth
+        return {
+          width: offsetWidth,
+          height: (offsetWidth / imageWidth) * imageHeight
+        }
+      }
+      const offsetHeight = ref.current.offsetHeight
+      return {
+        width: (offsetHeight / imageHeight) * imageWidth,
+        height: offsetHeight
+      }
+    }, imageSizeDef)
+
+    setImageSize(imageSize)
+  }, [imageWidth, imageWidth, ref])
+
+
   return (
     <Box
       ref={ref}
-      display={"block"}
+      display={'block'}
       className={styles.imageContainer}
-      width={width}
-      height={height}
+      width={imageSize.width}
+      height={imageSize.height}
       {...props}
       style={{
         position: 'relative',
@@ -39,7 +65,7 @@ const ImageContainer = ({ src, thumb, alt, width, height,imageProps={}, onIsVisi
         <Image src={src} thumb={thumb} alt={alt} {...imageProps}/>
       )}
       <noscript>
-        <img src={src} alt={alt}/>
+        {`<img src="${src}" alt="${alt}" />`}
       </noscript>
     </Box>
   )

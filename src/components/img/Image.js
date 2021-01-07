@@ -55,7 +55,6 @@ const Image = ({ src, thumb, alt, ...props }) => {
           style={{
             opacity: isLoaded ? 1 : 0,
             zIndex: 4,
-            position: thumbVisibility ? 'absolute' : undefined
           }}
           alt={alt}
           src={src}
