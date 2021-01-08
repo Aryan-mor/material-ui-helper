@@ -9,6 +9,7 @@ function Img({
                src: sr,
                thumbnail: th,
                autoSize,
+               backupSrc,
                imageWidth,
                imageHeight,
                imageProps,
@@ -42,10 +43,10 @@ function Img({
 
   return (
     <ImageContainer
-      src={src+"/55"}
-      thumb={undefined}
+      src={src}
+      thumb={thumbnail}
       alt={alt}
-      backupSrc={src}
+      backupSrc={backupSrc}
       autoSize={autoSize}
       imageWidth={imageWidth}
       imageHeight={imageHeight}
@@ -64,8 +65,9 @@ Img.defaultProps = {
 Img.propTypes = {
   imageWidth: PropTypes.any,
   imageHeight: PropTypes.any,
-  alt: PropTypes.string,
-  src: PropTypes.string,
+  alt: PropTypes.string.isRequired,
+  src: PropTypes.string.isRequired,
+  backupSrc: PropTypes.string,
   autoSize: PropTypes.bool,
   thumbnail: PropTypes.string,
   imageProps: PropTypes.object,

@@ -14,7 +14,7 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
   const [isThumbLoaded, setIsThumbLoaded] = React.useState(!Boolean(thumb))
   const [thumbVisibility, setThumbVisibility] = React.useState(true)
   const [isLoaded, setIsLoaded] = React.useState(false)
-  const [error, setError] = React.useState(false)
+  const [error, setError] = React.useState(!Boolean(src))
 
   useEffect(() => {
     if (!isLoaded)
@@ -25,7 +25,7 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
   }, [isLoaded])
 
   useEffect(() => {
-    setError(false)
+    setError(!Boolean(src))
   }, [src])
 
 
