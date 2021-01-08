@@ -5,7 +5,7 @@ import clsx from 'clsx'
 import Skeleton from '@material-ui/lab/Skeleton'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PropTypes from 'prop-types'
-import { gLog, UtilsStyle } from '..'
+import { UtilsStyle } from '..'
 import styles from '../styles.module.css'
 
 
@@ -39,8 +39,6 @@ const Box = React.forwardRef((pr, ref) => {
     ...props
   } = pr
   //endregion props
-  gLog("aslfklskalfklask", { ...props })
-
   const getTransformStyle = (forHover = false) => {
     const tr = forHover ? hoverTransform : transform
     if (!tr) {

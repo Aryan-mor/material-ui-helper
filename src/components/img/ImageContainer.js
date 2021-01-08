@@ -1,12 +1,12 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Image from './image'
 import styles from './imageContainer.css'
 import useIntersectionObserver from '../../helper/useIntersectionObserver'
-import { getSafe, gLog, tryIt } from '../..'
+import { getSafe, tryIt } from '../..'
 import Box from '../Box'
 
 const imageSizeDef = { width: '100%', height: 'auto' }
-const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, autoSize, imageProps = {}, onIsVisible, ...props }) => {
+const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight,backupSrc, autoSize, imageProps = {}, onIsVisible, ...props }) => {
   const ref = useRef()
   const [isVisible, setIsVisible] = useState(false)
   const [imageSize, setImageSize] = useState(imageSizeDef)
@@ -62,7 +62,7 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, autoSize, im
         ...props.style
       }}>
       {isVisible && (
-        <Image src={src} thumb={thumb} alt={alt} {...imageProps}/>
+        <Image src={src} backupSrc={backupSrc} thumb={thumb} alt={alt} {...imageProps}/>
       )}
       <noscript>
         {`<img src="${src}" alt="${alt}" />`}

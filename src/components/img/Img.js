@@ -1,7 +1,5 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
-import { getSafe, tryIt } from '../..'
-import Box from '../Box'
-import Skeleton from '@material-ui/lab/Skeleton'
+import React, { useMemo } from 'react'
+import { getSafe } from '../..'
 import ImageContainer from './ImageContainer'
 import PropTypes from 'prop-types'
 
@@ -44,9 +42,10 @@ function Img({
 
   return (
     <ImageContainer
-      src={src}
-      thumb={thumbnail}
+      src={src+"/55"}
+      thumb={undefined}
       alt={alt}
+      backupSrc={src}
       autoSize={autoSize}
       imageWidth={imageWidth}
       imageHeight={imageHeight}

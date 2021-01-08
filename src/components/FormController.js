@@ -8,7 +8,7 @@ import {
 } from './textField/TextFieldContainer'
 import PropTypes from 'prop-types'
 import Box from './Box'
-import { getSafe, gLog } from '..'
+import { getSafe } from '..'
 
 
 function getGroup(text) {

@@ -2,8 +2,7 @@ import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { checkHasErrorPatternArray, isRTL } from '../../utils/Checker'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
-import DefaultTextField from './DefaultTextField'
-import { getSafe, gLog } from '../..'
+import { getSafe } from '../..'
 
 export const errorList = ['این فیلد اجباری است.']
 

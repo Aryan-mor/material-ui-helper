@@ -4,7 +4,7 @@ import Slide from '@material-ui/core/Slide'
 import IconButton from '@material-ui/core/IconButton'
 import { Close } from '@material-ui/icons'
 import _ from 'lodash'
-import { gLog, isElement, tryIt } from '..'
+import { isElement, tryIt } from '..'
 import PropTypes from 'prop-types'
 import Box from './Box'
 

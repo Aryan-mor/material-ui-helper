@@ -1,5 +1,5 @@
-import React from "react";
-import MaterialTooltip from "@material-ui/core/Tooltip";
+import React from 'react'
+import MaterialTooltip from '@material-ui/core/Tooltip'
 import PropTypes from 'prop-types'
 
 export default function Tooltip({title, disable, ...props}) {

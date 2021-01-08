@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import styles from './image.css'
 import clsx from 'clsx'
 import Skeleton from '@material-ui/lab/Skeleton'
-import Box from '../Box'
 
 
 const skeletonStyle = {
@@ -11,10 +10,11 @@ const skeletonStyle = {
 }
 
 
-const Image = ({ src, thumb, alt, ...props }) => {
+const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
   const [isThumbLoaded, setIsThumbLoaded] = React.useState(!Boolean(thumb))
   const [thumbVisibility, setThumbVisibility] = React.useState(true)
   const [isLoaded, setIsLoaded] = React.useState(false)
+  const [error, setError] = React.useState(false)
 
   useEffect(() => {
     if (!isLoaded)
@@ -24,10 +24,15 @@ const Image = ({ src, thumb, alt, ...props }) => {
     }, 1000)
   }, [isLoaded])
 
+  useEffect(() => {
+    setError(false)
+  }, [src])
+
+
   return (
     <React.Fragment>
       {
-        ((!isLoaded && thumb && !isThumbLoaded)) &&
+        ((!isLoaded && (!thumb || (thumb && !isThumbLoaded)))) &&
         <Skeleton variant={'rect'} style={skeletonStyle}/>
       }
       {
@@ -51,13 +56,16 @@ const Image = ({ src, thumb, alt, ...props }) => {
           onLoad={() => {
             setIsLoaded(true)
           }}
+          onError={() => {
+            setError(true)
+          }}
           className={clsx([styles.image, styles.full])}
           style={{
             opacity: isLoaded ? 1 : 0,
-            zIndex: 4,
+            zIndex: 4
           }}
           alt={alt}
-          src={src}
+          src={(error && backupSrc) ? backupSrc : src}
           {...props}
         />
       }

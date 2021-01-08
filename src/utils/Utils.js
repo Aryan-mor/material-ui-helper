@@ -1,5 +1,3 @@
-import { gLog } from './Helper'
-
 export const UtilsStyle = {
   transition: (duration = 500) => {
     return {

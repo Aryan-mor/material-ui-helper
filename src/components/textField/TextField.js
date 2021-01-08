@@ -4,7 +4,7 @@ import _ from 'lodash'
 import Typography from '../Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import PropTypes from 'prop-types'
-import { getSafe, gLog } from '../..'
+import { getSafe } from '../..'
 import Box from '../Box'
 import { makeStyles } from '@material-ui/styles'
 
