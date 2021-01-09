@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { gLog, Img, getSafe, Box, DefaultTextField, IconButton, Random, Typography } from 'material-ui-helper'
+import {
+  LazyLoad,
+  UtilsStyle,
+  gLog,
+  Img,
+  getSafe,
+  Box,
+  DefaultTextField,
+  IconButton,
+  Random,
+  Typography
+} from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
@@ -8,6 +19,7 @@ import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/styles'
 import 'material-ui-helper/src/styles.module.css'
 import images from './images.json'
+
 
 const useTypographyStyle = makeStyles({
   root: props => ({
@@ -196,16 +208,22 @@ const src = 'https://api.mehrtakhfif.com/media/boxes/14/2020-11-01/category/10-5
 
 function App2({ ...props }) {
 
+  let its = [...images.categories, ...images.categories, ...images.categories, ...images.categories, ...images.categories]
+  its = [...its,...its,]
+
+
   return (
     <Box m={5}
          center={true}
          flexWrap={'wrap'}>
       {
-        [...images.categories, ...images.categories].map(({ media, ...im }) =>
-          <Box width={1 / 4} p={2}>
-            <Box width={1} flexDirectionColumn={true}>
+        its.map(({ media, ...im },index) =>
+          <LazyLoad
+            key={index}
+            width={1 / 4}>
+            <Box width={1} p={2}
+                 flexDirectionColumn={true}>
               <Img
-                key={im.id}
                 minHeight={20}
                 imageWidth={800}
                 imageHeight={500}
@@ -215,9 +233,48 @@ function App2({ ...props }) {
                 {im.name}
               </Typography>
             </Box>
-          </Box>
+          </LazyLoad>
         )
       }
+    </Box>
+  )
+}
+
+function App3({ ...props }) {
+
+
+  return (
+    <Box flexDirectionColumn={true} height={2000}>
+      <Box m={5}
+           flexWrap={'wrap'}>
+        {
+          (new Array(200).fill(null)).map((i, index) => {
+            const color = Random.randomColor()
+            return (
+              <Box key={color} width={'30%'} p={1}>
+                <LazyLoad width={1}>
+                  <El index={index} color={color}/>
+                </LazyLoad>
+              </Box>
+            )
+          })
+        }
+      </Box>
+    </Box>
+  )
+}
+
+const El = ({ index, color }) => {
+  return (
+    <Box
+      width={1}
+      style={{
+        backgroundColor: color,
+        ...UtilsStyle.borderRadius(5)
+      }}>
+      <Typography p={5} variant={'h6'} fontWeight={500}>
+        {color}
+      </Typography>
     </Box>
   )
 }
