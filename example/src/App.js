@@ -208,35 +208,51 @@ const src = 'https://api.mehrtakhfif.com/media/boxes/14/2020-11-01/category/10-5
 
 function App2({ ...props }) {
 
-  let its = [...images.categories, ...images.categories, ...images.categories, ...images.categories, ...images.categories]
-  its = [...its,...its,]
+  let its = [...images.categories, ...images.categories]
 
 
   return (
     <Box m={5}
          center={true}
          flexWrap={'wrap'}>
+      <LazyElement items={its}/>
+      <LazyElement items={its}/>
+      <LazyElement items={its}/>
+      <LazyElement items={its}/>
+    </Box>
+  )
+}
+
+
+const LazyElement = ({ items: its }) => {
+  return (
+    <LazyLoad my={20} transition={false} serverSideRender={false} width={1} flexWrap={'wrap'}>
       {
-        its.map(({ media, ...im },index) =>
-          <LazyLoad
+        its.map(({ media, ...im }, index) =>
+          <Box
             key={index}
             width={1 / 4}>
             <Box width={1} p={2}
                  flexDirectionColumn={true}>
-              <Img
-                minHeight={20}
-                imageWidth={800}
-                imageHeight={500}
-                alt={media.title}
-                src={media.image}/>
+              {
+                true &&
+                <Img
+                  minHeight={20}
+                  imageWidth={800}
+                  imageHeight={500}
+                  alt={media.title}
+                  src={media.image}/>
+              }
+              <Box width={1} height={100} style={{ backgroundColor: Random.randomColor() }}>
+                {Random.randomString(5)}
+              </Box>
               <Typography center={true} variant={'body1'} pt={1}>
                 {im.name}
               </Typography>
             </Box>
-          </LazyLoad>
-        )
-      }
-    </Box>
+          </Box>
+        )}
+    </LazyLoad>
   )
 }
 

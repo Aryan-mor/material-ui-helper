@@ -21,7 +21,11 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight,backupSrc, au
           tryIt(() => onIsVisible())
           setIsVisible(true)
         }
-        tryIt(()=>observerElement.unobserve(ref.current))
+        try {
+          observerElement.unobserve(ref.current)
+        }catch (e) {
+
+        }
       }
     }
   })

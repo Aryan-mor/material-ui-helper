@@ -5,13 +5,13 @@ import Box from './Box'
 import PropTypes from 'prop-types'
 import Fade from '@material-ui/core/Fade'
 
-function LazyLoad({ serverSideRender, children, transition, onIsVisible, ...props }) {
+function LazyLoad({ serverSideRender, children, transition,rootMarginOffset, onIsVisible, ...props }) {
   const ref = useRef()
   const [isVisible, setIsVisible] = useState(false)
-  const [transitionEnd, setTransitionEnd] = useState(false)
 
   useIntersectionObserver({
     target: ref,
+    rootMargin:`${rootMarginOffset}px`,
     onIntersect: ([{ isIntersecting }], observerElement) => {
       if (isIntersecting) {
         if (!isVisible) {
@@ -29,19 +29,14 @@ function LazyLoad({ serverSideRender, children, transition, onIsVisible, ...prop
     <Box ref={ref}
          {...props}>
       {
-        ((isVisible || (serverSideRender && isServer()))) &&
-        (!transitionEnd && transition && !(serverSideRender && isServer())) ?
+        (isVisible || (serverSideRender && isServer())) ?
+        ( transition && !(serverSideRender && isServer())) ?
           <Fade in={true}
-                timeout={600}
-                onEnter={() => {
-                  if (!transitionEnd)
-                    setTimeout(() => {
-                      setTransitionEnd(true)
-                    }, 300)
-                }}>
+                timeout={600}>
             {children}
           </Fade> :
-          children
+          children:
+          <React.Fragment/>
       }
     </Box>
   )
@@ -50,11 +45,13 @@ function LazyLoad({ serverSideRender, children, transition, onIsVisible, ...prop
 LazyLoad.defaultProps = {
   serverSideRender: true,
   transition: true,
+  rootMarginOffset:250
 }
 
 LazyLoad.propTypes = {
   serverSideRender: PropTypes.bool,
   transition: PropTypes.bool,
+  rootMarginOffset: PropTypes.number,
   onIsVisible: PropTypes.func
 }
 

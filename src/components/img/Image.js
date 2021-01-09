@@ -19,13 +19,18 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
   useEffect(() => {
     if (!isLoaded)
       return
-    setTimeout(() => {
-      setThumbVisibility(false)
+    const timeout = setTimeout(() => {
+      if (thumbVisibility)
+        setThumbVisibility(false)
     }, 1000)
+    return()=>{
+      clearTimeout(timeout)
+    }
   }, [isLoaded])
 
   useEffect(() => {
-    setError(!Boolean(src))
+    if (error !== Boolean(src))
+      setError(!Boolean(src))
   }, [src])
 
 
