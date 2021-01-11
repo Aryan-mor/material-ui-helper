@@ -17,7 +17,7 @@ export { default as InfoButton } from './components/button/InfoButton'
 
 export { default as HoverWatcher } from './helper/HoverWatcher'
 
-export { default as Utils, UtilsElement, UtilsStyle, TimeUtils, Random } from './utils/Utils'
+export { default as Utils, UtilsElement, UtilsStyle, UtilsTime, Random } from './utils/Utils'
 
 export {
   tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement, isServer, isClient, sleep

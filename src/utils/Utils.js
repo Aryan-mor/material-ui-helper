@@ -401,7 +401,7 @@ export const Random = {
   }
 }
 
-export const TimeUtils = {
+export const UtilsTime = {
   getTimeRemaining: (endTimestamp) => {
     const total = endTimestamp - new Date().getTime()
     const seconds = Math.floor((total / 1000) % 60)
