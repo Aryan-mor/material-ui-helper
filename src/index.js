@@ -17,7 +17,7 @@ export { default as InfoButton } from './components/button/InfoButton'
 
 export { default as HoverWatcher } from './helper/HoverWatcher'
 
-export { UtilsStyle, Random } from './utils/Utils'
+export { default as Utils, UtilsElement, UtilsStyle, TimeUtils, Random } from './utils/Utils'
 
 export {
   tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement, isServer, isClient, sleep
@@ -27,6 +27,6 @@ export { default as FormController } from './components/FormController'
 export { default as TextFieldContainer } from './components/textField/TextFieldContainer'
 export { default as DefaultTextField } from './components/textField/DefaultTextField'
 export { default as NoneTextField } from './components/textField/NoneTextField'
-export { default as TextField,createName } from './components/textField/TextField'
+export { default as TextField, createName } from './components/textField/TextField'
 
 import './styles.module.css'

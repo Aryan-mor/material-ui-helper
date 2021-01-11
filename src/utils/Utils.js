@@ -1,3 +1,69 @@
+import { gLog, isClient, tryIt } from './Helper'
+import QueryString from 'query-string'
+
+
+const Utils = {
+  getQueryFromUrl: url => {
+    if (_.isObject(url) && url.history && url.history.state) {
+      url = url.history.state.as || url.history.state
+    }
+    if (!_.isString(url))
+      return {}
+    const a = url.match('([^\\?]+)\\?(.*)')
+    if (!a || _.isEmpty(a) || !_.isArray(a) || !a[2])
+      return {}
+    return QueryString.parse('?' + a[2])
+  },
+  getQueryFromWindows: () => {
+    if (!isClient())
+      return {}
+    return Utils.getQueryFromUrl(window)
+  },
+  copyToClipboard: str => {
+    const el = document.createElement('textarea')  // Create a <textarea> element
+    el.value = str                                 // Set its value to the string that you want copied
+    el.setAttribute('readonly', '')                // Make it readonly to be tamper-proof
+    el.style.position = 'absolute'
+    el.style.left = '-9999px'                      // Move outside the screen to make it invisible
+    document.body.appendChild(el)                  // Append the <textarea> element to the HTML document
+    const selected =
+      document.getSelection().rangeCount > 0        // Check if there is any content selected previously
+        ? document.getSelection().getRangeAt(0)     // Store selection if found
+        : false                                    // Mark as false to know no selection existed before
+    el.select()                                    // Select the <textarea> content
+    document.execCommand('copy')                   // Copy - only works as a result of a user action (e.g. click events)
+    document.body.removeChild(el)                  // Remove the <textarea> element
+    if (selected) {                                 // If a selection existed before copying
+      document.getSelection().removeAllRanges()    // Unselect everything on the HTML document
+      document.getSelection().addRange(selected)   // Restore the original selection
+    }
+  }
+}
+
+export default Utils
+
+export const UtilsElement = {
+  scrollTo: ({ behavior = 'smooth' } = {}) => {
+    tryIt(() => {
+      window.scrollTo({ top: 0, behavior: behavior })
+    })
+  },
+  scrollToElement: (el, { behavior = 'smooth', offsetY = 10 } = {}) => {
+
+    tryIt(() => {
+      const elementPosition = el.getBoundingClientRect().top
+      const offsetPosition = elementPosition - offsetY
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    })
+
+
+  }
+}
+
 export const UtilsStyle = {
   transition: (duration = 500) => {
     return {
@@ -53,7 +119,7 @@ export const Random = {
     }
     return result
   },
-  randomColor:()=>{
+  randomColor: () => {
     const mdColors = [
       '#F44336',
       '#FFEBEE',
@@ -329,8 +395,26 @@ export const Random = {
       '#37474F',
       '#263238',
       '#000000',
-      '#FFFFFF',
-    ];
-    return mdColors[Random.randomInteger(0,mdColors.length-1)]
+      '#FFFFFF'
+    ]
+    return mdColors[Random.randomInteger(0, mdColors.length - 1)]
+  }
+}
+
+export const TimeUtils = {
+  getTimeRemaining: (endTimestamp) => {
+    const total = endTimestamp - new Date().getTime()
+    const seconds = Math.floor((total / 1000) % 60)
+    const minutes = Math.floor((total / 1000 / 60) % 60)
+    const hours = Math.floor((total / (1000 * 60 * 60)) % 24)
+    const days = Math.floor(total / (1000 * 60 * 60 * 24))
+
+    return {
+      total,
+      days,
+      hours,
+      minutes,
+      seconds
+    }
   }
 }
