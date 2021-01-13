@@ -317,17 +317,9 @@ const El = ({ index, color }) => {
 function App4() {
 
   return (
-    <Box
-      height={300}
-      width={300}
-      hoverProps={{
-        width:600
-      }}
-      style={{
-        backgroundColor:"red"
-      }}>
-      sallllllllllam
-    </Box>
+    <Typography variant={'h1'} mt={20} mb={15}>
+      sfasfasf
+    </Typography>
   )
 }
 

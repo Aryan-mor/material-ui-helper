@@ -24,23 +24,23 @@ const useTypographyStyle = makeStyles({
 })
 
 const CM = forwardRef(
-  ({ className,width, component, variant, fontWeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
+  ({ className, width, component, variant, fontWeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
     const classes = textDecorationBottom ? useTypographyStyle({ textDecorationBottom }) : {}
 
-    const style=useMemo(()=>{
-      return{
+    const style = useMemo(() => {
+      return {
         color: color,
         fontWeight: fontWeight,
         textAlign: textAlign,
         ...props.style
       }
-    },[color,fontWeight,textAlign,props.style])
+    }, [color, fontWeight, textAlign, props.style])
 
     return (
       <Box
         ref={ref}
         baseWidth={width}
-        className={clsx([textDecorationBottom?styles.hasBefore:"", classes.root, className])}
+        className={clsx([textDecorationBottom ? styles.hasBefore : '', classes.root, className])}
         component={_.isObject(variant) ? ResponsiveTypo : Typo}
         display={'flex'}
         cm={component}
@@ -52,8 +52,8 @@ const CM = forwardRef(
     )
   })
 
-function Typography(props) {
-  return <CM {...props}>{props.children}</CM>
+function Typography({ mt, ml, mb, mr, mx, my, m, ...props }) {
+  return <CM margin={{mt, ml, mb, mr, mx, my, m}} {...props}>{props.children}</CM>
 }
 
 

@@ -5,15 +5,17 @@ import clsx from 'clsx'
 import Skeleton from '@material-ui/lab/Skeleton'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import PropTypes from 'prop-types'
-import { getSafe, UtilsStyle } from '../../index'
+import { getSafe, gLog, UtilsStyle } from '../../index'
 import styles from '../../styles.module.css'
 import ResponsivePropsPush from './ResponsivePropsPush'
 import HoverStyle from './HoverProps'
 import Loading, { LoadingContainer } from './Loading'
+import { useTheme } from '@material-ui/core'
 
 
 const Box = React.forwardRef((pr, ref) => {
   //region props
+  const theme = useTheme()
   const {
     component,
     className,
@@ -22,6 +24,7 @@ const Box = React.forwardRef((pr, ref) => {
     overflow,
     width: wi,
     baseWidth,
+    margin: marg = {},
     alignItems,
     justifyContent,
     alignCenter,
@@ -42,6 +45,7 @@ const Box = React.forwardRef((pr, ref) => {
     onClick,
     onMouseEnter,
     onMouseLeave,
+    mt, ml, mb, mr, mx, my, m,
     ...props
   } = pr
   //endregion props
@@ -86,12 +90,23 @@ const Box = React.forwardRef((pr, ref) => {
         animationIterationCount: animationHoverIterationCount
       }
     }
-  }, [animationHoverIterationCount,hoverProps])
+  }, [animationHoverIterationCount, hoverProps])
   const alignItemsMemo = useMemo(() => alignItems || ((alignCenter || center) ? 'center' : undefined), [alignItems, alignCenter, center])
   const justifyContentMemo = useMemo(() => justifyContent || ((justifyCenter || center) ? 'center' : undefined), [justifyContent, justifyCenter, center])
   const flexDirectionMemo = useMemo(() => flexDirection || ((flexDirectionColumn) ? 'column' : undefined), [flexDirection, flexDirectionColumn])
   //endregion Memos
 
+  const margin = useMemo(() => {
+    const mar = {
+      mt: (mt || marg.mt || my || marg.my || m||0),
+      ml: (ml || marg.ml || mx || marg.mx || m||0),
+      mb: (mb || marg.mb || my || marg.my || m||0),
+      mr: (mr || marg.mr || mx || marg.mx || m||0)
+    }
+    return {
+      margin: theme.spacing(mar.mt, mar.mr, mar.mb, mar.ml)
+    }
+  }, [mt, ml, mb, mr, mx, my, m, marg])
 
   return (
     <ResponsivePropsPush
@@ -109,10 +124,14 @@ const Box = React.forwardRef((pr, ref) => {
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
       {...props}
-      style={style}>
+      style={{
+        ...style,
+        ...margin
+      }}>
       <HoverStyle>
         <LoadingContainer skeleton={skeleton} loading={loading}>
-          <MaterialBox ref={ref}>
+          <MaterialBox
+            ref={ref}>
             {props.children}
             <Loading loading={loading} skeleton={skeleton} loadingWidth={loadingWidth}/>
           </MaterialBox>
