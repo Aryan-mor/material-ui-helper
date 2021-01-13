@@ -1,15 +1,13 @@
 import React, { forwardRef, useMemo } from 'react'
-import Tp from '@material-ui/core/Typography'
 import _ from 'lodash'
-import { useTheme } from '@material-ui/core'
-import useMediaQuery from '@material-ui/core/useMediaQuery'
 import PropTypes from 'prop-types'
-import Box from './Box'
-import { getSafe } from '..'
+import Box from '../box/Box'
+import { getSafe } from '../../index'
 import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
-import styles from '../styles.module.css'
-
+import styles from '../../styles.module.css'
+import ResponsiveTypo from './ResponsiveTypo'
+import Typo from './DefaultTypo'
 
 const useTypographyStyle = makeStyles({
   root: props => ({
@@ -25,52 +23,8 @@ const useTypographyStyle = makeStyles({
   })
 })
 
-
-function ResponsiveTypo({ children, variant: vari, ...props }) {
-  const theme = useTheme()
-
-
-  const variant = useMemo(() => {
-    const screenSize = {
-      xs: useMediaQuery(theme.breakpoints.down('xs')),
-      sm: useMediaQuery(theme.breakpoints.down('sm')),
-      md: useMediaQuery(theme.breakpoints.down('md')),
-      lg: useMediaQuery(theme.breakpoints.down('lg')),
-      xl: useMediaQuery(theme.breakpoints.down('xl'))
-    }
-
-    const { xs, sm, md, lg, xl } = vari
-    let res = (xs || sm || md || lg || xl)
-    if (screenSize.sm) {
-      res = (sm || md || lg || xl || xs)
-    } else if (screenSize.md) {
-      res = (md || lg || xl || sm || xs)
-    } else if (screenSize.lg) {
-      res = (lg || xl || md || sm || xs)
-    } else if (screenSize.xl) {
-      res = (xl || lg || md || sm || xs)
-    }
-    return res
-  }, [vari])
-
-  return (
-    <Typo variant={variant} {...props}>
-      {children}
-    </Typo>
-  )
-}
-
-function Typo({ cm = 'div', children, variant, ...props }) {
-
-  return (
-    <Tp component={cm} variant={variant} {...props}>
-      {children}
-    </Tp>
-  )
-}
-
 const CM = forwardRef(
-  ({ className, component, variant, fontWeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
+  ({ className,width, component, variant, fontWeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
     const classes = textDecorationBottom ? useTypographyStyle({ textDecorationBottom }) : {}
 
     const style=useMemo(()=>{
@@ -85,6 +39,7 @@ const CM = forwardRef(
     return (
       <Box
         ref={ref}
+        baseWidth={width}
         className={clsx([textDecorationBottom?styles.hasBefore:"", classes.root, className])}
         component={_.isObject(variant) ? ResponsiveTypo : Typo}
         display={'flex'}

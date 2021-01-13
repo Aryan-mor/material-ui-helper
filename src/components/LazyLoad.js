@@ -1,7 +1,7 @@
 import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import useIntersectionObserver, { useIntersectionObserver2 } from '../helper/useIntersectionObserver'
 import { getSafe, gLog, isServer, tryIt } from '../index'
-import Box from './Box'
+import Box from './box/Box'
 import PropTypes from 'prop-types'
 import Fade from '@material-ui/core/Fade'
 

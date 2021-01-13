@@ -3,7 +3,7 @@ import Image from './image'
 import styles from './imageContainer.css'
 import useIntersectionObserver from '../../helper/useIntersectionObserver'
 import { getSafe, tryIt } from '../..'
-import Box from '../Box'
+import Box from '../box/Box'
 
 const imageSizeDef = { width: '100%', height: 'auto' }
 const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight,backupSrc, autoSize, imageProps = {}, onIsVisible, ...props }) => {

@@ -6,7 +6,7 @@ import { Close } from '@material-ui/icons'
 import _ from 'lodash'
 import { isElement, tryIt } from '..'
 import PropTypes from 'prop-types'
-import Box from './Box'
+import Box from './box/Box'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />

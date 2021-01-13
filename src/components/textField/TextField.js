@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { TextField as MaterialTextField, useTheme } from '@material-ui/core'
 import _ from 'lodash'
-import Typography from '../Typography'
+import Typography from '../typography/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import PropTypes from 'prop-types'
 import { getSafe } from '../..'
-import Box from '../Box'
+import Box from '../box/Box'
 import { makeStyles } from '@material-ui/styles'
 
 

@@ -1,5 +1,5 @@
-export { default as Box } from './components/Box'
-export { default as Typography } from './components/Typography'
+export { default as Box } from './components/box/Box'
+export { default as Typography } from './components/typography/Typography'
 export { default as ButtonBase } from './components/ButtonBase'
 export { default as Tooltip } from './components/Tooltip'
 export { default as IconButton } from './components/IconButton'

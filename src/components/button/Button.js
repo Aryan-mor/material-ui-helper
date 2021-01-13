@@ -1,9 +1,9 @@
 import React from 'react'
-import Box from '../Box'
+import Box from '../box/Box'
 import MButton from '@material-ui/core/Button'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
-import Typography from '../Typography'
+import Typography from '../typography/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 function Button(pr) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { ButtonBase as MaterialButtonBase } from '@material-ui/core'
 import PropTypes from 'prop-types'
-import Box, { boxPropType } from './Box'
+import Box, { boxPropType } from './box/Box'
 import { UtilsStyle } from '../utils/Utils'
 
 
@@ -20,7 +20,7 @@ function ButtonBase(pr) {
                 borderRadius={borderRadius}
                 {...props}
                 hoverStyle={{
-                    ...props.hoverStyle,
+                    ...props.hoverProps,
                     backgroundColor: `${hoverBackgroundColor} !important`,
                     ...UtilsStyle.transition(transitionDuration)
                 }}
