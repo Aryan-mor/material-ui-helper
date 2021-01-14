@@ -98,13 +98,19 @@ const Box = React.forwardRef((pr, ref) => {
 
   const margin = useMemo(() => {
     const mar = {
-      mt: (mt || marg.mt || my || marg.my || m||0),
-      ml: (ml || marg.ml || mx || marg.mx || m||0),
-      mb: (mb || marg.mb || my || marg.my || m||0),
-      mr: (mr || marg.mr || mx || marg.mx || m||0)
+      mt: (mt || marg.mt || my || marg.my || m || 0),
+      ml: (ml || marg.ml || mx || marg.mx || m || 0),
+      mb: (mb || marg.mb || my || marg.my || m || 0),
+      mr: (mr || marg.mr || mx || marg.mx || m || 0)
     }
+
+    const mtV = _.isNumber(mar.mt) ? theme.spacing(mar.mt) : mar.mt
+    const mrV = _.isNumber(mar.mr) ? theme.spacing(mar.mr) : mar.mr
+    const mbV = _.isNumber(mar.mb) ? theme.spacing(mar.mb) : mar.mb
+    const mlV = _.isNumber(mar.ml) ? theme.spacing(mar.ml) : mar.ml
+
     return {
-      margin: theme.spacing(mar.mt, mar.mr, mar.mb, mar.ml)
+      margin: `${mtV} ${mrV} ${mbV} ${mlV}`
     }
   }, [mt, ml, mb, mr, mx, my, m, marg])
 

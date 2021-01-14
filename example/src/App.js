@@ -317,7 +317,8 @@ const El = ({ index, color }) => {
 function App4() {
 
   return (
-    <Typography variant={'h1'} mt={20} mb={15}>
+    <Typography component={"p"} variant={'h1'} mt={"20px"} mb={"20px"} ml={"20px"}
+    >
       sfasfasf
     </Typography>
   )
