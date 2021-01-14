@@ -76,7 +76,6 @@ export const UtilsStyle = {
     }
   },
   borderRadius: (radius) => {
-
     return {
       borderRadius: radius,
       WebkitBorderRadius: radius,

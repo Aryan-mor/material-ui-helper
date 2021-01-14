@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
-import { getSafe, gLog } from '../..'
+import { getSafe, gLog, UtilsObject } from '../..'
 
 function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...props }) {
 
@@ -11,6 +11,7 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
     return getSafe(() => {
       gLog("asfklkasjkfjkjas",props)
       if (isWidthUp('xl', width)) {
+        return UtilsObject.smartAssign(props,xs,sm,md,lg,xl)
         return {
           ...props,
           ...xs,
@@ -21,6 +22,7 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
         }
       }
       if (isWidthUp('lg', width)) {
+        return UtilsObject.smartAssign(props,xs,sm,md,lg)
         return {
           ...props,
           ...xs,
@@ -30,6 +32,8 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
         }
       }
       if (isWidthUp('md', width)) {
+
+        return UtilsObject.smartAssign(props,xs,sm,md)
         return {
           ...props,
           ...xs,
@@ -38,6 +42,7 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
         }
       }
       if (isWidthUp('sm', width)) {
+        return UtilsObject.smartAssign(props,xs,sm)
         return {
           ...props,
           ...xs,
@@ -45,6 +50,7 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
         }
       }
       if (isWidthUp('xs', width)) {
+        return UtilsObject.smartAssign(props,xs)
         return {
           ...props,
           ...xs
