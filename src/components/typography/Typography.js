@@ -46,14 +46,7 @@ const CM = forwardRef(
         cm={component}
         variant={variant}
         {...props}
-        style={style}
-        responsiveProps={{
-          xs: {
-            style: {
-              backgroundColor: "#eee",
-            }
-          }
-        }}>
+        style={style}>
         {props.children}
       </Box>
     )

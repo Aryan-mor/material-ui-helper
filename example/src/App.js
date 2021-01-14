@@ -319,16 +319,9 @@ function App4() {
 
 
   return (
-    <Typography component={'p'} variant={'h1'} mt={'8vw'} mb={'8vw'} ml={'8vw'}
-                responsiveProps={{
-                  xs: {
-                    style: {
-                      backgroundColor:"#eee",
-                    }
-                  }
-                }}>
-      sfasfasf
-    </Typography>
+    <Box>
+
+    </Box>
   )
 }
 
