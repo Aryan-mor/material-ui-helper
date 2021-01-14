@@ -60,3 +60,5 @@ String.prototype.trimAll = function() {
   return this.replaceAll(/ /g, '').trim()
 }
 //endregion string
+
+

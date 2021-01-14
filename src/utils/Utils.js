@@ -1,5 +1,6 @@
 import { gLog, isClient, tryIt } from './Helper'
 import QueryString from 'query-string'
+import _ from 'lodash'
 
 
 const Utils = {
@@ -418,3 +419,35 @@ export const UtilsTime = {
     }
   }
 }
+
+export const UtilsObject = {
+  smartAssign: (target, ...objs) => {
+    return tryIt(() => {
+      let res = _.cloneDeep(target)
+      _.forEach(objs, (obj) => {
+        _.forEach(obj, (item, key) => {
+          if (_.isObject(item)) {
+            res[key] = tryIt(() => res[key] = Object.assign(res[key], item), res[key])
+            return
+          }
+          if (_.isArray(item)) {
+            res[key] = tryIt(() => res[key] = res[key].concat(item), res[key])
+            return
+          }
+          return res[key] = item
+        })
+      })
+      return res
+    }, target)
+  }
+}
+
+export const UtilsString = {
+  replaceAll:(str,regex,to)=>{
+    return str.replace(regex, to)
+  },
+  trimAll:(str)=>{
+    return str.replaceAll(/ /g, '').trim()
+  }
+}
+

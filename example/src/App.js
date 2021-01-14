@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import {
   Box,
+  gLog,
   Button,
   getSafe,
   IconButton,
@@ -9,7 +10,8 @@ import {
   Random,
   Typography,
   UtilsElement,
-  UtilsStyle
+  UtilsStyle,
+  UtilsObject
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -316,11 +318,29 @@ const El = ({ index, color }) => {
 
 function App4() {
 
+
+  useEffect(() => {
+    const b = {
+      style: {
+        b: 5
+      }
+    }
+    const c = {
+      style: {
+        c: 2
+      }
+    }
+
+    gLog('asfasfasfasfas', UtilsObject.smartAssign(b, c))
+  }, [])
+
   return (
-    <Typography component={"p"} variant={'h1'} mt={"20px"} mb={"20px"} ml={"20px"}
-    >
-      sfasfasf
-    </Typography>
+    <Box>
+      {false &&
+      <Typography component={'p'} variant={'h1'} mt={'8vw'} mb={'8vw'} ml={'8vw'}>
+        sfasfasf
+      </Typography>}
+    </Box>
   )
 }
 

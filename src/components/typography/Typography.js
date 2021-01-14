@@ -46,14 +46,21 @@ const CM = forwardRef(
         cm={component}
         variant={variant}
         {...props}
-        style={style}>
+        style={style}
+        responsiveProps={{
+          xs: {
+            style: {
+              backgroundColor: "#eee",
+            }
+          }
+        }}>
         {props.children}
       </Box>
     )
   })
 
 function Typography({ mt, ml, mb, mr, mx, my, m, ...props }) {
-  return <CM margin={{mt, ml, mb, mr, mx, my, m}} {...props}>{props.children}</CM>
+  return <CM margin={{ mt, ml, mb, mr, mx, my, m }} {...props}>{props.children}</CM>
 }
 
 

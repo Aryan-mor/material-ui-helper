@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
-import { getSafe } from '../..'
+import { getSafe, gLog } from '../..'
 
 function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...props }) {
 
@@ -9,6 +9,7 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
 
   const responsivePr = useMemo(() => {
     return getSafe(() => {
+      gLog("asfklkasjkfjkjas",props)
       if (isWidthUp('xl', width)) {
         return {
           ...props,
