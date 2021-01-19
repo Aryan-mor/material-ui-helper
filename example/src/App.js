@@ -18,6 +18,8 @@ import { useTheme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import 'material-ui-helper/src/styles.module.css'
 import images from './images.json'
+import './style.css';
+
 
 
 const useTypographyStyle = makeStyles({
@@ -318,8 +320,14 @@ function App4() {
 
 
   return (
-    <Box>p
-    </Box>
+    <Typography
+      p={8}
+      href={'#'} variant={'h6'} width={100} component={'a'}
+      style={{
+        position: 'absolute'
+      }}>
+      safasfasfas
+    </Typography>
   )
 }
 

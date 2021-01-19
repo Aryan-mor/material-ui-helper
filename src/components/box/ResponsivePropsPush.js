@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
-import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
-import { getSafe, gLog, UtilsObject } from '../..'
+import { getSafe, UtilsObject } from '../..'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { useTheme } from '@material-ui/core'
 
@@ -66,7 +65,7 @@ const isXs = useMediaQuery(theme.breakpoints.up('xs'))
 
   return (
     !_.isEmpty(responsivePr) ?
-      React.cloneElement(children) :
+      React.cloneElement(children,responsiveProps) :
       React.cloneElement(children, props)
   )
 }

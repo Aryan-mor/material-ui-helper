@@ -19,8 +19,7 @@ const Box = React.forwardRef((pr, ref) => {
     hoverProps,
     display,
     overflow,
-    width: wi,
-    baseWidth,
+    width,
     margin: marginProp = {},
     alignItems,
     justifyContent,
@@ -131,7 +130,7 @@ const Box = React.forwardRef((pr, ref) => {
       className={clsx([animClass, animHoverClass, className])}
       component={component}
       overflow={overflow}
-      baseWidth={wi || baseWidth}
+      width={width}
       display={display}
       alignItems={alignItemsMemo}
       justifyContent={justifyContentMemo}
