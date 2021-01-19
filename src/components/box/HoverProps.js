@@ -1,9 +1,8 @@
 import { makeStyles } from '@material-ui/styles'
 import React, { useCallback, useMemo, useState } from 'react'
 import clsx from 'clsx'
-import { isWidthUp } from '@material-ui/core'
-import withWidth from '@material-ui/core/withWidth'
 import { getSafe } from '../..'
+
 
 const useBoxHoverStyles = makeStyles({
   hoverStyleGenerator: props => ({
@@ -51,4 +50,4 @@ function hoverProps({ hoverProps, children, ...props }) {
   )
 }
 
-export default withWidth()(hoverProps)
+export default hoverProps

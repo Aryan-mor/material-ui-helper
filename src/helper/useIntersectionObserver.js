@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { getSafe, tryIt } from '..'
+import { getSafe, gLog, tryIt } from '..'
 
 const useIntersectionObserver = ({
                                    target,
@@ -12,13 +12,15 @@ const useIntersectionObserver = ({
       rootMargin,
       threshold
     })
+
     const current = target.current
+
     observer.observe(current)
 
     return () => {
       try {
         observer.unobserve(current)
-      }catch (e) {
+      } catch (e) {
       }
     }
   })

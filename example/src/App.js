@@ -245,7 +245,7 @@ function App2({ ...props }) {
 
 const LazyElement = ({ items: its, ...props }) => {
   return (
-    <LazyLoad my={20} transition={false} serverSideRender={false} width={1} flexWrap={'wrap'} {...props}>
+    <Box my={20} transition={false} serverSideRender={false} width={1} flexWrap={'wrap'} {...props}>
       {
         its.map(({ media, ...im }, index) =>
           <Box
@@ -271,7 +271,7 @@ const LazyElement = ({ items: its, ...props }) => {
             </Box>
           </Box>
         )}
-    </LazyLoad>
+    </Box>
   )
 }
 
@@ -317,10 +317,8 @@ const El = ({ index, color }) => {
 function App4() {
 
 
-
   return (
-    <Box>
-
+    <Box>p
     </Box>
   )
 }

@@ -1,17 +1,22 @@
 import React, { useMemo } from 'react'
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth'
 import { getSafe, gLog, UtilsObject } from '../..'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core'
 
-function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...props }) {
-
+function ResponsivePropsPush({ baseWidth, width, responsiveProps, children, ...props }) {
+  const theme = useTheme()
   const { xs = {}, sm = {}, md = {}, lg = {}, xl = {} } = responsiveProps
-
+const isXl = useMediaQuery(theme.breakpoints.up('xl'))
+const isLg = useMediaQuery(theme.breakpoints.up('lg'))
+const isMd = useMediaQuery(theme.breakpoints.up('md'))
+const isSm = useMediaQuery(theme.breakpoints.up('sm'))
+const isXs = useMediaQuery(theme.breakpoints.up('xs'))
 
   const responsivePr = useMemo(() => {
     return getSafe(() => {
-      gLog("asfklkasjkfjkjas",props)
-      if (isWidthUp('xl', width)) {
-        return UtilsObject.smartAssign(props,xs,sm,md,lg,xl)
+      if (isXl) {
+        return UtilsObject.smartAssign(props, xs, sm, md, lg, xl)
         return {
           ...props,
           ...xs,
@@ -21,8 +26,8 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
           ...xl
         }
       }
-      if (isWidthUp('lg', width)) {
-        return UtilsObject.smartAssign(props,xs,sm,md,lg)
+      if (isLg) {
+        return UtilsObject.smartAssign(props, xs, sm, md, lg)
         return {
           ...props,
           ...xs,
@@ -31,9 +36,8 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
           ...lg
         }
       }
-      if (isWidthUp('md', width)) {
-
-        return UtilsObject.smartAssign(props,xs,sm,md)
+      if (isMd) {
+        return UtilsObject.smartAssign(props, xs, sm, md)
         return {
           ...props,
           ...xs,
@@ -41,16 +45,16 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
           ...md
         }
       }
-      if (isWidthUp('sm', width)) {
-        return UtilsObject.smartAssign(props,xs,sm)
+      if (isSm) {
+        return UtilsObject.smartAssign(props, xs, sm)
         return {
           ...props,
           ...xs,
           ...sm
         }
       }
-      if (isWidthUp('xs', width)) {
-        return UtilsObject.smartAssign(props,xs)
+      if (isXs) {
+        return UtilsObject.smartAssign(props, xs)
         return {
           ...props,
           ...xs
@@ -62,13 +66,10 @@ function ResponsivePropsPush({ baseWidth,width, responsiveProps, children, ...pr
 
   return (
     !_.isEmpty(responsivePr) ?
-      React.cloneElement(children, {
-        width:baseWidth,
-        ...responsivePr
-      }) :
-      React.cloneElement(children, {width:baseWidth, ...props })
+      React.cloneElement(children) :
+      React.cloneElement(children, props)
   )
 }
 
-export default withWidth()(ResponsivePropsPush)
+export default ResponsivePropsPush
 

@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { getSafe } from '../..'
+import { getSafe, gLog } from '../..'
 import ImageContainer from './ImageContainer'
 import PropTypes from 'prop-types'
 
@@ -40,6 +40,8 @@ function Img({
       }
     })
   }, [src, th])
+
+
 
   return (
     <ImageContainer

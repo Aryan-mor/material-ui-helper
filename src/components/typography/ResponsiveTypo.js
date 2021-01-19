@@ -12,7 +12,6 @@ function ResponsiveTypo({ width, children, variant: vari = {}, ...props }) {
 
   const variant = useMemo(() => {
     return getSafe(() => {
-
       if (isWidthUp('xl', width)) {
         return xl || lg || md || sm || xs
       }

@@ -45,6 +45,7 @@ const CM = forwardRef(
         display={'flex'}
         cm={component}
         variant={variant}
+        margin={true}
         {...props}
         style={style}>
         {props.children}
@@ -55,7 +56,6 @@ const CM = forwardRef(
 function Typography({ mt, ml, mb, mr, mx, my, m, ...props }) {
   return <CM margin={{ mt, ml, mb, mr, mx, my, m }} {...props}>{props.children}</CM>
 }
-
 
 Typography.propTypes = {
   component: PropTypes.string,

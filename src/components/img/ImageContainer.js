@@ -24,7 +24,6 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight,backupSrc, au
         try {
           observerElement.unobserve(ref.current)
         }catch (e) {
-
         }
       }
     }

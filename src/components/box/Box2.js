@@ -1,27 +1,22 @@
 import React, { useMemo } from 'react'
 import MaterialBox from '@material-ui/core/Box'
+import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
+import Skeleton from '@material-ui/lab/Skeleton'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import PropTypes from 'prop-types'
-import { getSafe, gLog, UtilsStyle } from '../../index'
-import styles from '../../styles.module.css'
-import ResponsivePropsPush from './ResponsivePropsPush'
-import HoverStyle from './HoverProps'
-import Loading, { LoadingContainer } from './Loading'
-import _ from 'lodash'
-import { useTheme } from '@material-ui/core'
+import { UtilsStyle } from '..'
+import styles from '../styles.module.css'
+
 
 const Box = React.forwardRef((pr, ref) => {
   //region props
-  const theme = useTheme()
   const {
     component,
     className,
-    hoverProps,
+    hoverStyle,
     display,
     overflow,
-    width: wi,
-    baseWidth,
-    margin: marginProp = {},
     alignItems,
     justifyContent,
     alignCenter,
@@ -38,11 +33,9 @@ const Box = React.forwardRef((pr, ref) => {
     loading,
     loadingWidth,
     textSelectable,
-    responsiveProps,
     onClick,
     onMouseEnter,
     onMouseLeave,
-    mt, ml, mb, mr, mx, my, m,
     ...props
   } = pr
   //endregion props
@@ -79,59 +72,24 @@ const Box = React.forwardRef((pr, ref) => {
       ...props.style
     }
   }, [animationIterationCount, textSelectable, borderRadius, props.style])
-  const hoverPropsMemo = useMemo(() => {
+  const hoverStyleMemo = useMemo(() => {
     return {
-      ...hoverProps,
-      style: {
-        ...getSafe(() => hoverProps.style, {}),
-        animationIterationCount: animationHoverIterationCount
-      }
+      ...hoverStyle,
+      animationIterationCount: animationHoverIterationCount
     }
-  }, [animationHoverIterationCount, hoverProps])
+  }, [animationIterationCount, textSelectable, borderRadius, props.style])
   const alignItemsMemo = useMemo(() => alignItems || ((alignCenter || center) ? 'center' : undefined), [alignItems, alignCenter, center])
   const justifyContentMemo = useMemo(() => justifyContent || ((justifyCenter || center) ? 'center' : undefined), [justifyContent, justifyCenter, center])
   const flexDirectionMemo = useMemo(() => flexDirection || ((flexDirectionColumn) ? 'column' : undefined), [flexDirection, flexDirectionColumn])
   //endregion Memos
 
-  const margin = useMemo(() => {
-    let marg = _.cloneDeep(marginProp)
-
-    if ( _.isEmpty(marg)) {
-      return { mt, ml, mb, mr, mx, my, m, style: {} }
-    }
-    if (!_.isObject(marg)) {
-      marg = {}
-    }
-    const mar = {
-      mt: (mt || marg.mt || my || marg.my || m || 0),
-      ml: (ml || marg.ml || mx || marg.mx || m || 0),
-      mb: (mb || marg.mb || my || marg.my || m || 0),
-      mr: (mr || marg.mr || mx || marg.mx || m || 0)
-    }
-
-    const mtV = _.isNumber(mar.mt) ? theme.spacing(mar.mt) : mar.mt
-    const mrV = _.isNumber(mar.mr) ? theme.spacing(mar.mr) : mar.mr
-    const mbV = _.isNumber(mar.mb) ? theme.spacing(mar.mb) : mar.mb
-    const mlV = _.isNumber(mar.ml) ? theme.spacing(mar.ml) : mar.ml
-
-    return {
-
-      style: {
-        margin: `${mtV}px ${mrV}px ${mbV}px ${mlV}px`
-      }
-    }
-  }, [mt, ml, mb, mr, mx, my, m, marginProp])
-
-
 
   return (
-    <ResponsivePropsPush
-      responsiveProps={responsiveProps}
-      hoverProps={hoverPropsMemo}
+    <HoverStyle
+      hoverStyle={hoverStyleMemo}
       className={clsx([animClass, animHoverClass, className])}
       component={component}
       overflow={overflow}
-      baseWidth={wi || baseWidth}
       display={display}
       alignItems={alignItemsMemo}
       justifyContent={justifyContentMemo}
@@ -139,28 +97,15 @@ const Box = React.forwardRef((pr, ref) => {
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      m={margin.m}
-      my={margin.my}
-      mx={margin.mx}
-      mt={margin.mt}
-      mb={margin.mb}
-      mr={margin.mr}
-      ml={margin.ml}
       {...props}
-      style={{
-        ...style,
-        ...margin.style
-      }}>
-      <HoverStyle>
-        <LoadingContainer skeleton={skeleton} loading={loading}>
-          <MaterialBox
-            ref={ref}>
-            {props.children}
-            <Loading loading={loading} skeleton={skeleton} loadingWidth={loadingWidth}/>
-          </MaterialBox>
-        </LoadingContainer>
-      </HoverStyle>
-    </ResponsivePropsPush>
+      style={style}>
+      <LoadingContainer skeleton={skeleton} loading={loading}>
+        <MaterialBox ref={ref}>
+          {props.children}
+          <Loading loading={loading} skeleton={skeleton} loadingWidth={loadingWidth}/>
+        </MaterialBox>
+      </LoadingContainer>
+    </HoverStyle>
   )
 })
 
@@ -185,18 +130,11 @@ export const boxPropType = {
   hoverTransform: PropTypes.oneOf(['shake']),
   transformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hoverTransformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  hoverProps: PropTypes.object,
+  hoverStyle: PropTypes.object,
   skeleton: PropTypes.bool,
   loading: PropTypes.bool,
   textSelectable: PropTypes.bool,
   loadingWidth: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
-  responsiveProps: PropTypes.shape({
-    xs: PropTypes.object,
-    sm: PropTypes.object,
-    md: PropTypes.object,
-    lg: PropTypes.object,
-    xl: PropTypes.object
-  }),
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func
@@ -210,8 +148,7 @@ Box.defaultProps = {
   flexDirectionColumn: false,
   loadingWidth: '25%',
   textSelectable: true,
-  hoverProps: {},
-  responsiveProps: {}
+  hoverStyle: {}
 }
 
 Box.propTypes = {
@@ -234,18 +171,11 @@ Box.propTypes = {
   hoverTransform: PropTypes.oneOf(['shake', 'shake2']),
   transformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
   hoverTransformCount: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-  hoverProps: PropTypes.object,
+  hoverStyle: PropTypes.object,
   skeleton: PropTypes.bool,
   loading: PropTypes.bool,
   textSelectable: PropTypes.bool,
   loadingWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  responsiveProps: PropTypes.shape({
-    xs: PropTypes.object,
-    sm: PropTypes.object,
-    md: PropTypes.object,
-    lg: PropTypes.object,
-    xl: PropTypes.object
-  }),
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func
@@ -254,4 +184,76 @@ Box.propTypes = {
 export default Box
 //endregion propTypes
 
+//region HoverStyle
+const useBoxHoverStyles = makeStyles({
+  hoverStyleGenerator: props => ({
+    '&:hover': {
+      ...props.hoverStyle
+    }
+  })
+})
 
+function HoverStyle({ hoverStyle, children, ...props }) {
+  const classes = hoverStyle ? useBoxHoverStyles({ hoverStyle }) : undefined
+
+
+  return (
+    classes ?
+      React.cloneElement(children, { ...props, className: clsx(classes.hoverStyleGenerator, props.className) }) :
+      React.cloneElement(children, props)
+  )
+}
+
+//endregion HoverStyle
+
+function LoadingContainer({ children, loading, skeleton, ...props }) {
+
+  return (
+    React.cloneElement(children, { ...props, position: (loading || skeleton) ? 'relative' : undefined })
+  )
+}
+
+function Loading({ children, loading, loadingWidth, skeleton }) {
+
+  return (
+    <React.Fragment>
+      {
+        (skeleton || loading) &&
+        <MaterialBox
+          display={'flex'}
+          alignItems={'center'}
+          justifyContent={'center'}
+          width={1} height={1}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0
+          }}>
+          {
+            (skeleton) &&
+            <Skeleton
+              variant="rect"
+              style={{
+                width: '100%',
+                height: '100%'
+              }}/>
+          }
+          {
+            loading &&
+            <MaterialBox
+              display={'flex'}
+              width={1} height={1}
+              alignItems={'center'}
+              justifyContent={'center'}>
+              <CircularProgress
+                style={{
+                  width: loadingWidth,
+                  height: loadingWidth
+                }}/>
+            </MaterialBox>
+          }
+        </MaterialBox>
+      }
+    </React.Fragment>
+  )
+}
