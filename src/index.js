@@ -17,11 +17,43 @@ export { default as InfoButton } from './components/button/InfoButton'
 
 export { default as HoverWatcher } from './helper/HoverWatcher'
 
-export { default as Utils, UtilsElement, UtilsStyle, UtilsTime, Random, UtilsObject,UtilsString } from './utils/Utils'
+export { default as Utils, UtilsElement, UtilsStyle, UtilsTime, Random, UtilsObject, UtilsString } from './utils/Utils'
 
 export {
   tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement, isServer, isClient, sleep
 } from './utils/Helper'
+
+
+export {
+  HiddenXlUp,
+  HiddenLgUp,
+  HiddenMdUp,
+  HiddenSmUp,
+  HiddenXsUp,
+
+  HiddenXlDown,
+  HiddenLgDown,
+  HiddenMdDown,
+  HiddenSmDown,
+  HiddenXsDown,
+
+  ShowOnlyXl,
+  ShowOnlyLg,
+  ShowOnlyMd,
+  ShowOnlySm,
+  ShowOnlyXs,
+
+  HiddenOnlyXl,
+  HiddenOnlyLg,
+  HiddenOnlyMd,
+  HiddenOnlySm,
+  HiddenOnlyXs,
+
+  ShowInTablet,
+  ShowInDesktop,
+  ShowInMobile,
+  ShowInTabletAndDesktop
+} from './components/Hidden'
 
 export { default as FormController } from './components/FormController'
 export { default as TextFieldContainer } from './components/textField/TextFieldContainer'

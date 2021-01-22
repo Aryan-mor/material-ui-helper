@@ -3,10 +3,23 @@ import {
   Box,
   Button,
   getSafe,
+  HiddenLgDown,
+  HiddenLgUp,
+  HiddenMdDown,
+  HiddenMdUp,
+  HiddenSmDown,
+  HiddenSmUp,
+  HiddenXlDown,
+  HiddenXlUp,
   IconButton,
   Img,
   LazyLoad,
+  HiddenXsDown, HiddenXsUp,
   Random,
+  ShowInDesktop,
+  ShowInMobile,
+  ShowInTablet,
+  ShowInTabletAndDesktop,
   Typography,
   UtilsElement,
   UtilsStyle
@@ -18,8 +31,7 @@ import { useTheme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import 'material-ui-helper/src/styles.module.css'
 import images from './images.json'
-import './style.css';
-
+import './style.css'
 
 
 const useTypographyStyle = makeStyles({
@@ -317,18 +329,150 @@ const El = ({ index, color }) => {
 }
 
 function App4() {
-
-
+  const theme = useTheme()
+  const [disable, setDisable] = useState(true)
   return (
-    <Typography
-      p={8}
-      href={'#'} variant={'h6'} width={100} component={'a'}
-      style={{
-        position: 'absolute'
+    <Box>
+      <Button onClick={() => {
+        setDisable(st => !st)
       }}>
-      safasfasfas
-    </Typography>
+        safasf
+      </Button>
+      <Button
+        pt={[2, 5]}
+        id={'login_first_step_submit_button'}
+        fullWidth={true}
+        color={theme.palette.primary.main}
+        loading={false}
+        disableElevation={true}
+        disabled={disable}
+        typography={{
+          py: '8px',
+          variant: 'body1',
+          color: '#fff'
+        }}>
+        coskafasjjfh
+      </Button>
+    </Box>
   )
 }
 
-export default App4
+function App5() {
+
+  function Box2({ children }) {
+    return (
+      <Box width={200} height={200} p={2} center={true}>
+        <Box width={1} center={true} height={1} style={{border:`1px solid #ccc`,...UtilsStyle.borderRadius(5)}}>
+        {children}
+        </Box>
+      </Box>
+    )
+  }
+
+  const v1 = false;
+  const v2 = false;
+  const v3 = true;
+
+  return (
+    <Box flexDirectionColumn={true} center={true}>
+      {
+        v1&&
+        <Box width={"98%"} py={2} my={2} flexWrap={'wrap'}
+             style={{
+               border:'1px solid #ddd',
+               ...UtilsStyle.borderRadius(5)
+             }}>
+          <Box2>
+            <HiddenXlUp>
+              HiddenXlUp
+            </HiddenXlUp>
+          </Box2>
+          <Box2>
+            <HiddenLgUp>
+              HiddenLgUp
+            </HiddenLgUp>
+          </Box2>
+          <Box2>
+            <HiddenMdUp>
+              HiddenMdUp
+            </HiddenMdUp>
+          </Box2>
+          <Box2>
+            <HiddenSmUp>
+              HiddenSmUp
+            </HiddenSmUp>
+          </Box2>
+          <Box2>
+            <HiddenXsUp>
+              HiddenSmUp
+            </HiddenXsUp>
+          </Box2>
+        </Box>
+      }
+      {v2&&
+        <Box width={"98%"} py={2} my={2} flexWrap={'wrap'}
+             style={{
+               border:'1px solid #ddd',
+               ...UtilsStyle.borderRadius(5)
+             }}>
+          <Box2>
+            <HiddenXlDown>
+              HiddenXlDown
+            </HiddenXlDown>
+          </Box2>
+          <Box2>
+            <HiddenLgDown>
+              HiddenLgDown
+            </HiddenLgDown>
+          </Box2>
+          <Box2>
+            <HiddenMdDown>
+              HiddenMdDown
+            </HiddenMdDown>
+          </Box2>
+          <Box2>
+            <HiddenSmDown>
+              HiddenSmDown
+            </HiddenSmDown>
+          </Box2>
+          <Box2>
+            <HiddenXsDown>
+              HiddenXsDown
+            </HiddenXsDown>
+          </Box2>
+        </Box>}
+      {
+        v3 &&
+        <Box width={"98%"} py={2} my={2} flexWrap={'wrap'}
+             style={{
+               border:'1px solid #ddd',
+               ...UtilsStyle.borderRadius(5)
+             }}>
+          <Box2>
+            <ShowInTablet>
+              ShowInTablet
+            </ShowInTablet>
+          </Box2>
+          <Box2>
+            <ShowInDesktop>
+              ShowInDesktop
+            </ShowInDesktop>
+          </Box2>
+          <Box2>
+            <ShowInMobile>
+              ShowInMobile
+            </ShowInMobile>
+          </Box2>
+          <Box2>
+            <ShowInTabletAndDesktop>
+              ShowInTabletAndDesktop
+            </ShowInTabletAndDesktop>
+          </Box2>
+        </Box>
+      }
+
+    </Box>
+  )
+}
+
+export default App5

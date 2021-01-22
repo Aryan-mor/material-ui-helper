@@ -2,21 +2,25 @@ import React, { useMemo } from 'react'
 import MaterialBox from '@material-ui/core/Box'
 import clsx from 'clsx'
 import PropTypes from 'prop-types'
-import { UtilsStyle } from '..'
-import styles from '../styles.module.css'
-import HoverProps from './HoverProps'
+import { getSafe, gLog, UtilsStyle } from '../../index'
+import styles from '../../styles.module.css'
+import ResponsivePropsPush from './ResponsivePropsPush'
+import HoverStyle from './HoverProps'
 import Loading, { LoadingContainer } from './Loading'
-import { getSafe } from '../..'
-
+import _ from 'lodash'
+import { useTheme } from '@material-ui/core'
 
 const Box = React.forwardRef((pr, ref) => {
   //region props
+  const theme = useTheme()
   const {
     component,
     className,
     hoverProps,
     display,
     overflow,
+    width,
+    margin: marginProp = {},
     alignItems,
     justifyContent,
     alignCenter,
@@ -33,9 +37,11 @@ const Box = React.forwardRef((pr, ref) => {
     loading,
     loadingWidth,
     textSelectable,
+    responsiveProps,
     onClick,
     onMouseEnter,
     onMouseLeave,
+    mt, ml, mb, mr, mx, my, m,
     ...props
   } = pr
   //endregion props
@@ -72,28 +78,59 @@ const Box = React.forwardRef((pr, ref) => {
       ...props.style
     }
   }, [animationIterationCount, textSelectable, borderRadius, props.style])
-
   const hoverPropsMemo = useMemo(() => {
     return {
       ...hoverProps,
       style: {
-        animationIterationCount: animationHoverIterationCount,
-        ...getSafe(() => hoverProps.style || {}, {})
+        ...getSafe(() => hoverProps.style, {}),
+        animationIterationCount: animationHoverIterationCount
       }
     }
   }, [animationHoverIterationCount, hoverProps])
-
   const alignItemsMemo = useMemo(() => alignItems || ((alignCenter || center) ? 'center' : undefined), [alignItems, alignCenter, center])
   const justifyContentMemo = useMemo(() => justifyContent || ((justifyCenter || center) ? 'center' : undefined), [justifyContent, justifyCenter, center])
   const flexDirectionMemo = useMemo(() => flexDirection || ((flexDirectionColumn) ? 'column' : undefined), [flexDirection, flexDirectionColumn])
   //endregion Memos
 
+  const margin = useMemo(() => {
+    let marg = _.cloneDeep(marginProp)
+
+    if ( _.isEmpty(marg)) {
+      return { mt, ml, mb, mr, mx, my, m, style: {} }
+    }
+    if (!_.isObject(marg)) {
+      marg = {}
+    }
+    const mar = {
+      mt: (mt || marg.mt || my || marg.my || m || 0),
+      ml: (ml || marg.ml || mx || marg.mx || m || 0),
+      mb: (mb || marg.mb || my || marg.my || m || 0),
+      mr: (mr || marg.mr || mx || marg.mx || m || 0)
+    }
+
+    const mtV = _.isNumber(mar.mt) ? theme.spacing(mar.mt) : mar.mt
+    const mrV = _.isNumber(mar.mr) ? theme.spacing(mar.mr) : mar.mr
+    const mbV = _.isNumber(mar.mb) ? theme.spacing(mar.mb) : mar.mb
+    const mlV = _.isNumber(mar.ml) ? theme.spacing(mar.ml) : mar.ml
+
+    return {
+
+      style: {
+        margin: `${mtV}px ${mrV}px ${mbV}px ${mlV}px`
+      }
+    }
+  }, [mt, ml, mb, mr, mx, my, m, marginProp])
+
+
+
   return (
-    <HoverProps
+    <ResponsivePropsPush
+      responsiveProps={responsiveProps}
       hoverProps={hoverPropsMemo}
       className={clsx([animClass, animHoverClass, className])}
       component={component}
       overflow={overflow}
+      width={width}
       display={display}
       alignItems={alignItemsMemo}
       justifyContent={justifyContentMemo}
@@ -101,18 +138,30 @@ const Box = React.forwardRef((pr, ref) => {
       onClick={onClick}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      m={margin.m}
+      my={margin.my}
+      mx={margin.mx}
+      mt={margin.mt}
+      mb={margin.mb}
+      mr={margin.mr}
+      ml={margin.ml}
       {...props}
-      style={style}>
-      <LoadingContainer skeleton={skeleton} loading={loading}>
-        <MaterialBox ref={ref}>
-          {props.children}
-          <Loading loading={loading} skeleton={skeleton} loadingWidth={loadingWidth}/>
-        </MaterialBox>
-      </LoadingContainer>
-    </HoverProps>
+      style={{
+        ...style,
+        ...margin.style
+      }}>
+      <HoverStyle>
+        <LoadingContainer skeleton={skeleton} loading={loading}>
+          <MaterialBox
+            ref={ref}>
+            {props.children}
+            <Loading loading={loading} skeleton={skeleton} loadingWidth={loadingWidth}/>
+          </MaterialBox>
+        </LoadingContainer>
+      </HoverStyle>
+    </ResponsivePropsPush>
   )
 })
-
 
 //region propTypes
 export const boxPropType = {
@@ -140,6 +189,13 @@ export const boxPropType = {
   loading: PropTypes.bool,
   textSelectable: PropTypes.bool,
   loadingWidth: PropTypes.oneOf([PropTypes.string, PropTypes.number]),
+  responsiveProps: PropTypes.shape({
+    xs: PropTypes.object,
+    sm: PropTypes.object,
+    md: PropTypes.object,
+    lg: PropTypes.object,
+    xl: PropTypes.object
+  }),
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func
@@ -153,7 +209,8 @@ Box.defaultProps = {
   flexDirectionColumn: false,
   loadingWidth: '25%',
   textSelectable: true,
-  hoverProps: {}
+  hoverProps: {},
+  responsiveProps: {}
 }
 
 Box.propTypes = {
@@ -181,6 +238,13 @@ Box.propTypes = {
   loading: PropTypes.bool,
   textSelectable: PropTypes.bool,
   loadingWidth: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  responsiveProps: PropTypes.shape({
+    xs: PropTypes.object,
+    sm: PropTypes.object,
+    md: PropTypes.object,
+    lg: PropTypes.object,
+    xl: PropTypes.object
+  }),
   onClick: PropTypes.func,
   onMouseEnter: PropTypes.func,
   onMouseLeave: PropTypes.func
@@ -188,4 +252,5 @@ Box.propTypes = {
 
 export default Box
 //endregion propTypes
+
 

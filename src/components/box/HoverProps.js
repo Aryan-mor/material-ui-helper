@@ -12,7 +12,7 @@ const useBoxHoverStyles = makeStyles({
   })
 })
 
-function hoverProps({ hoverProps, children, ...props }) {
+function HoverProps({hoverProps, children, ...props}) {
 
   const [hover, setHover] = useState(false)
 
@@ -31,23 +31,30 @@ function hoverProps({ hoverProps, children, ...props }) {
       if (!hoverProps)
         throw ''
       return {
-        ...props,
         ...(hover ? hoverProps : {}),
         style: {
-          ...props.style,
           ...(getSafe(() => hoverProps.style, {}))
         },
         onMouseEnter: handleOnMouseEnter,
         onMouseLeave: handleOnMouseLeave,
-        className: clsx([hover ? (hoverProps.className) : '', props.className])
+        className: hoverProps.className
       }
-    }, props)
+    }, {})
   }, [hover, hoverProps])
 
 
   return (
-    React.cloneElement(children, hovProps)
+    React.cloneElement(children, {
+      ...props,
+      ...hovProps,
+      className: clsx([getSafe(() => hovProps.className, ""), getSafe(() => props.className, "")]),
+      style: {
+        ...getSafe(()=>props.style,{}),
+        ...getSafe(()=>hovProps.style,{})
+      }
+    })
   )
 }
 
-export default hoverProps
+
+export default HoverProps

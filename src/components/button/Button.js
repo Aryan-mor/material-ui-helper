@@ -7,6 +7,7 @@ import Typography from '../typography/Typography'
 import CircularProgress from '@material-ui/core/CircularProgress'
 
 function Button(pr) {
+
   const {
     component,
     variant,
