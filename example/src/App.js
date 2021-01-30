@@ -491,6 +491,7 @@ function App6() {
         autoComplete={'off'}
         autoFocus={false}
         onFocusIn={() => setState(true)}
+        onFocusOut={()=>setState(false)}
         onChangeTextField={(e, v) => setValue(v)}/>
       {state && 'fffffffffoccuuuused'}
     </Box>
