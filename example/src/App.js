@@ -22,7 +22,8 @@ import {
   ShowInTabletAndDesktop,
   Typography,
   UtilsElement,
-  UtilsStyle
+  UtilsStyle,
+  DefaultTextField
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -362,24 +363,24 @@ function App5() {
   function Box2({ children }) {
     return (
       <Box width={200} height={200} p={2} center={true}>
-        <Box width={1} center={true} height={1} style={{border:`1px solid #ccc`,...UtilsStyle.borderRadius(5)}}>
-        {children}
+        <Box width={1} center={true} height={1} style={{ border: `1px solid #ccc`, ...UtilsStyle.borderRadius(5) }}>
+          {children}
         </Box>
       </Box>
     )
   }
 
-  const v1 = false;
-  const v2 = false;
-  const v3 = true;
+  const v1 = false
+  const v2 = false
+  const v3 = true
 
   return (
     <Box flexDirectionColumn={true} center={true}>
       {
-        v1&&
-        <Box width={"98%"} py={2} my={2} flexWrap={'wrap'}
+        v1 &&
+        <Box width={'98%'} py={2} my={2} flexWrap={'wrap'}
              style={{
-               border:'1px solid #ddd',
+               border: '1px solid #ddd',
                ...UtilsStyle.borderRadius(5)
              }}>
           <Box2>
@@ -409,43 +410,43 @@ function App5() {
           </Box2>
         </Box>
       }
-      {v2&&
-        <Box width={"98%"} py={2} my={2} flexWrap={'wrap'}
-             style={{
-               border:'1px solid #ddd',
-               ...UtilsStyle.borderRadius(5)
-             }}>
-          <Box2>
-            <HiddenXlDown>
-              HiddenXlDown
-            </HiddenXlDown>
-          </Box2>
-          <Box2>
-            <HiddenLgDown>
-              HiddenLgDown
-            </HiddenLgDown>
-          </Box2>
-          <Box2>
-            <HiddenMdDown>
-              HiddenMdDown
-            </HiddenMdDown>
-          </Box2>
-          <Box2>
-            <HiddenSmDown>
-              HiddenSmDown
-            </HiddenSmDown>
-          </Box2>
-          <Box2>
-            <HiddenXsDown>
-              HiddenXsDown
-            </HiddenXsDown>
-          </Box2>
-        </Box>}
+      {v2 &&
+      <Box width={'98%'} py={2} my={2} flexWrap={'wrap'}
+           style={{
+             border: '1px solid #ddd',
+             ...UtilsStyle.borderRadius(5)
+           }}>
+        <Box2>
+          <HiddenXlDown>
+            HiddenXlDown
+          </HiddenXlDown>
+        </Box2>
+        <Box2>
+          <HiddenLgDown>
+            HiddenLgDown
+          </HiddenLgDown>
+        </Box2>
+        <Box2>
+          <HiddenMdDown>
+            HiddenMdDown
+          </HiddenMdDown>
+        </Box2>
+        <Box2>
+          <HiddenSmDown>
+            HiddenSmDown
+          </HiddenSmDown>
+        </Box2>
+        <Box2>
+          <HiddenXsDown>
+            HiddenXsDown
+          </HiddenXsDown>
+        </Box2>
+      </Box>}
       {
         v3 &&
-        <Box width={"98%"} py={2} my={2} flexWrap={'wrap'}
+        <Box width={'98%'} py={2} my={2} flexWrap={'wrap'}
              style={{
-               border:'1px solid #ddd',
+               border: '1px solid #ddd',
                ...UtilsStyle.borderRadius(5)
              }}>
           <Box2>
@@ -475,4 +476,25 @@ function App5() {
   )
 }
 
-export default App5
+
+function App6() {
+  const [state, setState] = useState(false)
+  const [value, setValue] = useState('')
+
+  return (
+    <Box p={10} flexDirectionColumn={true}>
+      <DefaultTextField
+        value={value}
+        variant={'outlined'}
+        placeholder={'جستجو'}
+        name={'search'}
+        autoComplete={'off'}
+        autoFocus={false}
+        onFocusIn={() => setState(true)}
+        onChangeTextField={(e, v) => setValue(v)}/>
+      {state && 'fffffffffoccuuuused'}
+    </Box>
+  )
+}
+
+export default App6

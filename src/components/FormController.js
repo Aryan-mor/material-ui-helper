@@ -133,9 +133,9 @@ function FormController(pr) {
   const {
     name = 'form',
     innerRef,
-    checkInterval = 1000,
+    checkDelay = 1000,
     onChange,
-    onChangeInterval = 4000,
+    onChangeDelay = 4000,
     onSubmit,
     ...props
   } = pr
@@ -180,14 +180,14 @@ function FormController(pr) {
               if (mutation.attributeName === notValidTextField) {
                 clearTimeout(timer[name])
                 timer[name] = setTimeout(() => {
-                }, checkInterval)
+                }, checkDelay)
               }
               clearTimeout(onChangeTimer[name])
               setAttr(checkError())
               if (onChange) {
                 onChangeTimer[name] = setTimeout(() => {
                   onChange()
-                }, onChangeInterval)
+                }, onChangeDelay)
               }
             }
           } catch (e) {
@@ -272,9 +272,9 @@ function FormController(pr) {
 FormController.propTypes = {
   name: PropTypes.string,
   innerRef: PropTypes.any.isRequired,
-  checkInterval: PropTypes.number,
+  checkDelay: PropTypes.number,
   onChange: PropTypes.func,
-  onChangeInterval: PropTypes.number,
+  onChangeDelay: PropTypes.number,
   onSubmit: PropTypes.func
 }
 
