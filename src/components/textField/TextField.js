@@ -4,7 +4,7 @@ import _ from 'lodash'
 import Typography from '../typography/Typography'
 import InputAdornment from '@material-ui/core/InputAdornment'
 import PropTypes from 'prop-types'
-import { getSafe } from '../..'
+import { getSafe, tryIt } from '../..'
 import Box from '../box/Box'
 import { makeStyles } from '@material-ui/styles'
 
@@ -153,20 +153,17 @@ function TextField(pr) {
   const theme = useTheme()
 
   const onFocusDebounce = _.debounce(e => {
-
-    onFocusIn(e, getSafe(() => {
-        return e.target.value
-      }, ''),
-      { error })
+    tryIt(() => {
+      onFocusIn()
+    })
   }, onFocusInDelay)
 
   const onBlurDebounce = _.debounce(e => {
-    onFocusOut(e,
-      getSafe(() => {
-        return e.target.value
-      }, ''),
-      { error })
+    tryIt(() => {
+      onFocusOut()
+    })
   }, onFocusOutDelay)
+
   const onChangeDebounce = _.debounce(e => {
     onChange(e,
       getSafe(() => {

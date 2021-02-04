@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import _ from 'lodash'
 
 //region functions
@@ -22,6 +22,23 @@ export const isClient = () => getSafe(() => process.browser, false)
 
 export function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
+}
+
+
+export function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useLayoutEffect(() => {
+    function updateSize() {
+      tryIt(() => setSize([window.innerWidth, window.innerHeight]))
+    }
+
+    window.addEventListener('resize', _.debounce(function () {
+      updateSize()
+    }, 300));
+    updateSize();
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
 }
 
 //endregion functions
