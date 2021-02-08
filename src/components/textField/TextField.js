@@ -412,3 +412,12 @@ export const createName = ({ group, array, name }) => {
   let n = array ? `${array}___${name}` : name
   return n + (array ? '___' : '')
 }
+
+export const clearTextFieldValue = (textFieldName, autoFocus) => {
+  tryIt(() => {
+    const el = document.getElementsByName(textFieldName)[0];
+    el.value = '';
+    if (autoFocus)
+      el.focus()
+  })
+}

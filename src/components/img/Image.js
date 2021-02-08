@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import styles from './image.css'
 import clsx from 'clsx'
 import Skeleton from '@material-ui/lab/Skeleton'
+import { zIndexComponent } from '../..'
 
 
 const skeletonStyle = {
@@ -67,7 +68,7 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
           className={clsx([styles.image, styles.full])}
           style={{
             opacity: isLoaded ? 1 : 0,
-            zIndex: 4
+            zIndex: zIndexComponent.img
           }}
           alt={alt}
           src={(error && backupSrc) ? backupSrc : src}

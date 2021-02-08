@@ -20,7 +20,7 @@ export { default as HoverWatcher } from './helper/HoverWatcher'
 export { default as Utils, UtilsElement, UtilsStyle, UtilsTime, Random, UtilsObject, UtilsString } from './utils/Utils'
 
 export {
-  tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement, isServer, isClient, sleep
+  tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement, isServer, isClient, sleep, zIndexComponent
 } from './utils/Helper'
 
 
@@ -59,6 +59,6 @@ export { default as FormController } from './components/FormController'
 export { default as TextFieldContainer } from './components/textField/TextFieldContainer'
 export { default as DefaultTextField } from './components/textField/DefaultTextField'
 export { default as NoneTextField } from './components/textField/NoneTextField'
-export { default as TextField, createName } from './components/textField/TextField'
+export { default as TextField, createName, clearTextFieldValue } from './components/textField/TextField'
 
 import './styles.module.css'

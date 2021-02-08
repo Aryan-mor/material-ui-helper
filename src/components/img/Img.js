@@ -12,6 +12,7 @@ function Img({
                backupSrc,
                imageWidth,
                imageHeight,
+               renderTimeout,
                imageProps,
                onIsVisible,
                ...props
@@ -48,6 +49,7 @@ function Img({
       src={src}
       thumb={thumbnail}
       alt={alt}
+      renderTimeout={renderTimeout}
       backupSrc={backupSrc}
       autoSize={autoSize}
       imageWidth={imageWidth}
@@ -60,7 +62,8 @@ function Img({
 
 
 Img.defaultProps = {
-  autoSize: true
+  autoSize: true,
+  renderTimeout:300,
 }
 
 
@@ -69,6 +72,7 @@ Img.propTypes = {
   imageHeight: PropTypes.any,
   alt: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
+  renderTimeout:PropTypes.number,
   backupSrc: PropTypes.string,
   autoSize: PropTypes.bool,
   thumbnail: PropTypes.string,

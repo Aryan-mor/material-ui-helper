@@ -79,3 +79,7 @@ String.prototype.trimAll = function() {
 //endregion string
 
 
+export const zIndexComponent = {
+  img:4
+}
+

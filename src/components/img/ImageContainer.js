@@ -6,11 +6,10 @@ import { getSafe, tryIt } from '../..'
 import Box from '../box/Box'
 
 const imageSizeDef = { width: '100%', height: 'auto' }
-const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight,backupSrc, autoSize, imageProps = {}, onIsVisible, ...props }) => {
+const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, backupSrc, autoSize, renderTimeout = 0, imageProps = {}, onIsVisible, ...props }) => {
   const ref = useRef()
   const [isVisible, setIsVisible] = useState(false)
   const [imageSize, setImageSize] = useState(imageSizeDef)
-
 
 
   useIntersectionObserver({
@@ -23,31 +22,32 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight,backupSrc, au
         }
         try {
           observerElement.unobserve(ref.current)
-        }catch (e) {
+        } catch (e) {
         }
       }
     }
   })
 
   useEffect(() => {
-    const imageSize = getSafe(() => {
-      if (!autoSize || !(imageWidth && imageHeight))
-        throw ''
-      if (imageWidth > imageHeight) {
-        const offsetWidth = ref.current.offsetWidth
-        return {
-          width: "100%",
-          height: (offsetWidth / imageWidth) * imageHeight
+    setTimeout(() => {
+      const imageSize = getSafe(() => {
+        if (!autoSize || !(imageWidth && imageHeight))
+          throw ''
+        if (imageWidth > imageHeight) {
+          const offsetWidth = ref.current.offsetWidth
+          return {
+            width: '100%',
+            height: (offsetWidth / imageWidth) * imageHeight
+          }
         }
-      }
-      const offsetHeight = ref.current.offsetHeight
-      return {
-        width: (offsetHeight / imageHeight) * imageWidth,
-        height: "100%"
-      }
-    }, imageSizeDef)
-
-    setImageSize(imageSize)
+        const offsetHeight = ref.current.offsetHeight
+        return {
+          width: (offsetHeight / imageHeight) * imageWidth,
+          height: '100%'
+        }
+      }, imageSizeDef)
+      setImageSize(imageSize)
+    }, renderTimeout)
   }, [imageWidth, imageWidth, ref])
 
 
