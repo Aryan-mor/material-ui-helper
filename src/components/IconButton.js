@@ -5,10 +5,10 @@ import PropTypes from 'prop-types'
 
 
 function IconButton(pr) {
-  const { tooltip, tooltipDisable, ...props }=pr
+  const { tooltip,disabled, tooltipDisable, ...props }=pr
 
   const el = (
-    <MaterialIconButton {...props}>
+    <MaterialIconButton disabled={disabled} {...props}>
       {props.children}
     </MaterialIconButton>
   )
@@ -23,7 +23,9 @@ function IconButton(pr) {
 }
 
 IconButton.prototype = {
+  tooltip:PropTypes.string,
   tooltipDisable:PropTypes.bool,
+  disabled:PropTypes.bool,
   ...tooltipPrototype
 }
 

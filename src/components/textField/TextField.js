@@ -342,7 +342,7 @@ TextField.propTypes = {
   disabled: PropTypes.bool,
   error: PropTypes.bool,
   startAction: PropTypes.any,
-  startAdornment: PropTypes.func,
+  startAdornment: PropTypes.any,
   endAction: PropTypes.any,
   endAdornment: PropTypes.any,
   containerProps: PropTypes.object,
@@ -413,7 +413,7 @@ export const createName = ({ group, array, name }) => {
   return n + (array ? '___' : '')
 }
 
-export const clearTextFieldValue = (textFieldName, autoFocus) => {
+export const clearTextFieldValue = (textFieldName, autoFocus=true) => {
   tryIt(() => {
     const el = document.getElementsByName(textFieldName)[0];
     el.value = '';
