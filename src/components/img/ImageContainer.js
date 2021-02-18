@@ -4,9 +4,11 @@ import styles from './imageContainer.css'
 import useIntersectionObserver from '../../helper/useIntersectionObserver'
 import { getSafe, tryIt } from '../..'
 import Box from '../box/Box'
+import { useWindowSize } from '../../utils/Helper'
 
 const imageSizeDef = { width: '100%', height: 'auto' }
 const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, backupSrc, autoSize, renderTimeout = 0, imageProps = {}, onIsVisible, ...props }) => {
+  const [width] = useWindowSize()
   const ref = useRef()
   const [isVisible, setIsVisible] = useState(false)
   const [imageSize, setImageSize] = useState(imageSizeDef)
@@ -28,6 +30,9 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, backupSrc, a
     }
   })
 
+
+
+
   useEffect(() => {
     setTimeout(() => {
       const imageSize = getSafe(() => {
@@ -48,7 +53,7 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, backupSrc, a
       }, imageSizeDef)
       setImageSize(imageSize)
     }, renderTimeout)
-  }, [imageWidth, imageWidth, ref])
+  }, [imageWidth, imageWidth,width, ref])
 
 
   return (

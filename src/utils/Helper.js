@@ -25,16 +25,15 @@ export function sleep(ms) {
 }
 
 
-export function useWindowSize() {
+export function useWindowSize(wait=2000) {
   const [size, setSize] = useState([0, 0]);
   useLayoutEffect(() => {
     function updateSize() {
       tryIt(() => setSize([window.innerWidth, window.innerHeight]))
     }
-
     window.addEventListener('resize', _.debounce(function () {
       updateSize()
-    }, 300));
+    }, wait));
     updateSize();
     return () => window.removeEventListener('resize', updateSize);
   }, []);
