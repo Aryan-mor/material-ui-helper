@@ -158,7 +158,7 @@ Box.defaultProps = {
 
 Box.propTypes = {
   component: PropTypes.any,
-  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  width: PropTypes.oneOfType([PropTypes.string, PropTypes.number,PropTypes.object]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   display: PropTypes.oneOf(['block', 'flex', 'none', 'inline', 'inline-block', 'grid',"unset"]),
   overflow: PropTypes.oneOf(['visible', 'hidden', 'scroll', 'auto']),

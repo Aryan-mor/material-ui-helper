@@ -491,11 +491,31 @@ function App6() {
         autoComplete={'off'}
         autoFocus={false}
         onFocusIn={() => setState(true)}
-        onFocusOut={()=>setState(false)}
+        onFocusOut={() => setState(false)}
         onChangeTextField={(e, v) => setValue(v)}/>
       {state && 'fffffffffoccuuuused'}
     </Box>
   )
 }
 
-export default App6
+
+function App7() {
+  const [state, setState] = useState(false)
+  const [value, setValue] = useState('')
+
+  return (
+    <Box
+      width={{
+        xs: 1 / 2,
+        md: 1 / 3
+      }}
+      p={10} flexDirectionColumn={true} style={{ backgroundColor: 'yellow' }}>
+      <Typography variant={'h1'}>
+        saf
+      </Typography>
+    </Box>
+  )
+}
+
+
+export default App7

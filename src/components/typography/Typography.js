@@ -2,7 +2,7 @@ import React, { forwardRef, useMemo } from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import Box from '../box/Box'
-import { getSafe } from '../../index'
+import { getSafe, gLog } from '../../index'
 import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
 import styles from '../../styles.module.css'
@@ -46,7 +46,6 @@ const CM = forwardRef(
         display={'flex'}
         cm={component}
         variant={variant}
-        margin={true}
         {...props}
         style={style}>
         {props.children}
@@ -58,8 +57,8 @@ const CM = forwardRef(
 //   return <CM margin={{ mt, ml, mb, mr, mx, my, m }} {...props}>{props.children}</CM>
 // }
 
-const Typography = React.forwardRef(({ mt, ml, mb, mr, mx, my, m, ...props }, ref) => {
-  return <CM margin={{ mt, ml, mb, mr, mx, my, m }} {...props}>{props.children}</CM>
+const Typography = React.forwardRef(({  ...props }, ref) => {
+  return <CM {...props}>{props.children}</CM>
 
 })
 
