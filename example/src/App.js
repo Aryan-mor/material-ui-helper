@@ -500,19 +500,13 @@ function App6() {
 
 
 function App7() {
-  const [state, setState] = useState(false)
-  const [value, setValue] = useState('')
 
-  return (
-    <Box
-      width={{
-        xs: 1 / 2,
-        md: 1 / 3
-      }}
-      p={10} flexDirectionColumn={true} style={{ backgroundColor: 'yellow' }}>
-      <Typography variant={'h1'}>
-        saf
-      </Typography>
+  return(
+    <Box width={1/4}>
+      <Img
+        imageHeight={372}
+        imageWidth={600}
+        src={"https://api.mehrtakhfif.com/media/boxes/2/2021-02-13/thumbnail/15-01-42-00-has-ph.jpg"}/>
     </Box>
   )
 }

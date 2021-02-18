@@ -34,6 +34,12 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, backupSrc, a
 
 
   useEffect(() => {
+  }, [imageWidth, imageWidth, ref])
+  useEffect(()=>{
+    reRender(renderTimeout+500)
+  },[width])
+
+  function reRender(rTimeout =renderTimeout) {
     setTimeout(() => {
       const imageSize = getSafe(() => {
         if (!autoSize || !(imageWidth && imageHeight))
@@ -52,8 +58,8 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, backupSrc, a
         }
       }, imageSizeDef)
       setImageSize(imageSize)
-    }, renderTimeout)
-  }, [imageWidth, imageWidth,width, ref])
+    }, rTimeout)
+  }
 
 
   return (
