@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { getSafe, gLog } from '../..'
 import ImageContainer from './ImageContainer'
 import PropTypes from 'prop-types'
-
+import _ from "lodash"
 
 function Img({
                alt: al,
