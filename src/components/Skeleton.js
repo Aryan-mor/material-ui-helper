@@ -2,23 +2,24 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Box from './box/Box'
 import MaterialSkeleton from '@material-ui/lab/Skeleton'
+import { UtilsStyle } from '..'
 
 
 const defaultSkeletonStyle = {
-  maxWidth:"unset",
-  display:'block'
+  maxWidth: 'unset',
+  display: 'block'
 }
-export default function Skeleton({variant,width,height, ...props }) {
+export default function Skeleton({ variant, width, height, borderRadius, ...props }) {
 
   return (
     <Box
       variant={variant}
       width={width}
-      height={height}
       component={MaterialSkeleton}
       {...props}
       style={{
-        height:height,
+        height: height === 1 ? '100%' : height,
+        ...UtilsStyle.borderRadius(borderRadius),
         ...defaultSkeletonStyle,
         ...props.style
       }}/>)
@@ -26,12 +27,15 @@ export default function Skeleton({variant,width,height, ...props }) {
 
 Skeleton.defaultProps = {
   variant: 'rect',
-  width:1
+  width: 1,
+  height: 1,
+  borderRadius: 5
 }
 
 Skeleton.propTypes = {
   component: PropTypes.any,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number, PropTypes.object]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  variant:PropTypes.oneOf(["text","circle","rect"])
+  variant: PropTypes.oneOf(['text', 'circle', 'rect']),
+  borderRadius: PropTypes.any
 }

@@ -1,14 +1,10 @@
 import React, { useEffect } from 'react'
 import styles from './image.css'
 import clsx from 'clsx'
-import Skeleton from '@material-ui/lab/Skeleton'
 import { zIndexComponent } from '../..'
+import Skeleton from '../Skeleton'
 
 
-const skeletonStyle = {
-  width: '100%',
-  height: '100%'
-}
 
 
 const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
@@ -39,7 +35,7 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
     <React.Fragment>
       {
         ((!isLoaded && (!thumb || (thumb && !isThumbLoaded)))) &&
-        <Skeleton variant={'rect'} style={skeletonStyle}/>
+        <Skeleton width={1} height={1}/>
       }
       {
         ((thumbVisibility && thumb)) &&
