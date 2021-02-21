@@ -23,7 +23,8 @@ import {
   Typography,
   UtilsElement,
   UtilsStyle,
-  DefaultTextField
+  DefaultTextField,
+  Skeleton
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -511,5 +512,14 @@ function App7() {
   )
 }
 
+function App8() {
 
-export default App7
+  return(
+    <Box width={1/4}>
+      <Skeleton height={300}/>
+    </Box>
+  )
+}
+
+
+export default App8

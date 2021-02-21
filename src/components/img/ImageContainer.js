@@ -7,6 +7,7 @@ import Box from '../box/Box'
 import { useWindowSize } from '../../utils/Helper'
 
 const imageSizeDef = { width: '100%', height: 'auto' }
+
 const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, backupSrc, autoSize, renderTimeout = 0, imageProps = {}, onIsVisible, ...props }) => {
   const [width] = useWindowSize()
   const ref = useRef()
@@ -30,11 +31,9 @@ const ImageContainer = ({ src, thumb, alt, imageWidth, imageHeight, backupSrc, a
     }
   })
 
-
-
-
   useEffect(() => {
   }, [imageWidth, imageWidth, ref])
+
   useEffect(()=>{
     reRender(renderTimeout+500)
   },[width])
