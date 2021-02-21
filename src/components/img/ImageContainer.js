@@ -14,7 +14,7 @@ const ImageContainer = ({ src, thumb, alt, groupKey, imageWidth, imageHeight, ba
   const [width] = useWindowSize()
   const ref = useRef()
   const [isVisible, setIsVisible] = useState(false)
-  const [imageSize, setImageSize] = useState((groupKey &&imgGroupKey[groupKey])?imgGroupKey[groupKey]:imageSizeDef)
+  const [imageSize, setImageSize] = useState((groupKey && imgGroupKey[groupKey]) ? imgGroupKey[groupKey] : imageSizeDef)
 
 
   useIntersectionObserver({
@@ -34,6 +34,8 @@ const ImageContainer = ({ src, thumb, alt, groupKey, imageWidth, imageHeight, ba
   })
 
   useEffect(() => {
+    if (groupKey)
+      imgGroupKey[groupKey] = undefined
     reRender(renderTimeout + 500)
   }, [width])
 
