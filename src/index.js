@@ -21,7 +21,7 @@ export { default as HoverWatcher } from './helper/HoverWatcher'
 export { default as Utils, UtilsElement, UtilsStyle, UtilsTime, Random, UtilsObject, UtilsString } from './utils/Utils'
 
 export {
-  tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement, isServer, isClient, sleep, zIndexComponent
+  tryIt, getSafe, toNumberSafe, gLog, gError, isNumeric, isElement, isServer, isClient, sleep, zIndexComponent,useWindowSize
 } from './utils/Helper'
 
 
