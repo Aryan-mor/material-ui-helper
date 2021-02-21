@@ -2,12 +2,13 @@ import React, { useMemo } from 'react'
 import { getSafe, gLog } from '../..'
 import ImageContainer from './ImageContainer'
 import PropTypes from 'prop-types'
-import _ from "lodash"
+import _ from 'lodash'
 
 function Img({
                alt: al,
                src: sr,
                thumbnail: th,
+               groupKey,
                autoSize,
                backupSrc,
                imageWidth,
@@ -43,12 +44,12 @@ function Img({
   }, [src, th])
 
 
-
   return (
     <ImageContainer
       src={src}
       thumb={thumbnail}
       alt={alt}
+      groupKey={groupKey}
       renderTimeout={renderTimeout}
       backupSrc={backupSrc}
       autoSize={autoSize}
@@ -63,7 +64,7 @@ function Img({
 
 Img.defaultProps = {
   autoSize: true,
-  renderTimeout:300,
+  renderTimeout: 300
 }
 
 
@@ -72,12 +73,13 @@ Img.propTypes = {
   imageHeight: PropTypes.any,
   alt: PropTypes.string.isRequired,
   src: PropTypes.string.isRequired,
-  renderTimeout:PropTypes.number,
+  renderTimeout: PropTypes.number,
   backupSrc: PropTypes.string,
   autoSize: PropTypes.bool,
   thumbnail: PropTypes.string,
   imageProps: PropTypes.object,
-  onIsVisible: PropTypes.func
+  groupKey:PropTypes.string,
+  onIsVisible: PropTypes.func,
 }
 
 export default Img
