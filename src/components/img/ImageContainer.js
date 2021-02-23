@@ -2,9 +2,8 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from './image'
 import styles from './imageContainer.css'
 import useIntersectionObserver from '../../helper/useIntersectionObserver'
-import { getSafe, gLog, tryIt } from '../..'
+import { getSafe, tryIt, useWindowSize } from '../..'
 import Box from '../box/Box'
-import { useWindowSize } from '../../utils/Helper'
 
 const imageSizeDef = { width: '100%', height: 'auto' }
 
@@ -88,7 +87,7 @@ const ImageContainer = ({ src, thumb, alt, groupKey, imageWidth, imageHeight, ba
         <Image src={src} backupSrc={backupSrc} thumb={thumb} alt={alt} {...imageProps}/>
       )}
       <noscript>
-        {`<img src="${src}" alt="${alt}" />`}
+        <img src={src} alt={alt} />
       </noscript>
     </Box>
   )
