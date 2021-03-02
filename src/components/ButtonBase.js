@@ -6,43 +6,39 @@ import { UtilsStyle } from '../utils/Utils'
 
 
 function ButtonBase(pr) {
-    const {borderRadius = 5, backgroundColor,hoverBackgroundColor, transitionDuration = 200, onClick, buttonProps = {}, ...props} = pr
-    return (
-        <MaterialButtonBase
-            onClick={onClick}
-            {...buttonProps}
-            style={{
-                ...UtilsStyle.borderRadius(borderRadius),
-                ...buttonProps.style
-            }}>
-            <Box
-                display={"block"}
-                borderRadius={borderRadius}
-                {...props}
-                hoverStyle={{
-                    ...props.hoverProps,
-                    backgroundColor: `${hoverBackgroundColor} !important`,
-                    ...UtilsStyle.transition(transitionDuration)
-                }}
-                style={{
-                    backgroundColor:backgroundColor,
-                    ...UtilsStyle.transition(transitionDuration),
-                    ...UtilsStyle.borderRadius(borderRadius),
-                    ...props.style,
-                }}>
-                {props.children}
-            </Box>
-        </MaterialButtonBase>
-    )
+  const { borderRadius = 5, backgroundColor, hoverBackgroundColor, transitionDuration = 200, onClick, buttonProps = {}, ...props } = pr
+  return (
+    <MaterialButtonBase
+      onClick={onClick}
+      {...buttonProps}
+      style={{
+        width: props.width === 1 ? '100%' : props.width,
+        ...UtilsStyle.borderRadius(borderRadius),
+        ...buttonProps.style
+      }}>
+      <Box
+        display={'block'}
+        borderRadius={borderRadius}
+        {...props}
+        style={{
+          backgroundColor: backgroundColor,
+          ...UtilsStyle.transition(transitionDuration),
+          ...UtilsStyle.borderRadius(borderRadius),
+          ...props.style
+        }}>
+        {props.children}
+      </Box>
+    </MaterialButtonBase>
+  )
 }
 
 
 ButtonBase.prototype = {
-    hoverBackgroundColor: PropTypes.string,
-    backgroundColor:PropTypes.string,
-    buttonProps: PropTypes.object,
-    transitionDuration: PropTypes.number,
-    ...boxPropType
+  hoverBackgroundColor: PropTypes.string,
+  backgroundColor: PropTypes.string,
+  buttonProps: PropTypes.object,
+  transitionDuration: PropTypes.number,
+  ...boxPropType
 }
 
 export default ButtonBase

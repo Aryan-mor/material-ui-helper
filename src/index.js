@@ -15,6 +15,7 @@ export { default as SuccessButton } from './components/button/SuccessButton'
 export { default as WarningButton } from './components/button/WarningButton'
 export { default as ErrorButton } from './components/button/ErrorButton'
 export { default as InfoButton } from './components/button/InfoButton'
+export { default as useOpenWithBrowserHistory } from './helper/useOpenWithBrowserHistory'
 
 export { default as HoverWatcher } from './helper/HoverWatcher'
 

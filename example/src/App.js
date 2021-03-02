@@ -501,28 +501,55 @@ function App6() {
 
 
 function App7() {
-  const [show,setShow] =  useState(true)
+  const [show, setShow] = useState(true)
 
-  return(
-    <Box width={1/4}>
-      <Button onClick={()=>setShow(!show)}>
+  return (
+    <Box width={1 / 4}>
+      <Button onClick={() => setShow(!show)}>
         show
       </Button>
-      {
-        show&&
-      <Img
-        imageHeight={372}
-        imageWidth={600}
-        src={"https://api.mehrtakhfif.com/media/boxes/2/2021-02-13/thumbnail/15-01-42-00-has-ph.jpg"}/>
-      }
+      <Box flexDirectionColumn={true}>
+        <Img
+          imageHeight={372}
+          imageWidth={600}
+          src={'https://api.mehrtakhfif.com/media/boxes/2/2021-02-13/thumbnail/15-01-42-00-has-ph.jpg'}/>
+        {
+          show &&
+          <Img
+            imageHeight={372}
+            imageWidth={600}
+            src={'https://api.mehrtakhfif.com/media/boxes/2/2021-02-13/thumbnail/15-01-42-00-has-ph.jpg'}/>
+        }
+        {
+          show &&
+          <Img
+            imageHeight={372}
+            imageWidth={600}
+            src={'https://api.mehrtakhfif.com/media/boxes/2/2021-02-13/thumbnail/15-01-42-00-has-ph.jpg'}/>
+        }
+        {
+          show &&
+          <Img
+            imageHeight={372}
+            imageWidth={600}
+            src={'https://api.mehrtakhfif.com/media/boxes/2/2021-02-13/thumbnail/15-01-42-00-has-ph.jpg'}/>
+        }
+        {
+          show &&
+          <Img
+            imageHeight={372}
+            imageWidth={600}
+            src={'https://api.mehrtakhfif.com/media/boxes/2/2021-02-13/thumbnail/15-01-42-00-has-ph.jpg'}/>
+        }
+      </Box>
     </Box>
   )
 }
 
 function App8() {
 
-  return(
-    <Box width={1/4}>
+  return (
+    <Box width={1 / 4}>
       <Skeleton height={300}/>
     </Box>
   )

@@ -5,8 +5,6 @@ import { zIndexComponent } from '../..'
 import Skeleton from '../Skeleton'
 
 
-
-
 const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
   const [isThumbLoaded, setIsThumbLoaded] = React.useState(!Boolean(thumb))
   const [thumbVisibility, setThumbVisibility] = React.useState(true)
@@ -20,7 +18,7 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
       if (thumbVisibility)
         setThumbVisibility(false)
     }, 1000)
-    return()=>{
+    return () => {
       clearTimeout(timeout)
     }
   }, [isLoaded])
@@ -33,10 +31,6 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
 
   return (
     <React.Fragment>
-      {
-        ((!isLoaded && (!thumb || (thumb && !isThumbLoaded)))) &&
-        <Skeleton width={1} height={1}/>
-      }
       {
         ((thumbVisibility && thumb)) &&
         <img
@@ -64,12 +58,20 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
           className={clsx([styles.image, styles.full])}
           style={{
             opacity: isLoaded ? 1 : 0,
-            zIndex: zIndexComponent.img
+            zIndex: zIndexComponent.img,
           }}
           alt={alt}
           src={(error && backupSrc) ? backupSrc : src}
-          {...props}
-        />
+          {...props}/>
+      }
+      {
+        ((!isLoaded && (!thumb || (thumb && !isThumbLoaded)))) &&
+        <Skeleton
+          width={1}
+          height={1}
+          style={{
+            position: 'absolute',
+          }}/>
       }
     </React.Fragment>
   )

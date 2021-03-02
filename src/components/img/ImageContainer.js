@@ -66,7 +66,7 @@ const ImageContainer = ({ src, thumb, alt, groupKey, imageWidth, imageHeight, ba
 
 
       setImageSize(imageSize)
-    }, rTimeout)
+    }, rTimeout+800)
   }
 
 
@@ -87,7 +87,7 @@ const ImageContainer = ({ src, thumb, alt, groupKey, imageWidth, imageHeight, ba
         <Image src={src} backupSrc={backupSrc} thumb={thumb} alt={alt} {...imageProps}/>
       )}
       <noscript>
-        <img src={src} alt={alt} />
+        <img src={src} alt={alt}/>
       </noscript>
     </Box>
   )
