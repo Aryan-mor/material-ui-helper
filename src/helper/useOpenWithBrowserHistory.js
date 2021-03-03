@@ -1,9 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 
 
-export default function useOpenWithBrowserHistory() {
+export default function useOpenWithBrowserHistory(defaultOpen = false) {
 
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(defaultOpen)
 
   useEffect(() => {
     window.onpopstate = function(event) {
@@ -29,5 +29,13 @@ export default function useOpenWithBrowserHistory() {
     window.history.back()
   }, [])
 
-  return [open, handleOpenClick, handleCloseClick]
+  function handleSetOpen(open) {
+    if (open) {
+      handleOpenClick()
+      return
+    }
+    handleCloseClick()
+  }
+
+  return [open, handleSetOpen]
 }

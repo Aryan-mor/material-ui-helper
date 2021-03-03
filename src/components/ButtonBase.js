@@ -38,6 +38,7 @@ ButtonBase.prototype = {
   backgroundColor: PropTypes.string,
   buttonProps: PropTypes.object,
   transitionDuration: PropTypes.number,
+  borderRadius:PropTypes.number,
   ...boxPropType
 }
 
