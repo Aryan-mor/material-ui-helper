@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
+  Dialog,
   Box,
   Button,
   getSafe,
@@ -21,6 +22,7 @@ import {
   ShowInTablet,
   ShowInTabletAndDesktop,
   Typography,
+  useOpenWithBrowserHistory,
   UtilsElement,
   UtilsStyle,
   DefaultTextField,
@@ -556,4 +558,35 @@ function App8() {
 }
 
 
-export default App7
+function App9() {
+
+  return (
+    <Box>
+      <TestItem uniq={"dialog"}/>
+      <TestItem uniq={"dialog22"}/>
+    </Box>
+  )
+}
+
+function TestItem({ uniq }) {
+  const [open, onOpen, onClose] = useOpenWithBrowserHistory(uniq)
+
+  return (
+    <React.Fragment>
+      <Button onClick={onOpen}>
+        open
+      </Button>
+      {
+        open &&
+        <Box width={1} height={1} center={true}>
+          <Button onClick={onClose}>
+            tessssssssssssttt {uniq}
+          </Button>
+        </Box>
+      }
+    </React.Fragment>
+  )
+}
+
+
+export default App9

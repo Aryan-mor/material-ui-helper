@@ -1,41 +1,62 @@
 import { useCallback, useEffect, useState } from 'react'
+import { getSafe, tryIt } from '..'
+import _ from 'lodash'
 
+const listOfListener = {}
 
-export default function useOpenWithBrowserHistory(defaultOpen = false) {
+function onPopState(event) {
+  _.forEach(listOfListener, l => {
+    tryIt(() => l(event))
+  })
+}
 
-  const [open, setOpen] = useState(defaultOpen)
+export default function useOpenWithBrowserHistory(uniq, defaultOpen) {
+
+  const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    window.onpopstate = function(event) {
-      if (!event.state || event.state.dialog === 1) {
-        setOpen(true)
-        return
+
+    if (!listOfListener[uniq]) {
+      listOfListener[uniq] = function(event) {
+        const state = event.state
+        const data = getSafe(() => state[uniq], undefined)
+        if (!state || data !== true) {
+          setOpen(false)
+          return
+        }
+        if (data === true) {
+          setOpen(true)
+        }
       }
-      setOpen(false)
     }
+    window.onpopstate = onPopState
+    if (defaultOpen) {
+      handleOpenClick()
+    }
+
     return () => {
       window.onpopstate = undefined
     }
   }, [])
 
   const handleOpenClick = useCallback(() => {
-    history.pushState({
-      dialog: 1
-    }, null, location.href)
+    const data = {}
+    data[uniq] = true
+    history.pushState(data, null, location.href)
     setOpen(true)
   }, [])
-
   const handleCloseClick = useCallback(() => {
     window.history.back()
   }, [])
 
-  function handleSetOpen(open) {
+
+  const handleSetOpen = useCallback((open) => {
     if (open) {
       handleOpenClick()
       return
     }
     handleCloseClick()
-  }
+  }, [])
 
   return [open, handleSetOpen, handleOpenClick, handleCloseClick]
 }
