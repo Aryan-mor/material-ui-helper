@@ -35,7 +35,9 @@ export default function useOpenWithBrowserHistory(uniq, defaultValue) {
     }
 
     return () => {
-      window.onpopstate = undefined
+      tryIt(() => {
+        delete listOfListener[uniq]
+      })
     }
   }, [])
 
