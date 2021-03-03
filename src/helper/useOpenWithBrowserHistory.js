@@ -10,7 +10,7 @@ function onPopState(event) {
   })
 }
 
-export default function useOpenWithBrowserHistory(uniq, defaultOpen) {
+export default function useOpenWithBrowserHistory(uniq, defaultValue) {
 
   const [open, setOpen] = useState(false)
 
@@ -30,7 +30,7 @@ export default function useOpenWithBrowserHistory(uniq, defaultOpen) {
       }
     }
     window.onpopstate = onPopState
-    if (defaultOpen) {
+    if (defaultValue) {
       handleOpenClick()
     }
 

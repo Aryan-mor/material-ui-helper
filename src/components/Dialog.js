@@ -4,7 +4,7 @@ import Slide from '@material-ui/core/Slide'
 import IconButton from '@material-ui/core/IconButton'
 import { Close } from '@material-ui/icons'
 import _ from 'lodash'
-import { isElement, tryIt } from '..'
+import { gLog, isElement, tryIt } from '..'
 import PropTypes from 'prop-types'
 import Box from './box/Box'
 
@@ -41,7 +41,7 @@ export default function Dialog(pr) {
 
 
   const closeEl = (
-    (closeElement && onClose) &&
+    (closeElement && onClose) ?
     _.isFunction(closeElement) ?
       closeElement(handleCloseDialog) :
       <IconButton
@@ -51,8 +51,11 @@ export default function Dialog(pr) {
             closeElement :
             <Close/>
         }
-      </IconButton>
+      </IconButton>:
+      <React.Fragment/>
   )
+
+
 
   return (
     <MaterialDialog

@@ -562,28 +562,28 @@ function App9() {
 
   return (
     <Box>
-      <TestItem uniq={"dialog"}/>
-      <TestItem uniq={"dialog22"}/>
+      <TestItem uniq={'dialog'}/>
+      <TestItem uniq={'dialog22'}/>
     </Box>
   )
 }
 
 function TestItem({ uniq }) {
-  const [open, onOpen, onClose] = useOpenWithBrowserHistory(uniq)
+  const [open, _, onOpen, onClose] = useOpenWithBrowserHistory(uniq)
 
   return (
     <React.Fragment>
       <Button onClick={onOpen}>
         open
       </Button>
-      {
-        open &&
+
+      <Dialog open={open} fullScreen={true} closeElement={undefined} onClose={undefined}>
         <Box width={1} height={1} center={true}>
           <Button onClick={onClose}>
             tessssssssssssttt {uniq}
           </Button>
         </Box>
-      }
+      </Dialog>
     </React.Fragment>
   )
 }
