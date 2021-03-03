@@ -37,5 +37,5 @@ export default function useOpenWithBrowserHistory(defaultOpen = false) {
     handleCloseClick()
   }
 
-  return [open, handleSetOpen]
+  return [open, handleSetOpen, handleOpenClick, handleCloseClick]
 }
