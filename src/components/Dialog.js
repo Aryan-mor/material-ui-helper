@@ -42,19 +42,18 @@ export default function Dialog(pr) {
 
   const closeEl = (
     (closeElement && onClose) ?
-    _.isFunction(closeElement) ?
-      closeElement(handleCloseDialog) :
-      <IconButton
-        onClick={handleCloseDialog}>
-        {
-          isElement(closeElement) ?
-            closeElement :
-            <Close/>
-        }
-      </IconButton>:
+      _.isFunction(closeElement) ?
+        closeElement(handleCloseDialog) :
+        <IconButton
+          onClick={handleCloseDialog}>
+          {
+            isElement(closeElement) ?
+              closeElement :
+              <Close/>
+          }
+        </IconButton> :
       <React.Fragment/>
   )
-
 
 
   return (
@@ -64,7 +63,7 @@ export default function Dialog(pr) {
       fullScreen={fullScreen}
       scroll={scroll}
       maxWidth={maxWidth === 'false' ? false : maxWidth}
-      TransitionComponent={transition ? Transition : undefined}
+      TransitionComponent={transition === false ? undefined : transition}
       keepMounted
       onBackdropClick={_.isFunction(onBackdropClick) ? onBackdropClick : undefined}
       onClose={!onBackdropClick ? handleCloseDialog : undefined}
@@ -104,7 +103,7 @@ Dialog.defaultProps = {
   fullWidth: false,
   fullScreen: false,
   scroll: 'paper',
-  transition: true,
+  transition: PropTypes.bool,
   maxWidth: 'lg',
   rootProps: {},
   headerProps: {},
@@ -117,7 +116,7 @@ Dialog.propTypes = {
   closeElement: PropTypes.oneOfType([PropTypes.bool, PropTypes.element, PropTypes.func]),
   fullWidth: PropTypes.bool,
   fullScreen: PropTypes.bool,
-  transition: PropTypes.bool,
+  transition: PropTypes.any,
   rootProps: PropTypes.object,
   headerProps: PropTypes.object,
   maxWidth: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl', 'false']),
