@@ -103,7 +103,7 @@ Dialog.defaultProps = {
   fullWidth: false,
   fullScreen: false,
   scroll: 'paper',
-  transition: PropTypes.bool,
+  transition: Transition,
   maxWidth: 'lg',
   rootProps: {},
   headerProps: {},
