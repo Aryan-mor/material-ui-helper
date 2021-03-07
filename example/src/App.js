@@ -31,7 +31,8 @@ import {
   UtilsElement,
   UtilsStyle,
   DefaultTextField,
-  Skeleton
+  Skeleton,
+  useEffectWithoutInit
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -41,6 +42,7 @@ import { makeStyles } from '@material-ui/styles'
 import 'material-ui-helper/src/styles.module.css'
 import images from './images.json'
 import './style.css'
+
 
 
 const useTypographyStyle = makeStyles({
@@ -613,6 +615,12 @@ function App10() {
 
   const [d1,setD1] = useStateWithCallback(1,cal1,false)
   const [d2,setD2] = useStateWithCallbackInstant(1,cal2,false)
+
+
+  useEffectWithoutInit(()=>{
+    gLog("salkdflkaslfklaskf:D :DDDDDDDDDDDDDDDD")
+  },[d2])
+
 
   return(
     <Box my={2}>

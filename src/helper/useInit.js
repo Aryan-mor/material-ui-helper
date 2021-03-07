@@ -1,13 +1,15 @@
 import React, { useEffect, useRef } from 'react'
 import { getSafe } from '..'
-
+import _ from 'lodash'
 
 export default function() {
-  const ref = useRef(false);
+  const ref = useRef(false)
 
   useEffect(() => {
-    ref.current = true
-  }, []);
+    setTimeout(() => {
+      ref.current = true
+    }, 100)
+  }, [])
 
-  return () => getSafe(() => ref.current, false)
+  return () => getSafe(() => _.cloneDeep(ref.current), false)
 }
