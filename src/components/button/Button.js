@@ -90,7 +90,6 @@ function Button(pr) {
   )
 }
 
-
 Button.defaultProps = {
   variant: 'contained',
   colorDef: 'default',
@@ -107,7 +106,6 @@ Button.defaultProps = {
   buttonProps: {},
   styleProps: {}
 }
-
 
 export const buttonPropType = {
   component: PropTypes.any,

@@ -1,5 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import {
+  gLog,
+  useStateWithCallback,
+  useStateWithCallbackInstant,
+  useStateWithCallbackLazy,
   Dialog,
   Box,
   Button,
@@ -589,4 +593,36 @@ function TestItem({ uniq }) {
 }
 
 
-export default App9
+
+function App10() {
+
+  const cal1 = useCallback((d) => {
+    gLog("salkdflkaslfklaskf D1",d)
+  },[]);
+
+  const cal2 = useCallback((d) => {
+    gLog("salkdflkaslfklaskf D2",d)
+  },[]);
+
+
+  const [d1,setD1] = useStateWithCallback(1,cal1,false)
+  const [d2,setD2] = useStateWithCallbackInstant(1,cal2,false)
+
+  return(
+    <Box my={2}>
+      <Box>
+        <Button onClick={()=>setD1(d=>d+1)}>
+          D1- {d1}
+        </Button>
+      </Box>
+      <Box>
+        <Button onClick={()=>setD2(d=>d+1)}>
+          D2- {d2}
+        </Button>
+      </Box>
+    </Box>
+  )
+}
+
+
+export default App10
