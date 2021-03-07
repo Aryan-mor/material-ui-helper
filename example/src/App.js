@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import {
   gLog,
+  useInit,
   useStateWithCallback,
   useStateWithCallbackInstant,
   useStateWithCallbackLazy,
@@ -595,13 +596,18 @@ function TestItem({ uniq }) {
 
 
 function App10() {
+  const init =useInit()
+
+  useEffect(()=>{
+  },[init])
+
 
   const cal1 = useCallback((d) => {
     gLog("salkdflkaslfklaskf D1",d)
   },[]);
 
   const cal2 = useCallback((d) => {
-    gLog("salkdflkaslfklaskf D2",d)
+    gLog("salkdflkaslfklaskf D2",init())
   },[]);
 
 

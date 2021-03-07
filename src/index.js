@@ -16,6 +16,14 @@ export { default as WarningButton } from './components/button/WarningButton'
 export { default as ErrorButton } from './components/button/ErrorButton'
 export { default as InfoButton } from './components/button/InfoButton'
 export { default as useOpenWithBrowserHistory } from './helper/useOpenWithBrowserHistory'
+export { default as useInit } from './helper/useInit'
+
+export {
+  default as useStateWithCallback,
+  useStateWithCallbackInstant,
+  useStateWithCallbackLazy
+} from './helper/useStateWithCallback'
+
 
 export { default as HoverWatcher } from './helper/HoverWatcher'
 
@@ -36,11 +44,6 @@ export {
   useWindowSize
 } from './utils/Helper'
 
-export {
-  default as useStateWithCallback,
-  useStateWithCallbackInstant,
-  useStateWithCallbackLazy
-} from './helper/useStateWithCallback'
 
 export {
   HiddenXlUp,
