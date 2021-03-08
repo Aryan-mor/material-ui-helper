@@ -1,12 +1,19 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useRef } from 'react'
 import { getSafe, tryIt, useEffectWithoutInit } from '..'
 import _ from 'lodash'
+import useState from './useState'
+import useInit from './useInit'
 
 const useStateWithCallback = (initialState, callback, initCall = true) => {
   const [state, setState] = useState(initialState)
   const lastValue = useRef(null)
+  const init =useInit()
 
-  useEffectWithoutInit(()=>{
+
+  useEffect(()=>{
+    if (!initCall && !init()){
+      return
+    }
     callback(state, getSafe(() => _.cloneDeep(lastValue.current)))
     lastValue.current = state
   },[state, callback])

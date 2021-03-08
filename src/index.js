@@ -17,6 +17,7 @@ export { default as ErrorButton } from './components/button/ErrorButton'
 export { default as InfoButton } from './components/button/InfoButton'
 export { default as useOpenWithBrowserHistory } from './helper/useOpenWithBrowserHistory'
 export { default as useInit } from './helper/useInit'
+export { default as useState } from './helper/useState'
 export { default as useEffectWithoutInit } from './helper/useEffectWithoutInit'
 
 export {

@@ -32,7 +32,8 @@ import {
   UtilsStyle,
   DefaultTextField,
   Skeleton,
-  useEffectWithoutInit
+  useEffectWithoutInit,
+  useState as useStateMaterialHelper
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -638,5 +639,16 @@ function App10() {
   )
 }
 
+
+function App11() {
+  const [value,setValue] = useStateMaterialHelper(1)
+
+
+  return(
+    <Button onClick={()=>setValue(value+1)}>
+      add {value}
+    </Button>
+  )
+}
 
 export default App10

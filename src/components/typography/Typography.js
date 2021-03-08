@@ -24,7 +24,7 @@ const useTypographyStyle = makeStyles({
 })
 
 const CM = forwardRef(
-  ({ className, width, component, variant, fontWeight,lineHeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
+  ({ className, width, component, variant, fontWeight, lineHeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
     const classes = textDecorationBottom ? useTypographyStyle({ textDecorationBottom }) : {}
 
     const style = useMemo(() => {
@@ -32,7 +32,7 @@ const CM = forwardRef(
         color: color,
         fontWeight: fontWeight,
         textAlign: textAlign,
-        lineHeight:lineHeight,
+        lineHeight: lineHeight,
         ...props.style
       }
     }, [color, fontWeight, textAlign, props.style])
@@ -57,17 +57,17 @@ const CM = forwardRef(
 //   return <CM margin={{ mt, ml, mb, mr, mx, my, m }} {...props}>{props.children}</CM>
 // }
 
-const Typography = React.forwardRef(({  ...props }, ref) => {
+const Typography = React.forwardRef(({ ...props }, ref) => {
   return <CM {...props}>{props.children}</CM>
 
 })
 
 Typography.propTypes = {
   component: PropTypes.string,
-  variant: PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']),
+  variant: PropTypes.oneOfType([PropTypes.oneOf(['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'subtitle1', 'subtitle2', 'body1', 'body2', 'caption']), PropTypes.object]),
   fontWeight: PropTypes.oneOf(['normal', 'bold', 'bolder', 'lighter', 100, 200, 300, 400, 500, 600, 700, 800, 900]),
   textAlign: PropTypes.oneOf(['left', 'right', 'center', 'justify', 'initial', 'inherit']),
-  lineHeight:PropTypes.number,
+  lineHeight: PropTypes.number,
   textSelectable: PropTypes.bool,
   color: PropTypes.string,
   textDecorationBottom: PropTypes.shape({
