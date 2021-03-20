@@ -15,7 +15,6 @@ export default function useOpenWithBrowserHistory(uniq, defaultValue) {
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-
     if (!listOfListener[uniq]) {
       listOfListener[uniq] = function(event) {
         const state = event.state

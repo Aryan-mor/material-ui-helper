@@ -7,6 +7,7 @@ export { default as LazyLoad } from './components/LazyLoad'
 export { default as Dialog } from './components/Dialog'
 export { default as Img } from './components/img/Img'
 export { default as Skeleton } from './components/Skeleton'
+export { default as Backdrop } from './components/Backdrop'
 export { default as useInterval } from './utils/useInterval'
 export { default as useIsomorphicLayoutEffect } from './utils/useIsomorphicLayoutEffect'
 

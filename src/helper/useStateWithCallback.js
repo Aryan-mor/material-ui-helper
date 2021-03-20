@@ -7,22 +7,21 @@ import useInit from './useInit'
 const useStateWithCallback = (initialState, callback, initCall = true) => {
   const [state, setState] = useState(initialState)
   const lastValue = useRef(null)
-  const init =useInit()
+  const init = useInit()
 
 
-  useEffect(()=>{
-    if (!initCall && !init()){
+  useEffect(() => {
+    if (!initCall && !init()) {
       return
     }
     callback(state, getSafe(() => _.cloneDeep(lastValue.current)))
     lastValue.current = state
-  },[state, callback])
+  }, [state, callback])
 
   return [state, setState]
 }
 
 export default useStateWithCallback
-
 
 export const useStateWithCallbackInstant = (initialState, callback) => {
   const lastValue = useRef(null)
@@ -39,8 +38,11 @@ export const useStateWithCallbackInstant = (initialState, callback) => {
 export const useStateWithCallbackLazy = initialValue => {
   const callbackRef = useRef(null)
   const lastValue = useRef(null)
-
   const [state, setState] = useState(initialValue)
+
+  useEffect(() => {
+    tryIt(() => lastValue.current = state)
+  }, [])
 
   useEffect(() => {
     tryIt(() => {

@@ -1,5 +1,6 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import {
+  Backdrop,
   gLog,
   useInit,
   useStateWithCallback,
@@ -43,7 +44,6 @@ import { makeStyles } from '@material-ui/styles'
 import 'material-ui-helper/src/styles.module.css'
 import images from './images.json'
 import './style.css'
-
 
 
 const useTypographyStyle = makeStyles({
@@ -597,41 +597,40 @@ function TestItem({ uniq }) {
 }
 
 
-
 function App10() {
-  const init =useInit()
+  const init = useInit()
 
-  useEffect(()=>{
-  },[init])
+  useEffect(() => {
+  }, [init])
 
 
   const cal1 = useCallback((d) => {
-    gLog("salkdflkaslfklaskf D1",d)
-  },[]);
+    gLog('salkdflkaslfklaskf D1', d)
+  }, [])
 
   const cal2 = useCallback((d) => {
-    gLog("salkdflkaslfklaskf D2",init())
-  },[]);
+    gLog('salkdflkaslfklaskf D2', init())
+  }, [])
 
 
-  const [d1,setD1] = useStateWithCallback(1,cal1,false)
-  const [d2,setD2] = useStateWithCallbackInstant(1,cal2,false)
+  const [d1, setD1] = useStateWithCallback(1, cal1, false)
+  const [d2, setD2] = useStateWithCallbackInstant(1, cal2, false)
 
 
-  useEffectWithoutInit(()=>{
-    gLog("salkdflkaslfklaskf:D :DDDDDDDDDDDDDDDD")
-  },[d2])
+  useEffectWithoutInit(() => {
+    gLog('salkdflkaslfklaskf:D :DDDDDDDDDDDDDDDD')
+  }, [d2])
 
 
-  return(
+  return (
     <Box my={2}>
       <Box>
-        <Button onClick={()=>setD1(d=>d+1)}>
+        <Button onClick={() => setD1(d => d + 1)}>
           D1- {d1}
         </Button>
       </Box>
       <Box>
-        <Button onClick={()=>setD2(d=>d+1)}>
+        <Button onClick={() => setD2(d => d + 1)}>
           D2- {d2}
         </Button>
       </Box>
@@ -641,14 +640,109 @@ function App10() {
 
 
 function App11() {
-  const [value,setValue] = useStateMaterialHelper(1)
+  const [open1, _1, onOpen1, onClose1, { disabled }] = useOpenWithBrowserHistory('dialog1', {
+    callBeforeOpenDuration: 4000,
+    callBeforeCloseDuration: 4000,
+    onBeforeOpen: () => {
+      gLog('sakfjkkjaskjfk open')
+    },
+    onBeforeClose: () => {
+      gLog('sakfjkkjaskjfk close')
+    }
+
+  })
+  const [open2, _2, onOpen2, onClose2] = useOpenWithBrowserHistory('dialog2')
+  const [open3, _3, onOpen3, onClose3] = useOpenWithBrowserHistory('dialog3')
+  const [open4, _4, onOpen4, onClose4] = useOpenWithBrowserHistory('dialog4')
 
 
-  return(
-    <Button onClick={()=>setValue(value+1)}>
-      add {value}
-    </Button>
+  return (
+    <Box flexDirectionColumn={true}>
+      <Button onClick={() => onOpen1()} disabled={disabled}>
+        open dialog
+      </Button>
+      <Dialog fullScreen={true} open={open1} onClose={onClose1} onBackdropClick={onClose1}>
+        <Box>
+          <Button disabled={disabled} mx={2} onClick={() => onClose1()}>
+            close
+          </Button>
+          <Button disabled={disabled} mx={2} onClick={() => onOpen2()}>
+            openDialog2
+          </Button>
+          <Button disabled={disabled} mx={2} onClick={() => onOpen3()}>
+            openDialog3
+          </Button>
+        </Box>
+
+        <Dialog fullScreen={true} open={open2} onClose={onClose2} onBackdropClick={onClose2}>
+          <Box>
+            <Button mx={2} onClick={() => onClose2()}>
+              close
+            </Button>
+            dialog3
+            <Button mx={2} onClick={() => onOpen4()}>
+              openDialog4
+            </Button>
+          </Box>
+          <Dialog fullScreen={true} open={open4} onClose={onClose4} onBackdropClick={onClose4}>
+
+            <Button mx={2} onClick={() => onClose4()}>
+              close
+            </Button>
+            dialog4
+          </Dialog>
+        </Dialog>
+        <Dialog fullScreen={true} open={open3} onClose={onClose3} onBackdropClick={onClose3}>
+          <Box>
+            <Button mx={2} onClick={() => onClose3()}>
+              close
+            </Button>
+            dialog3
+          </Box>
+        </Dialog>
+      </Dialog>
+    </Box>
+  )
+
+}
+
+
+function App12() {
+  const [state, setState] = useState(1)
+  const memo = React.useMemo(() => {
+    return state * 5
+  }, [state])
+
+
+  gLog('aslfjklasklkflask', memo)
+
+  return (
+    <Box>
+      <Button onClick={() => setState(state + 1)}>
+        {memo}
+      </Button>
+    </Box>
   )
 }
 
-export default App10
+function App13() {
+  const [state, setState] = useState(1)
+  const memo = React.useMemo(() => {
+    return state * 5
+  }, [state])
+
+
+  gLog('aslfjklasklkflask', memo)
+
+  return (
+    <Box>
+      <Box width={400} height={400} style={{ backgroundColor: 'yellow' }}>
+        sala,
+        <Button color={'red'}> button</Button>
+      </Box>
+      <Backdrop transparent={true} open={true}/>
+    </Box>
+  )
+}
+
+export default App13
