@@ -2,14 +2,27 @@ import React, { useEffect, useRef, useState } from 'react'
 import Image from './image'
 import styles from './imageContainer.css'
 import useIntersectionObserver from '../../helper/useIntersectionObserver'
-import { getSafe, tryIt, useWindowSize } from '../..'
+import { getSafe, tryIt, useEffectWithoutInit, useWindowSize } from '../..'
 import Box from '../box/Box'
 
 const imageSizeDef = { width: '100%', height: 'auto' }
 
 let imgGroupKey = {}
 
-const ImageContainer = ({ src, thumb, alt, groupKey, imageWidth, imageHeight, backupSrc, autoSize, renderTimeout = 0, imageProps = {}, onIsVisible, ...props }) => {
+const ImageContainer = ({
+                          src,
+                          thumb,
+                          alt,
+                          groupKey,
+                          imageWidth,
+                          imageHeight,
+                          backupSrc,
+                          autoSize,
+                          renderTimeout = 0,
+                          imageProps = {},
+                          onIsVisible,
+                          ...props
+                        }) => {
   const [width] = useWindowSize()
   const ref = useRef()
   const [isVisible, setIsVisible] = useState(false)
@@ -32,13 +45,26 @@ const ImageContainer = ({ src, thumb, alt, groupKey, imageWidth, imageHeight, ba
     }
   })
 
-  useEffect(() => {
+  useEffectWithoutInit(() => {
     if (groupKey)
       imgGroupKey[groupKey] = undefined
     reRender(renderTimeout + 500)
   }, [width])
 
+  useEffect(() => {
+    reRender(renderTimeout + 500)
+  }, [])
+
   function reRender(rTimeout = renderTimeout) {
+    const imageSize = getSafe(() => {
+      if (groupKey && imgGroupKey[groupKey]) return imgGroupKey[groupKey]
+      return undefined
+    })
+    if (imageSize){
+      setImageSize(imageSize)
+      return
+    }
+
     setTimeout(() => {
       const imageSize = getSafe(() => {
         if (!autoSize || !(imageWidth && imageHeight))
@@ -63,10 +89,8 @@ const ImageContainer = ({ src, thumb, alt, groupKey, imageWidth, imageHeight, ba
           imgGroupKey[groupKey] = res
         return res
       }, imageSizeDef)
-
-
       setImageSize(imageSize)
-    }, rTimeout+800)
+    }, rTimeout + 800)
   }
 
 

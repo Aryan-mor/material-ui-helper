@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import _ from 'lodash'
 
 //region functions
@@ -25,19 +25,20 @@ export function sleep(ms) {
 }
 
 
-export function useWindowSize(wait=2000) {
-  const [size, setSize] = useState([0, 0]);
-  useLayoutEffect(() => {
+export function useWindowSize(wait = 2000) {
+  const [size, setSize] = useState([0, 0])
+  useEffect(() => {
     function updateSize() {
       tryIt(() => setSize([window.innerWidth, window.innerHeight]))
     }
-    window.addEventListener('resize', _.debounce(function () {
+
+    window.addEventListener('resize', _.debounce(function() {
       updateSize()
-    }, wait));
-    updateSize();
-    return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
+    }, wait))
+    updateSize()
+    return () => window.removeEventListener('resize', updateSize)
+  }, [])
+  return size
 }
 
 //endregion functions
@@ -79,6 +80,6 @@ String.prototype.trimAll = function() {
 
 
 export const zIndexComponent = {
-  img:4
+  img: 4
 }
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { UtilsStyle, Box, Typography, IconButton, Button, gLog } from 'material-ui-helper'
 import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
 import ThemeProvider from '@material-ui/styles/ThemeProvider'
 import App from './App'
@@ -114,10 +113,9 @@ const theme = createMuiTheme({
 export default function() {
 
   return (
-
-    <MuiThemeProvider theme={theme}>
-      <ThemeProvider theme={theme}>
-        <App/>
+    <MuiThemeProvider theme={defaultTheme}>
+      <ThemeProvider theme={defaultTheme}>
+        salam
       </ThemeProvider>
     </MuiThemeProvider>
   )

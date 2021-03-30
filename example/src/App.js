@@ -209,21 +209,21 @@ function Item({ item: it, primaryKey, active, onClick, ...props }) {
           borderRadius={'100%'}
           width={20} height={20} mx={1}
           style={{ backgroundColor: it.color }}/>
-        {
-          !_.isObject(it.title) ?
-            <Typography variant={'body2'}>
-              {it.title}
-            </Typography> :
-            <Box>
-              <Typography variant={'body2'}>
-                {it.title.fa}
-              </Typography>
-              <Typography flex={1} justifyContent={'flex-end'}
-                          variant={'body2'}>
-                {it.title.en}
-              </Typography>
-            </Box>
-        }
+        {/*{*/}
+        {/*  !_.isObject(it.title) ?*/}
+        {/*    <Typography variant={'body2'}>*/}
+        {/*      {it.title}*/}
+        {/*    </Typography> :*/}
+        {/*    <Box>*/}
+        {/*      <Typography variant={'body2'}>*/}
+        {/*        {it.title.fa}*/}
+        {/*      </Typography>*/}
+        {/*      <Typography flex={1} justifyContent={'flex-end'}*/}
+        {/*                  variant={'body2'}>*/}
+        {/*        {it.title.en}*/}
+        {/*      </Typography>*/}
+        {/*    </Box>*/}
+        {/*}*/}
       </Box>
     </Box>
   )
