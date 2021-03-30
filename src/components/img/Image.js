@@ -47,7 +47,7 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
         />
       }
       {
-        isThumbLoaded &&
+        isThumbLoaded && (src || backupSrc) &&
         <img
           onLoad={() => {
             setIsLoaded(true)
@@ -58,7 +58,7 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
           className={clsx([styles.image, styles.full])}
           style={{
             opacity: isLoaded ? 1 : 0,
-            zIndex: zIndexComponent.img,
+            zIndex: zIndexComponent.img
           }}
           alt={alt}
           src={(error && backupSrc) ? backupSrc : src}
@@ -70,7 +70,7 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
           width={1}
           height={1}
           style={{
-            position: 'absolute',
+            position: 'absolute'
           }}/>
       }
     </React.Fragment>
