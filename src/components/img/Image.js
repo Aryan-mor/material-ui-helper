@@ -5,11 +5,20 @@ import { isServer, zIndexComponent } from '../..'
 import Skeleton from '../Skeleton'
 
 
+/*
+*
+* isThumbLoaded = if Thumb loaded set 1 if error set 2 and default 0
+* thumbVisibility = when image loaded after delay set false
+* isLoaded = when image loaded set true
+* error = if image error set 1 if backupSrc error set 2 default 0
+* */
+
 const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
-  const [isThumbLoaded, setIsThumbLoaded] = React.useState(isServer() || !Boolean(thumb))
-  const [thumbVisibility, setThumbVisibility] = React.useState(true)
+  const [isThumbLoaded, setIsThumbLoaded] = React.useState((isServer() || !Boolean(thumb)) ? 1 : 0)
+  const [thumbVisibility, setThumbVisibility] = React.useState(!isServer())
   const [isLoaded, setIsLoaded] = React.useState(isServer())
-  const [error, setError] = React.useState(!Boolean(src))
+  const [error, setError] = React.useState(src ? 0 : backupSrc ? 1 : 2)
+  // const [serverSideError, setServerSideError] = React.useState(false)
 
   useEffect(() => {
     if (!isLoaded)
@@ -28,20 +37,41 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
       setError(!Boolean(src))
   }, [src])
 
+  // useEffect(()=>{
+  //   if (!serverSideError)
+  //     return
+  //
+  //   setIsThumbLoaded( !Boolean(thumb))
+  //   setThumbVisibility(true)
+  //   setIsLoaded(false)
+  //   setError(!Boolean(src))
+  // },[serverSideError])
+  //
+
+
+  console.log('skajfkjkasjkfjaskjfkjsakjf', {
+    isThumbLoaded,
+    thumbVisibility,
+    isLoaded,
+    error,
+    src,
+    backupSrc,
+    thumb
+  })
 
   return (
     <React.Fragment>
       {
-        ((thumbVisibility && thumb)) &&
+        (isThumbLoaded !== 2 && (thumbVisibility && thumb)) &&
         <img
           className={clsx([styles.image, styles.thumb])}
           alt={alt}
           src={thumb}
           onLoad={() => {
-            setIsThumbLoaded(true)
+            setIsThumbLoaded(1)
           }}
-          onError={()=>{
-            setIsThumbLoaded(true)
+          onError={() => {
+            setIsThumbLoaded(2)
           }}
           style={{
             position: 'absolute',
@@ -50,13 +80,16 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
         />
       }
       {
-        isThumbLoaded && (src || backupSrc) &&
+        error !== 2 && isThumbLoaded !== 0 && (src || backupSrc) &&
         <img
           onLoad={() => {
             setIsLoaded(true)
           }}
           onError={() => {
-            setError(true)
+            if (!backupSrc) {
+              setError(2)
+            }
+            setError(error => error === 0 ? 1 : 2)
           }}
           className={clsx([styles.image, styles.full])}
           style={{
@@ -64,11 +97,11 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
             zIndex: zIndexComponent.img
           }}
           alt={alt}
-          src={(error && backupSrc) ? backupSrc : src}
+          src={(error === 1 && backupSrc) ? backupSrc : src}
           {...props}/>
       }
       {
-        ((!isLoaded && (!thumb || (thumb && !isThumbLoaded)))) &&
+        (error === 2 || (!isLoaded && (!thumb || (thumb && !isThumbLoaded)))) &&
         <Skeleton
           width={1}
           height={1}
