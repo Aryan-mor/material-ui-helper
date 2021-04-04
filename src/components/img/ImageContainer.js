@@ -60,7 +60,7 @@ const ImageContainer = ({
       if (groupKey && imgGroupKey[groupKey]) return imgGroupKey[groupKey]
       return undefined
     })
-    if (imageSize){
+    if (imageSize) {
       setImageSize(imageSize)
       return
     }
@@ -110,9 +110,6 @@ const ImageContainer = ({
       {isVisible && (
         <Image src={src} backupSrc={backupSrc} thumb={thumb} alt={alt} {...imageProps}/>
       )}
-      <noscript>
-        <img src={src} alt={alt}/>
-      </noscript>
     </Box>
   )
 }

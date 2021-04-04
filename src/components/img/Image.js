@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import styles from './image.css'
 import clsx from 'clsx'
-import { zIndexComponent } from '../..'
+import { isServer, zIndexComponent } from '../..'
 import Skeleton from '../Skeleton'
 
 
 const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
-  const [isThumbLoaded, setIsThumbLoaded] = React.useState(!Boolean(thumb))
+  const [isThumbLoaded, setIsThumbLoaded] = React.useState(isServer() || !Boolean(thumb))
   const [thumbVisibility, setThumbVisibility] = React.useState(true)
-  const [isLoaded, setIsLoaded] = React.useState(false)
+  const [isLoaded, setIsLoaded] = React.useState(isServer())
   const [error, setError] = React.useState(!Boolean(src))
 
   useEffect(() => {
@@ -38,6 +38,9 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
           alt={alt}
           src={thumb}
           onLoad={() => {
+            setIsThumbLoaded(true)
+          }}
+          onError={()=>{
             setIsThumbLoaded(true)
           }}
           style={{

@@ -1,6 +1,6 @@
 {
   "name": "material-ui-helper",
-  "version": "1.0.119",
+  "version": "1.0.120",
   "description": "Material-Ui component with more option",
   "author": "Aryan-mor",
   "license": "ISC",
@@ -46,9 +46,15 @@
     "lodash": "^4.17.15"
   },
   "devDependencies": {
-    "eslint": "latest",
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.45",
+    "@material-ui/styles": "^4.10.0",
+    "babel-eslint": "latest",
+    "clsx": "^1.1.1",
+    "cross-env": "latest",
     "css-loader": "^2.1.1",
-    "style-loader": "^0.23.1",
+    "eslint": "latest",
     "eslint-config-prettier": "latest",
     "eslint-config-standard": "latest",
     "eslint-config-standard-react": "latest",
@@ -58,21 +64,15 @@
     "eslint-plugin-promise": "latest",
     "eslint-plugin-react": "latest",
     "eslint-plugin-standard": "latest",
-    "microbundle-crl": "latest",
-    "babel-eslint": "latest",
-    "cross-env": "latest",
     "gh-pages": "latest",
+    "microbundle-crl": "latest",
     "npm-run-all": "latest",
     "prettier": "latest",
+    "prop-types": "^15.7.2",
     "react": "latest",
     "react-dom": "latest",
-    "react-scripts": "1.1.4",
-    "prop-types": "^15.7.2",
-    "@material-ui/core": "^4.11.0",
-    "@material-ui/lab": "^4.0.0-alpha.45",
-    "@material-ui/styles": "^4.10.0",
-    "@material-ui/icons": "^4.9.1",
-    "clsx": "^1.1.1"
+    "react-scripts": "^4.0.3",
+    "style-loader": "^0.23.1"
   },
   "bugs": {
     "url": "https://github.com/Aryan-mor/material-ui-helper/issues"

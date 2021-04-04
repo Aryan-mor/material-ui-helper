@@ -10,13 +10,13 @@
     "eject": "node ../node_modules/react-scripts/bin/react-scripts.js eject"
   },
   "dependencies": {
-    "react": "file:../node_modules/react",
-    "react-dom": "file:../node_modules/react-dom",
-    "react-scripts": "file:../node_modules/react-scripts",
-    "@material-ui/core": "file:../node_modules/@material-ui/core",
-    "@material-ui/lab": "file:../node_modules/@material-ui/lab",
-    "@material-ui/styles": "file:../node_modules/@material-ui/styles",
-    "material-ui-helper": "file:.."
+    "react": "link:../node_modules/react",
+    "react-dom": "link:../node_modules/react-dom",
+    "react-scripts": "link:../node_modules/react-scripts",
+    "@material-ui/core": "link:../node_modules/@material-ui/core",
+    "@material-ui/lab": "link:../node_modules/@material-ui/lab",
+    "@material-ui/styles": "link:../node_modules/@material-ui/styles",
+    "material-ui-helper": "link:.."
   },
   "browserslist": [
     ">0.2%",
