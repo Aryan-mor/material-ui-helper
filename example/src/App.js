@@ -8,6 +8,7 @@ import {
   useStateWithCallbackLazy,
   Dialog,
   Box,
+  SquareImg,
   Button,
   getSafe,
   HiddenLgDown,
@@ -745,123 +746,139 @@ function App13() {
   )
 }
 
-function App14(){
+function App14() {
 
 
-
-  return(
-    <Box flexWrap={"wrap"}>
+  return (
+    <Box flexWrap={'wrap'}>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
-      <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
       <ProductItem/>
-      <ProductItem src={"http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg"}/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-10-41-27-has-ph.jpg'}/>
+      <ProductItem/>
+      <ProductItem src={'http://api.mt.com/media/boxes/5/2020-05-04/thumbnail/15-23-21-18-has-ph.jpg'}/>
       <ProductItem/>
     </Box>
   )
 }
 
-function ProductItem({src=""}){
+function ProductItem({ src = '' }) {
 
-  return(
+  return (
     <Box
       py={2.25}
       px={2}
-      width={1/5}>
-      <Box flexDirectionColumn={true} width={"40%"}>
+      width={1 / 5}>
+      <Box flexDirectionColumn={true} width={'40%'}>
         <Box width={1} pr={1}>
           <Img
             src={src}
-            groupKey={"test"}
-            alt={"thumbnail-skeleton"}
+            groupKey={'test'}
+            alt={'thumbnail-skeleton'}
             imageWidth={600}
             imageHeight={372}/>
         </Box>
       </Box>
-      <Box width={"60%"}>
+      <Box width={'60%'}>
         <Skeleton borderRadius={3} width={2 / 3} mt={3} height={30}/>
       </Box>
     </Box>
   )
 }
 
-export default App14
+
+function App15() {
+
+  return (
+    <Box
+      width={1}
+      p={2}
+      style={{ backgroundColor: 'green' }}>
+      <SquareImg
+        width={100}
+        src={'http://api.mt.com/media/boxes/2/2021-03-04/media/09-42-13-97-has-ph.jpg'}
+        alt={'testSrc'}/>
+
+    </Box>
+  )
+}
+
+export default App15
