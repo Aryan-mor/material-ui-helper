@@ -21,6 +21,8 @@ export { default as useOpenWithBrowserHistory } from './helper/useOpenWithBrowse
 export { default as useInit } from './helper/useInit'
 export { default as useState } from './helper/useState'
 export { default as useEffectWithoutInit } from './helper/useEffectWithoutInit'
+export { default as useLimitHeight} from "./helper/limit/useLimitHeight"
+export { default as useLimitLine} from "./helper/limit/useLimitLine"
 
 export {
   default as useStateWithCallback,

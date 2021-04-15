@@ -35,7 +35,9 @@ import {
   DefaultTextField,
   Skeleton,
   useEffectWithoutInit,
-  useState as useStateMaterialHelper
+  useState as useStateMaterialHelper,
+  useLimitHeight,
+  useLimitLine
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -881,4 +883,152 @@ function App15() {
   )
 }
 
-export default App15
+function App16() {
+
+  return (
+    <Box flexDirectionColumn={true}>
+      <Box my={5} style={{
+        backgroundColor: 'yellow'
+      }}>
+        <Cm1/>
+      </Box>
+      <Box my={5} style={{ backgroundColor: 'green' }}>
+        <Cm2/>
+      </Box>
+    </Box>
+  )
+}
+
+
+function Cm1() {
+
+  const [randomText, setRandomText] = useState('')
+  const [ref, show, setShow, { canHide, lineHeight }] = useLimitHeight(200, { watcher: [randomText] })
+
+
+  return (
+    <Box flexDirectionColumn={true}>
+      <Box
+        ref={ref}
+        flexDirectionColumn={true}
+        style={{
+          maxHeight: !show ? 120 : undefined,
+          overflow: !show ? 'hidden' : undefined
+        }}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+        <br/>
+        {randomText}
+      </Box>
+      {
+        canHide &&
+        <Button onClick={() => {
+          setShow(!show)
+        }}>{show ? 'بستن' : 'بازکردن'}</Button>
+      }
+      <Button onClick={() => {
+        const t1 = '\n' +
+          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+          '        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n' +
+          '        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n' +
+          '        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n' +
+          '        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n' +
+          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos'
+        if (randomText === t1) {
+          setRandomText('')
+          return
+        }
+        setRandomText(t1)
+      }}>
+        changeText
+      </Button>
+
+    </Box>
+  )
+
+}
+
+function Cm2() {
+
+  const [randomText, setRandomText] = useState('')
+  const [ref, show, setShow, { canHide, lineHeight }] = useLimitLine(4, { watcher: [randomText] })
+
+
+  return (
+    <Box flexDirectionColumn={true}>
+      <Box
+        ref={ref}
+        flexDirectionColumn={true}
+        style={{
+          maxHeight: !show ? (4 * lineHeight) + 20 : undefined,
+          overflow: !show ? 'hidden' : undefined
+        }}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+        <br/>
+        {randomText}
+      </Box>
+      {
+        canHide &&
+        <Button onClick={() => {
+          setShow(!show)
+        }}>{show ? 'بستن' : 'بازکردن'}</Button>
+      }
+      <Button onClick={() => {
+        const t1 = '\n' +
+          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+          '        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n' +
+          '        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n' +
+          '        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n' +
+          '        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n' +
+          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos'
+        if (randomText === t1) {
+          setRandomText('')
+          return
+        }
+        setRandomText(t1)
+      }}>
+        changeText
+      </Button>
+
+    </Box>
+  )
+}
+
+export default App16
