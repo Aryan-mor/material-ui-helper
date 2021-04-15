@@ -966,21 +966,66 @@ function Cm1() {
 
 }
 
+
+const t1 = '\n' +
+  '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+  '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+  '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+  '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+  '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+  '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+  '        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n' +
+  '        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n' +
+  '        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n' +
+  '        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n' +
+  '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+  '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+  '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+  '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
+  '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
+  '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
+  '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+  '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+  '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+  '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+  '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
+  '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos'
+
 function Cm2() {
 
-  const [randomText, setRandomText] = useState('')
-  const [ref, show, setShow, { canHide, lineHeight }] = useLimitLine(4, { watcher: [randomText] })
+  const [randomText, setRandomText] = useState(t1)
+  const [ref, show, setShow, { canHide, lineHeight }] = useLimitLine(4, { defaultShow: false, watcher: [randomText] })
 
 
   return (
-    <Box flexDirectionColumn={true}>
+    <Box
+      ref={ref} flexDirectionColumn={true}>
       <Box
-        ref={ref}
         flexDirectionColumn={true}
         style={{
           maxHeight: !show ? (4 * lineHeight) + 20 : undefined,
           overflow: !show ? 'hidden' : undefined
         }}>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
+        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
+        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
+        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,
         molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum
         numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium
@@ -995,29 +1040,7 @@ function Cm2() {
         }}>{show ? 'بستن' : 'بازکردن'}</Button>
       }
       <Button onClick={() => {
-        const t1 = '\n' +
-          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
-          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
-          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
-          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
-          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
-          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
-          '        Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n' +
-          '        molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n' +
-          '        numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n' +
-          '        optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n' +
-          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
-          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
-          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
-          '        obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n' +
-          '        nihil, eveniet aliquid culpa officia aut! Impedit sit sunt quaerat, odit,\n' +
-          '        tenetur error, harum nesciunt ipsum debitis quas aliquid. Reprehenderit,\n' +
-          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
-          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
-          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
-          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
-          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos\n' +
-          '        quia. Quo neque error repudiandae fuga? Ipsa laudantium molestias eos'
+
         if (randomText === t1) {
           setRandomText('')
           return

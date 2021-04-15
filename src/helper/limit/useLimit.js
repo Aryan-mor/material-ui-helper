@@ -8,7 +8,7 @@ import useEffectWithoutInit from '../useEffectWithoutInit'
 export default function useLimit(acceptableHeight, { defaultShow, isTextLine = false, watcher = [] } = {}) {
   const [lineHeight, setLineHeight] = useState(undefined)
 
-  const [width, height] = useWindowSize()
+  const [width] = useWindowSize()
   const ref = useRef()
   const [show, setShow] = useStateWithCallbackLazy(true)
   const [canHide, setCanHide] = useState(true)
@@ -21,7 +21,7 @@ export default function useLimit(acceptableHeight, { defaultShow, isTextLine = f
 
   useEffectWithoutInit(() => {
     checker()
-  }, [acceptableHeight, height])
+  }, [acceptableHeight])
 
   useEffectWithoutInit(() => {
     firstHeight.current = undefined
