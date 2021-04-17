@@ -8,7 +8,7 @@ import styles from '../styles.module.css'
 function SquareImg({
                      src,
                      alt,
-                     size,
+                     width,
                      align: al,
                      imageWidth,
                      imageHeight,
@@ -18,30 +18,30 @@ function SquareImg({
   const align = al === 'end' ? 'flex-end' : al === 'start' ? 'flex-start' : al
 
   return (
-    <Box
-      className={styles.squareImgContainer}
-      {...props}
-      style={{
-        maxWait: size,
-        maxHeight: size,
-        overflow: 'hidden',
-        ...props.style
-      }}>
-      <Img
-        src={src}
-        alt={alt}
-        display={'flex'}
-        alignItems={align}
-        justifyContent={align}
-        imageProps={{
-          ...imageProps,
-          style: {
-            ...imageProps?.style,
-            width: imageWidth > imageHeight ? 'auto' : '100%',
-            height: imageWidth > imageHeight ? '100%' : 'auto'
-          }
-        }}/>
-    </Box>
+      <Box
+        className={styles.squareImgContainer}
+        {...props}
+        style={{
+          maxWidth: width,
+          maxHeight: width,
+          overflow: 'hidden',
+          ...props.style
+        }}>
+        <Img
+          src={src}
+          alt={alt}
+          display={'flex'}
+          alignItems={align}
+          justifyContent={align}
+          imageProps={{
+            ...imageProps,
+            style: {
+              ...imageProps?.style,
+              width: imageWidth > imageHeight ? 'auto' : '100%',
+              height: imageWidth > imageHeight ? '100%' : 'auto'
+            }
+          }}/>
+      </Box>
   )
 }
 
@@ -54,7 +54,7 @@ SquareImg.propTypes = {
   src: PropTypes.string,
   alt: PropTypes.string,
   imageProps: PropTypes.object,
-  size: PropTypes.any,
+  width: PropTypes.any,
   imageWidth: PropTypes.number,
   imageHeight: PropTypes.number,
   align: PropTypes.oneOf(['start', 'center', 'end'])
