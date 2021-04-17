@@ -16,7 +16,9 @@ export default function useLimit(acceptableHeight, { defaultShow, isTextLine = f
 
 
   useEffect(()=>{
+    setTimeout(()=>{
     checker(defaultShow)
+    },500)
   },[])
 
   useEffectWithoutInit(() => {
