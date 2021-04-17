@@ -72,7 +72,7 @@ export default function useLimit(acceptableHeight, { defaultShow, isTextLine = f
     setShow(show)
   }
 
-  return [ref, show, handleShowChange, {lineHeight, canHide }]
+  return [ref, show, handleShowChange, {maxHeight:firstHeight?.current,lineHeight, canHide }]
 }
 
 function countLines(target) {
