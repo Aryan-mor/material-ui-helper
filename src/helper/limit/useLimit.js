@@ -12,40 +12,43 @@ export default function useLimit(acceptableHeight, { defaultShow, isTextLine = f
   const ref = useRef()
   const [show, setShow] = useStateWithCallbackLazy(true)
   const [canHide, setCanHide] = useState(true)
-  const firstHeight = useRef()
+  const [firstHeight, setFirstHeight] = useStateWithCallbackLazy()
 
 
-  useEffect(()=>{
-    setTimeout(()=>{
-    checker(defaultShow)
-    },500)
-  },[])
+  useEffect(() => {
+    setTimeout(() => {
+      checker(defaultShow)
+    }, 500)
+  }, [])
 
   useEffectWithoutInit(() => {
     checker()
   }, [acceptableHeight])
 
   useEffectWithoutInit(() => {
-    firstHeight.current = undefined
-    if (show) {
-      checker(defaultShow)
-      return
-    }
-    setShow(true, () => {
-      checker(defaultShow)
+    setFirstHeight(undefined, () => {
+      if (show) {
+        checker(defaultShow)
+        return
+      }
+      setShow(true, () => {
+        checker(defaultShow)
+      })
     })
   }, [width, ...watcher])
 
   function checker(defaultShow) {
     tryIt(() => {
       const el = ref.current
-      if (!firstHeight?.current) {
-        firstHeight.current = el.offsetHeight
+      let fHeight = firstHeight
+      if (!fHeight) {
+        fHeight = el.offsetHeight
+        setFirstHeight(fHeight)
       }
 
       const offsetHeight = getSafe(() => {
-        if (!isTextLine){
-          return firstHeight.current
+        if (!isTextLine) {
+          return fHeight
         }
         const { lines, lineHeight, height } = countLines(el)
         setLineHeight(lineHeight)
@@ -74,7 +77,7 @@ export default function useLimit(acceptableHeight, { defaultShow, isTextLine = f
     setShow(show)
   }
 
-  return [ref, show, handleShowChange, {maxHeight:firstHeight?.current,lineHeight, canHide }]
+  return [ref, show, handleShowChange, { maxHeight: firstHeight, lineHeight, canHide }]
 }
 
 function countLines(target) {
