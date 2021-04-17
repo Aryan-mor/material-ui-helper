@@ -871,11 +871,15 @@ function App15() {
 
   return (
     <Box
-      width={1}
+      maxWidth={100}
+      maxHeight={100}
       p={2}
       style={{ backgroundColor: 'green' }}>
       <SquareImg
         width={100}
+        size={"100%"}
+        imageWidth={800}
+        imageHeight={500}
         src={'http://api.mt.com/media/boxes/2/2021-03-04/media/09-42-13-97-has-ph.jpg'}
         alt={'testSrc'}/>
 
@@ -1054,4 +1058,4 @@ function Cm2() {
   )
 }
 
-export default App16
+export default App15
