@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { getSafe, gLog, tryIt, useWindowSize } from '../../utils/Helper'
-import useState from '../useState'
-import { useStateWithCallbackLazy } from '../useStateWithCallback'
+import useState from '../state/useState'
+import { useStateWithCallbackLazy } from '../state/useStateWithCallback'
 import useEffectWithoutInit from '../useEffectWithoutInit'
 
 
@@ -43,7 +43,7 @@ export default function useLimit(acceptableHeight, { defaultShow, isTextLine = f
       let fHeight = firstHeight
       if (!fHeight) {
         fHeight = el.offsetHeight
-        setFirstHeight(fHeight)
+        setFirstHeight(Math.ceil(fHeight))
       }
 
       const offsetHeight = getSafe(() => {

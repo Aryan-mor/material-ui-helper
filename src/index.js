@@ -19,16 +19,17 @@ export { default as ErrorButton } from './components/button/ErrorButton'
 export { default as InfoButton } from './components/button/InfoButton'
 export { default as useOpenWithBrowserHistory } from './helper/useOpenWithBrowserHistory'
 export { default as useInit } from './helper/useInit'
-export { default as useState } from './helper/useState'
+export { default as useState } from './helper/state/useState'
 export { default as useEffectWithoutInit } from './helper/useEffectWithoutInit'
 export { default as useLimitHeight} from "./helper/limit/useLimitHeight"
 export { default as useLimitLine} from "./helper/limit/useLimitLine"
+export { default as useLimit} from "./helper/limit/useLimit"
 
 export {
   default as useStateWithCallback,
   useStateWithCallbackInstant,
   useStateWithCallbackLazy
-} from './helper/useStateWithCallback'
+} from './helper/state/useStateWithCallback'
 
 
 export { default as HoverWatcher } from './helper/HoverWatcher'

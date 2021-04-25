@@ -3,6 +3,7 @@ import {
   Backdrop,
   gLog,
   useInit,
+  useState as useStateMaterialHelper,
   useStateWithCallback,
   useStateWithCallbackInstant,
   useStateWithCallbackLazy,
@@ -35,7 +36,6 @@ import {
   DefaultTextField,
   Skeleton,
   useEffectWithoutInit,
-  useState as useStateMaterialHelper,
   useLimitHeight,
   useLimitLine
 } from 'material-ui-helper'
@@ -893,9 +893,9 @@ function App16() {
       }}>
         <Cm1/>
       </Box>
-      <Box my={5} style={{ backgroundColor: 'green' }}>
-        <Cm2/>
-      </Box>
+      {/*<Box my={5} style={{ backgroundColor: 'green' }}>*/}
+      {/*  <Cm2/>*/}
+      {/*</Box>*/}
     </Box>
   )
 }
@@ -904,7 +904,7 @@ function App16() {
 function Cm1() {
 
   const [randomText, setRandomText] = useState('')
-  const [ref, show, setShow, { canHide, lineHeight }] = useLimitHeight(200, { watcher: [randomText] })
+  const [ref, show, setShow, { canHide, lineHeight }] = useLimitHeight(100, { watcher: [randomText] })
 
 
   return (
@@ -994,6 +994,7 @@ const t1 = '\n' +
 
 function Cm2() {
 
+
   const [randomText, setRandomText] = useState(t1)
   const [ref, show, setShow, { canHide, lineHeight }] = useLimitLine(4, { defaultShow: false, watcher: [randomText] })
 
@@ -1040,14 +1041,14 @@ function Cm2() {
           setShow(!show)
         }}>{show ? 'بستن' : 'بازکردن'}</Button>
       }
-      <Button onClick={() => {
-
-        if (randomText === t1) {
-          setRandomText('')
-          return
-        }
-        setRandomText(t1)
-      }}>
+      <Button
+        onClick={() => {
+          if (randomText === t1) {
+            setRandomText('')
+            return
+          }
+          setRandomText(t1)
+        }}>
         changeText
       </Button>
 
@@ -1055,4 +1056,25 @@ function Cm2() {
   )
 }
 
-export default App15
+
+function App17() {
+  const [d1, setD1] = useStateMaterialHelper(1, {
+    validator: (vale, setter) => {
+      if (vale > 10)
+        return
+      setter(vale)
+    }
+  })
+
+
+  return (
+    <Box style={{ backgroundColor: 'red', width: 100, height: 100 }}>
+      <Button onClick={() => setD1(d1 + 1)}>
+        add
+      </Button>
+      {d1}
+    </Box>
+  )
+}
+
+export default App17

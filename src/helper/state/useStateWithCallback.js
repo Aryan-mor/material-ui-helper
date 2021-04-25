@@ -1,14 +1,16 @@
 import React, { useEffect, useLayoutEffect, useRef } from 'react'
-import { getSafe, tryIt, useEffectWithoutInit } from '..'
+import { getSafe, tryIt, useEffectWithoutInit } from '../../index'
 import _ from 'lodash'
 import useState from './useState'
-import useInit from './useInit'
+import useInit from '../useInit'
 
-const useStateWithCallback = (initialState, callback, initCall = true) => {
-  const [state, setState] = useState(initialState)
+const useStateWithCallback = (initialState, callback, {
+  initCall = true,
+  validator
+} = {}) => {
+  const [state, setState] = useState(initialState, { validator })
   const lastValue = useRef(null)
   const init = useInit()
-
 
   useEffect(() => {
     if (!initCall && !init()) {
@@ -35,10 +37,12 @@ export const useStateWithCallbackInstant = (initialState, callback) => {
   return [state, setState]
 }
 
-export const useStateWithCallbackLazy = initialValue => {
+export const useStateWithCallbackLazy = (initialValue, {
+  validator
+} = {}) => {
   const callbackRef = useRef(null)
   const lastValue = useRef(null)
-  const [state, setState] = useState(initialValue)
+  const [state, setState] = useState(initialValue, { validator })
 
   useEffect(() => {
     tryIt(() => lastValue.current = state)
