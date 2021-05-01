@@ -39,6 +39,7 @@ const Box = React.forwardRef((pr, ref) => {
     ...props
   } = pr
   //endregion props
+
   const getTransformStyle = (forHover = false) => {
     const tr = forHover ? hoverTransform : transform
     if (!tr) {

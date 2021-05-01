@@ -2,9 +2,12 @@ import React from 'react'
 import MaterialBox from '@material-ui/core/Box'
 import Skeleton from '@material-ui/lab/Skeleton'
 import CircularProgress from '@material-ui/core/CircularProgress'
+import { gLog } from '../../utils/Helper'
 
 export function LoadingContainer({ children, loading, skeleton, ...props }) {
 
+  if (props.onMouseEnter)
+    gLog(props)
   return (
     React.cloneElement(children, { ...props, position: (loading || skeleton) ? 'relative' : undefined })
   )

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import Box from '../components/box/Box'
+import { gLog } from '../utils/Helper'
+import { Box } from '@material-ui/core'
 
 
 export default function HoverWatcher({component:cm, enterSkip, leaveSkip, enterTimeout, leaveTimeout, timeout = 600, onHover, ...props}) {

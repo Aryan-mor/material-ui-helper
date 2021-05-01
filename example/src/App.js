@@ -37,16 +37,18 @@ import {
   Skeleton,
   useEffectWithoutInit,
   useLimitHeight,
+  HoverWatcher,
   useLimitLine
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
-import { useTheme } from '@material-ui/core'
+import { ButtonBase, useTheme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import 'material-ui-helper/src/styles.module.css'
 import images from './images.json'
 import './style.css'
+import { grey } from '@material-ui/core/colors'
 
 
 const useTypographyStyle = makeStyles({
@@ -1056,7 +1058,6 @@ function Cm2() {
   )
 }
 
-
 function App17() {
   const [d1, setD1] = useStateMaterialHelper(1, {
     validator: (vale, setter) => {
@@ -1077,4 +1078,120 @@ function App17() {
   )
 }
 
-export default App17
+
+function createItem(index) {
+  const items = []
+  for (let i = index; i < (index + (Math.random() * 10) + 1); i++) {
+    items.push({
+      label: `sub${index}-${i}`
+    })
+  }
+  return {
+    label: `menu-${index}`,
+    items: items
+  }
+}
+
+const menu = [
+  createItem(1),
+  createItem(2),
+  createItem(3),
+  createItem(4),
+  createItem(5),
+  createItem(6),
+  createItem(7),
+  createItem(8)
+]
+
+function App18({ ...props }) {
+  const [activeMenu, setActiveMenu] = useState(0)
+  const [timer, setTimer] = useState(undefined)
+
+
+  useEffect(() => {
+    gLog('Hoooooooovver', activeMenu)
+  }, [activeMenu])
+
+  function onHover(index) {
+    clearTimeout(timer)
+    setTimer(setTimeout(() => {
+      setActiveMenu(index)
+    }, 600))
+  }
+
+  return (
+        <Box display={'flex'} m={8} flexWrap={'wrap'}>
+          <Box display={'flex'} width={1}>
+            {['red', 'blue', 'green', 'pink', 'brown', 'black', 'yellow', 'cyan'].map(it => (
+              <Box key={it} width={1 / 4} height={100} p={2}>
+                <Box width={1}
+                     height={1}
+                     display={'flex'}
+                     alignCenter
+                     justifyCenter
+                     borderRadius={5}
+                     skeleton={true}
+                     hoverStyle={{
+                       backgroundColor: it
+                     }}>
+                  {it}
+                </Box>
+              </Box>
+            ))}
+          </Box>
+          <Box display={'flex'} component={'ul'} flexDirection={'column'}>
+            {menu.map((item, index) => (
+              <Box key={item.label} component={'li'}>
+                <HoverWatcher
+                  p={1} m={0.5}
+                  component={ButtonBase}
+                  enterSkip={false}
+                  timeout={1000}
+                  onHover={(hover) => {
+                    if (hover)
+                      onHover(index)
+                  }}
+                  style={{
+                    borderColor: `1px solid ${grey[400]}`,
+                    ...UtilsStyle.borderRadius(5)
+                  }}>
+                  <Typography variant={'h6'}>
+                    {item.label}
+                  </Typography>
+                </HoverWatcher>
+              </Box>
+            ))}
+          </Box>
+          <Box display={'flex'} mx={1}
+               flexDirection={'column'} component={'ul'}
+               styke={{
+                 backgroundColor: grey[200]
+               }}>
+            {
+              menu[activeMenu].items.map((item, index) => (
+                <Box key={item.label} component={'li'}>
+                  <HoverWatcher
+                    p={1} m={0.5}
+                    component={ButtonBase}
+                    enterSkip={true}
+                    onHover={(hover) => {
+                      clearTimeout(timer)
+                    }}
+                    style={{
+                      borderColor: `1px solid ${grey[400]}`,
+                      ...UtilsStyle.borderRadius(5)
+                    }}>
+                    <Typography variant={'h6'}>
+                      {item.label}
+                    </Typography>
+                  </HoverWatcher>
+                </Box>
+              ))
+            }
+          </Box>
+        </Box>
+  )
+};
+
+
+export default App18
