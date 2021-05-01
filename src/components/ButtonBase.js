@@ -6,9 +6,10 @@ import { UtilsStyle } from '../utils/Utils'
 
 
 function ButtonBase(pr) {
-  const { borderRadius = 5, backgroundColor, hoverBackgroundColor, transitionDuration = 200, onClick, buttonProps = {}, ...props } = pr
+  const { disabled,borderRadius = 5, backgroundColor, hoverBackgroundColor, transitionDuration = 200, onClick, buttonProps = {}, ...props } = pr
   return (
     <MaterialButtonBase
+      disabled={disabled}
       onClick={onClick}
       {...buttonProps}
       style={{
