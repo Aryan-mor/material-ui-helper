@@ -6,10 +6,23 @@ import { UtilsStyle } from '../utils/Utils'
 
 
 function ButtonBase(pr) {
-  const { disabled,borderRadius = 5, backgroundColor, hoverBackgroundColor, transitionDuration = 200, onClick, buttonProps = {}, ...props } = pr
+  const {
+    disabled,
+    disableRipple,
+    disableTouchRipple,
+    borderRadius = 5,
+    backgroundColor,
+    hoverBackgroundColor,
+    transitionDuration = 200,
+    onClick,
+    buttonProps = {},
+    ...props
+  } = pr
   return (
     <MaterialButtonBase
       disabled={disabled}
+      disableRipple={disableRipple}
+      disableTouchRipple={disableTouchRipple}
       onClick={onClick}
       {...buttonProps}
       style={{
@@ -39,7 +52,10 @@ ButtonBase.prototype = {
   backgroundColor: PropTypes.string,
   buttonProps: PropTypes.object,
   transitionDuration: PropTypes.number,
-  borderRadius:PropTypes.number,
+  borderRadius: PropTypes.number,
+  disabled: PropTypes.bool,
+  disableRipple: PropTypes.bool,
+  disableTouchRipple: PropTypes.bool,
   ...boxPropType
 }
 
