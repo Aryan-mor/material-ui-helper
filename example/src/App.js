@@ -1120,78 +1120,95 @@ function App18({ ...props }) {
   }
 
   return (
-        <Box display={'flex'} m={8} flexWrap={'wrap'}>
-          <Box display={'flex'} width={1}>
-            {['red', 'blue', 'green', 'pink', 'brown', 'black', 'yellow', 'cyan'].map(it => (
-              <Box key={it} width={1 / 4} height={100} p={2}>
-                <Box width={1}
-                     height={1}
-                     display={'flex'}
-                     alignCenter
-                     justifyCenter
-                     borderRadius={5}
-                     skeleton={true}
-                     hoverStyle={{
-                       backgroundColor: it
-                     }}>
-                  {it}
-                </Box>
-              </Box>
-            ))}
+    <Box display={'flex'} m={8} flexWrap={'wrap'}>
+      <Box display={'flex'} width={1}>
+        {['red', 'blue', 'green', 'pink', 'brown', 'black', 'yellow', 'cyan'].map(it => (
+          <Box key={it} width={1 / 4} height={100} p={2}>
+            <Box width={1}
+                 height={1}
+                 display={'flex'}
+                 alignCenter
+                 justifyCenter
+                 borderRadius={5}
+                 skeleton={true}
+                 hoverStyle={{
+                   backgroundColor: it
+                 }}>
+              {it}
+            </Box>
           </Box>
-          <Box display={'flex'} component={'ul'} flexDirection={'column'}>
-            {menu.map((item, index) => (
-              <Box key={item.label} component={'li'}>
-                <HoverWatcher
-                  p={1} m={0.5}
-                  component={ButtonBase}
-                  enterSkip={false}
-                  timeout={1000}
-                  onHover={(hover) => {
-                    if (hover)
-                      onHover(index)
-                  }}
-                  style={{
-                    borderColor: `1px solid ${grey[400]}`,
-                    ...UtilsStyle.borderRadius(5)
-                  }}>
-                  <Typography variant={'h6'}>
-                    {item.label}
-                  </Typography>
-                </HoverWatcher>
-              </Box>
-            ))}
+        ))}
+      </Box>
+      <Box display={'flex'} component={'ul'} flexDirection={'column'}>
+        {menu.map((item, index) => (
+          <Box key={item.label} component={'li'}>
+            <HoverWatcher
+              p={1} m={0.5}
+              component={ButtonBase}
+              enterSkip={false}
+              timeout={1000}
+              onHover={(hover) => {
+                if (hover)
+                  onHover(index)
+              }}
+              style={{
+                borderColor: `1px solid ${grey[400]}`,
+                ...UtilsStyle.borderRadius(5)
+              }}>
+              <Typography variant={'h6'}>
+                {item.label}
+              </Typography>
+            </HoverWatcher>
           </Box>
-          <Box display={'flex'} mx={1}
-               flexDirection={'column'} component={'ul'}
-               styke={{
-                 backgroundColor: grey[200]
-               }}>
-            {
-              menu[activeMenu].items.map((item, index) => (
-                <Box key={item.label} component={'li'}>
-                  <HoverWatcher
-                    p={1} m={0.5}
-                    component={ButtonBase}
-                    enterSkip={true}
-                    onHover={(hover) => {
-                      clearTimeout(timer)
-                    }}
-                    style={{
-                      borderColor: `1px solid ${grey[400]}`,
-                      ...UtilsStyle.borderRadius(5)
-                    }}>
-                    <Typography variant={'h6'}>
-                      {item.label}
-                    </Typography>
-                  </HoverWatcher>
-                </Box>
-              ))
-            }
-          </Box>
-        </Box>
+        ))}
+      </Box>
+      <Box display={'flex'} mx={1}
+           flexDirection={'column'} component={'ul'}
+           styke={{
+             backgroundColor: grey[200]
+           }}>
+        {
+          menu[activeMenu].items.map((item, index) => (
+            <Box key={item.label} component={'li'}>
+              <HoverWatcher
+                p={1} m={0.5}
+                component={ButtonBase}
+                enterSkip={true}
+                onHover={(hover) => {
+                  clearTimeout(timer)
+                }}
+                style={{
+                  borderColor: `1px solid ${grey[400]}`,
+                  ...UtilsStyle.borderRadius(5)
+                }}>
+                <Typography variant={'h6'}>
+                  {item.label}
+                </Typography>
+              </HoverWatcher>
+            </Box>
+          ))
+        }
+      </Box>
+    </Box>
   )
-};
+}
 
 
-export default App18
+function App19() {
+  return (
+    <Box mx={4} my={5}>
+      <Typography
+        variant={{
+          xs: 'h1',
+          sm:"h2",
+          md:"h3",
+          lg:"h4",
+          xl:"h5"
+        }}>
+        Test Text
+      </Typography>
+    </Box>
+  )
+}
+
+export default App19

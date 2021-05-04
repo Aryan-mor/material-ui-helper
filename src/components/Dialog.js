@@ -31,14 +31,12 @@ export default function Dialog(pr) {
     ...props
   } = pr
 
-
   const handleCloseDialog = (e) => {
     e.stopPropagation()
     tryIt(() => {
       onClose(e)
     })
   }
-
 
   const closeEl = (
     (closeElement && onClose) ?
@@ -69,25 +67,26 @@ export default function Dialog(pr) {
       onClose={!onBackdropClick ? handleCloseDialog : undefined}
       {...props}>
       <Box display={'flex'} flexDirection={'column'} {...rootProps}>
-        {header ?
-          <Box display={'flex'} alignItems={'center'} p={0.5} {...headerProps}>
-            {closeEl}
-            {
-              isElement(header) &&
-              header
-            }
-          </Box> :
-          closeEl ?
-            <Box
-              style={{
-                position: 'absolute',
-                top: 2,
-                left: 2
-              }}
-              {...headerProps}>
+        {
+          header ?
+            <Box display={'flex'} alignItems={'center'} p={0.5} {...headerProps}>
               {closeEl}
+              {
+                isElement(header) &&
+                header
+              }
             </Box> :
-            <React.Fragment/>
+            closeEl ?
+              <Box
+                style={{
+                  position: 'absolute',
+                  top: 2,
+                  left: 2
+                }}
+                {...headerProps}>
+                {closeEl}
+              </Box> :
+              <React.Fragment/>
         }
         {props.children}
       </Box>

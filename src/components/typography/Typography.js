@@ -2,7 +2,7 @@ import React, { forwardRef, useMemo } from 'react'
 import _ from 'lodash'
 import PropTypes from 'prop-types'
 import Box from '../box/Box'
-import { getSafe, gLog } from '../../index'
+import { getSafe, gLog, ShowOnlyLg, ShowOnlyMd, ShowOnlySm, ShowOnlyXl, ShowOnlyXs } from '../../index'
 import { makeStyles } from '@material-ui/styles'
 import clsx from 'clsx'
 import styles from '../../styles.module.css'
@@ -24,7 +24,18 @@ const useTypographyStyle = makeStyles({
 })
 
 const CM = forwardRef(
-  ({ className, width, component, variant, fontWeight, lineHeight, textAlign, color, textDecorationBottom, ...props }, ref) => {
+  ({
+     className,
+     width,
+     component,
+     variant,
+     fontWeight,
+     lineHeight,
+     textAlign,
+     color,
+     textDecorationBottom,
+     ...props
+   }, ref) => {
     const classes = textDecorationBottom ? useTypographyStyle({ textDecorationBottom }) : {}
 
     const style = useMemo(() => {
@@ -53,13 +64,47 @@ const CM = forwardRef(
     )
   })
 
-// function Typography({ mt, ml, mb, mr, mx, my, m, ...props }) {
-//   return <CM margin={{ mt, ml, mb, mr, mx, my, m }} {...props}>{props.children}</CM>
-// }
 
-const Typography = React.forwardRef(({ ...props }, ref) => {
-  return <CM {...props}>{props.children}</CM>
+function ResponsiveTypography({ variant, children, ...props }) {
 
+  return (
+    <React.Fragment>
+      <ShowOnlyXs>
+        <CM variant={variant['xs'] || variant['sm'] || variant['md'] || variant['lg'] || variant['xl']} {...props}>
+          {children}
+        </CM>
+      </ShowOnlyXs>
+      <ShowOnlySm>
+        <CM variant={variant['sm'] || variant['md'] || variant['lg'] || variant['xl'] || variant['sm']}  {...props}>
+          {children}
+        </CM>
+      </ShowOnlySm>
+      <ShowOnlyMd>
+        <CM variant={variant['md'] || variant['lg'] || variant['xl'] || variant['sm'] || variant['xs']}  {...props}>
+          {children}
+        </CM>
+      </ShowOnlyMd>
+      <ShowOnlyLg>
+        <CM variant={variant['lg'] || variant['xl'] || variant['md'] || variant['sm'] || variant['xs']}  {...props}>
+          {children}
+        </CM>
+      </ShowOnlyLg>
+      <ShowOnlyXl>
+        <CM variant={variant['xl'] || variant['lg'] || variant['md'] || variant['sm'] || variant['xs']}  {...props}>
+          {children}
+        </CM>
+      </ShowOnlyXl>
+    </React.Fragment>
+  )
+
+}
+
+
+const Typography = React.forwardRef(({ variant, ...props }, ref) => {
+  if (_.isObject(variant))
+    return <ResponsiveTypography variant={variant} {...props} >{props.children}</ResponsiveTypography>
+
+  return <CM variant={variant} {...props}>{props.children}</CM>
 })
 
 Typography.propTypes = {
