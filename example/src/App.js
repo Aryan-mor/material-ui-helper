@@ -7,6 +7,7 @@ import {
   useStateWithCallback,
   useStateWithCallbackInstant,
   useStateWithCallbackLazy,
+  BottomAppBar,
   Dialog,
   Box,
   SquareImg,
@@ -38,7 +39,8 @@ import {
   useEffectWithoutInit,
   useLimitHeight,
   HoverWatcher,
-  useLimitLine
+  useLimitLine,
+
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -1200,10 +1202,10 @@ function App19() {
       <Typography
         variant={{
           xs: 'h1',
-          sm:"h2",
-          md:"h3",
-          lg:"h4",
-          xl:"h5"
+          sm: 'h2',
+          md: 'h3',
+          lg: 'h4',
+          xl: 'h5'
         }}>
         Test Text
       </Typography>
@@ -1211,4 +1213,25 @@ function App19() {
   )
 }
 
-export default App19
+
+function App20() {
+  return (
+    <Box flexDirectionColumn={true}>
+      <Box
+        width={1}
+        height={1000}
+        style={{
+          backgroundColor: 'red'
+        }}>
+        text
+      </Box>
+      <BottomAppBar >
+        <Button>
+          salaaaaaaaam
+        </Button>
+      </BottomAppBar>
+    </Box>
+  )
+}
+
+export default App20
