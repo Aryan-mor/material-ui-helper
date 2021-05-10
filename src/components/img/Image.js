@@ -48,17 +48,6 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
   // },[serverSideError])
   //
 
-
-  console.log('skajfkjkasjkfjaskjfkjsakjf', {
-    isThumbLoaded,
-    thumbVisibility,
-    isLoaded,
-    error,
-    src,
-    backupSrc,
-    thumb
-  })
-
   return (
     <React.Fragment>
       {
