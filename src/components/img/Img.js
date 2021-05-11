@@ -71,8 +71,8 @@ Img.defaultProps = {
 Img.propTypes = {
   imageWidth: PropTypes.any,
   imageHeight: PropTypes.any,
-  alt: PropTypes.string.isRequired,
-  src: PropTypes.string.isRequired,
+  alt: PropTypes.string,
+  src: PropTypes.string,
   renderTimeout: PropTypes.number,
   backupSrc: PropTypes.string,
   autoSize: PropTypes.bool,
