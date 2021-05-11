@@ -48,11 +48,21 @@ const ImageContainer = ({
   useEffectWithoutInit(() => {
     if (groupKey)
       imgGroupKey[groupKey] = undefined
-    reRender(renderTimeout + 500)
+    const timeoutKey = reRender(renderTimeout + 500)
+    return () => {
+      tryIt(() => {
+        clearTimeout(timeoutKey)
+      })
+    }
   }, [width])
 
   useEffect(() => {
-    reRender(renderTimeout + 500)
+    const timeoutKey = reRender(renderTimeout + 500)
+    return () => {
+      tryIt(() => {
+        clearTimeout(timeoutKey)
+      })
+    }
   }, [])
 
   function reRender(rTimeout = renderTimeout) {
@@ -64,8 +74,7 @@ const ImageContainer = ({
       setImageSize(imageSize)
       return
     }
-
-    setTimeout(() => {
+    return setTimeout(() => {
       const imageSize = getSafe(() => {
         if (!autoSize || !(imageWidth && imageHeight))
           throw ''
@@ -91,6 +100,7 @@ const ImageContainer = ({
       }, imageSizeDef)
       setImageSize(imageSize)
     }, rTimeout + 800)
+
   }
 
 
