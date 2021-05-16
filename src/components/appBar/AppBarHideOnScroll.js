@@ -1,9 +1,10 @@
 import React from 'react'
-import { AppBar, Slide, Toolbar, useScrollTrigger } from '@material-ui/core'
+import { Slide, Toolbar, useScrollTrigger } from '@material-ui/core'
 import Box from '../box/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import PropTypes from 'prop-types'
 import BottomAppBar from './BottomAppBar'
+import AppBar from './AppBar'
 
 function AppBarHideOnScroll(pr) {
   const { appBarProps = {}, toolbarProps = {}, children, ...props } = pr
