@@ -1,5 +1,6 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import _ from 'lodash'
+import { UtilsString } from './Utils'
 
 //region functions
 export const toNumberSafe = (x) => {
@@ -71,10 +72,13 @@ export const isElement = (element) => {
 
 //region string
 String.prototype.replaceAll = function(regex, to) {
-  return this.replace(regex, to)
+  return UtilsString.replaceAll(this, regex, to)
 }
 String.prototype.trimAll = function() {
-  return this.replaceAll(/ /g, '').trim()
+  return UtilsString.trimAll(this)
+}
+String.prototype.replaceAt = function(index, replacement) {
+  return UtilsString.replaceAt(this, index, replacement)
 }
 //endregion string
 

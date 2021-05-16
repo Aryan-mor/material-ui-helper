@@ -444,11 +444,14 @@ export const UtilsObject = {
 }
 
 export const UtilsString = {
-  replaceAll:(str,regex,to)=>{
+  replaceAll: (str, regex, to) => {
     return str.replace(regex, to)
   },
-  trimAll:(str)=>{
+  trimAll: (str) => {
     return str.replaceAll(/ /g, '').trim()
+  },
+  replaceAt: (str,index, replacement) => {
+    return str.substr(0, index) + replacement + str.substr(index + replacement.length)
   }
 }
 
