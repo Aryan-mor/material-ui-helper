@@ -452,6 +452,9 @@ export const UtilsString = {
   },
   replaceAt: (str,index, replacement) => {
     return str.substr(0, index) + replacement + str.substr(index + replacement.length)
+  },
+  replaceAtTo: (str,startIndex,endIndex, replacement) => {
+    return str.substr(0, startIndex) + replacement + str.substr(startIndex + (endIndex-startIndex))
   }
 }
 
