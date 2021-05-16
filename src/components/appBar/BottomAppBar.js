@@ -17,7 +17,7 @@ const useBottomToolbarStyles = makeStyles((theme) => ({
       alignItems: 'stretch'
     }
   }
-}))
+}));
 
 function BottomAppBar({ appBarProps={},toolbarProps={},...props }) {
   const classes = useBottomToolbarStyles()
@@ -29,7 +29,6 @@ function BottomAppBar({ appBarProps={},toolbarProps={},...props }) {
         </Box>
       </Toolbar>
     </AppBar>
-
   )
 }
 

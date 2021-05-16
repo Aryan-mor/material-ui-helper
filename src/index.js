@@ -14,7 +14,9 @@ export { default as SuccessButton } from './components/button/SuccessButton'
 export { default as WarningButton } from './components/button/WarningButton'
 export { default as ErrorButton } from './components/button/ErrorButton'
 export { default as InfoButton } from './components/button/InfoButton'
+export { default as AppBar } from './components/appBar/AppBar'
 export { default as BottomAppBar } from './components/appBar/BottomAppBar'
+export { default as AppBarHideOnScroll } from './components/appBar/AppBarHideOnScroll'
 
 
 export { default as useInterval } from './utils/useInterval'

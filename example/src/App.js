@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Backdrop,
   gLog,
@@ -40,6 +40,7 @@ import {
   useLimitHeight,
   HoverWatcher,
   useLimitLine,
+  AppBarHideOnScroll
 
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
@@ -1225,7 +1226,7 @@ function App20() {
         }}>
         text
       </Box>
-      <BottomAppBar >
+      <BottomAppBar>
         <Button>
           salaaaaaaaam
         </Button>
