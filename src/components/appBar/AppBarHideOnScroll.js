@@ -1,33 +1,43 @@
 import React from 'react'
-import { Slide, Toolbar, useScrollTrigger } from '@material-ui/core'
+import { AppBar, Slide, Toolbar, useScrollTrigger } from '@material-ui/core'
 import Box from '../box/Box'
 import makeStyles from '@material-ui/core/styles/makeStyles'
 import PropTypes from 'prop-types'
 import BottomAppBar from './BottomAppBar'
-import AppBar from './AppBar'
 
+
+const useStyle = makeStyles(theme => ({
+  customHeaderRoot: {
+    backgroundColor: '#fff !important',
+    color: '#000 !important',
+    "&>div": {
+      padding: 0
+    }
+  }
+}))
 function AppBarHideOnScroll(pr) {
+  const classes = useStyle()
   const { appBarProps = {}, toolbarProps = {}, children, ...props } = pr
 
   return (
-    <HideOnScroll>
-      <AppBar
-        appBarProps={appBarProps}
-        toolbarProps={toolbarProps}
-        {...props}>
-        {children}
-      </AppBar>
-    </HideOnScroll>
+      <HideOnScroll>
+        <AppBar className={classes.customHeaderRoot} {...appBarProps}>
+          <Toolbar {...toolbarProps}>
+            <Box width={1} {...props}>
+              {children}
+            </Box>
+          </Toolbar>
+        </AppBar>
+      </HideOnScroll>
   )
 }
 
 //region propTypes
 AppBarHideOnScroll.propTypes = {
-  appBarProps: PropTypes.object,
-  toolbarProps: PropTypes.object
+  appBarProps:PropTypes.object,
+  toolbarProps:PropTypes.object,
 }
-export default AppBarHideOnScroll
-
+export default AppBarHideOnScroll;
 //endregion propTypes
 
 function HideOnScroll(props) {

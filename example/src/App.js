@@ -46,7 +46,7 @@ import {
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
 import Checkbox from '@material-ui/core/Checkbox'
-import { ButtonBase, useTheme } from '@material-ui/core'
+import { ButtonBase, Toolbar, useTheme } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import 'material-ui-helper/src/styles.module.css'
 import images from './images.json'
@@ -1235,4 +1235,23 @@ function App20() {
   )
 }
 
-export default App20
+
+function App21(){
+
+  return(
+    <Box width={1}>
+      <AppBarHideOnScroll>
+        <Box px={2} py={2} width={1} style={{backgroundColor:"red"}}>
+          test
+        </Box>
+      </AppBarHideOnScroll>
+      <Toolbar/>
+      <Toolbar/>
+      <Box width={1} height={2000} style={{backgroundColor:"blue"}}>
+        my test message
+      </Box>
+    </Box>
+  )
+}
+
+export default App21

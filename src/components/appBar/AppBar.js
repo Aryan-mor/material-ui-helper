@@ -20,9 +20,9 @@ function AppBar(pr) {
   const { appBarProps = {}, toolbarProps = {}, children, ...props } = pr
 
   return (
-      <MaterialAppBar className={classes.customHeaderRoot} {...appBarProps}>
+      <MaterialAppBar className={classes.customHeaderRoot} {...appBarProps}  {...props}>
         <Toolbar {...toolbarProps}>
-          <Box width={1} {...props}>
+          <Box width={1}>
             {children}
           </Box>
         </Toolbar>
