@@ -80,8 +80,8 @@ String.prototype.trimAll = function() {
 String.prototype.replaceAt = function(index, replacement) {
   return UtilsString.replaceAt(this, index, replacement)
 }
-String.prototype.replaceAtTo = function(index, replacement) {
-  return UtilsString.replaceAtTo(this, index, replacement)
+String.prototype.replaceAtTo = function(startIndex,endIndex, replacement) {
+  return UtilsString.replaceAtTo(this, startIndex, endIndex,replacement)
 }
 //endregion string
 
