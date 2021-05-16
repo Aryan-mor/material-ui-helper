@@ -83,6 +83,9 @@ String.prototype.replaceAt = function(index, replacement) {
 String.prototype.replaceAtTo = function(startIndex,endIndex, replacement) {
   return UtilsString.replaceAtTo(this, startIndex, endIndex,replacement)
 }
+String.prototype.spaceWithPattern = function(pattern) {
+  return UtilsString.spaceWithPattern(this, pattern)
+}
 //endregion string
 
 

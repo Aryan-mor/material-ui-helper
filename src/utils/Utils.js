@@ -450,11 +450,17 @@ export const UtilsString = {
   trimAll: (str) => {
     return str.replaceAll(/ /g, '').trim()
   },
-  replaceAt: (str,index, replacement) => {
+  replaceAt: (str, index, replacement) => {
     return str.substr(0, index) + replacement + str.substr(index + replacement.length)
   },
-  replaceAtTo: (str,startIndex,endIndex, replacement) => {
-    return str.substr(0, startIndex) + replacement + str.substr(startIndex + (endIndex-startIndex))
+  replaceAtTo: (str, startIndex, endIndex, replacement) => {
+    return str.substr(0, startIndex) + replacement + str.substr(startIndex + (endIndex - startIndex))
+  },
+  spaceWithPattern: (str, pattern) => {
+    //spaceWithPattern("123456789","### ### ###")
+    // 123 456 789
+    let i = 0, string = str.toString()
+    return pattern.replace(/#/g, _ => string[i++])
   }
 }
 
