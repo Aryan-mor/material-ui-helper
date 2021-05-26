@@ -8,18 +8,18 @@ export default function HoverWatcher({component:cm, enterSkip, leaveSkip, enterT
 
     const [timer, setTimer] = useState();
 
-    function onHoverChange(hover) {
+    function onHoverChange(hover,e) {
         clearTimeout(timer)
         if (enterSkip && hover) {
-            onHover(hover)
+            onHover(hover,e)
             return
         }
         if (leaveSkip && !hover) {
-            onHover(hover)
+            onHover(hover,e)
             return;
         }
         setTimer(setTimeout(() => {
-            onHover(hover)
+            onHover(hover,e)
         }, (hover && enterTimeout) ? enterTimeout : (!hover && leaveTimeout) ? leaveTimeout : timeout))
     }
 
@@ -27,11 +27,11 @@ export default function HoverWatcher({component:cm, enterSkip, leaveSkip, enterT
     return (
         <Box
             component={cm}
-            onMouseEnter={() => {
-                onHoverChange(true)
+            onMouseEnter={(e) => {
+                onHoverChange(true,e)
             }}
-            onMouseLeave={() => {
-                onHoverChange(false)
+            onMouseLeave={(e) => {
+                onHoverChange(false,e)
             }}
             {...props}>
             {props.children}

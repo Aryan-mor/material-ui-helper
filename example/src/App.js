@@ -1236,22 +1236,37 @@ function App20() {
 }
 
 
-function App21(){
+function App21() {
 
-  return(
+  return (
     <Box width={1}>
       <AppBarHideOnScroll>
-        <Box px={2} py={2} width={1} style={{backgroundColor:"red"}}>
+        <Box px={2} py={2} width={1} style={{ backgroundColor: 'red' }}>
           test
         </Box>
       </AppBarHideOnScroll>
       <Toolbar/>
       <Toolbar/>
-      <Box width={1} height={2000} style={{backgroundColor:"blue"}}>
+      <Box width={1} height={2000} style={{ backgroundColor: 'blue' }}>
         my test message
       </Box>
     </Box>
   )
 }
 
-export default App21
+function App22() {
+
+  return (
+    <Box width={1}>
+      <Box width={1/6}>
+        <Img
+          src={'https://api.mehrtakhfif.com/media/resize_300x300&crop_300x300/boxes/2/2020-07-31/media/11-30-14-27-has-ph.jpg'}
+          imageWidth={300}
+          imageHeight={300}
+          alt={'sf'}/>
+      </Box>
+    </Box>
+  )
+}
+
+export default App22

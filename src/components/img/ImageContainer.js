@@ -79,7 +79,7 @@ const ImageContainer = ({
         if (!autoSize || !(imageWidth && imageHeight))
           throw ''
         if (groupKey && imgGroupKey[groupKey]) return imgGroupKey[groupKey]
-        if (imageWidth > imageHeight) {
+        if (imageWidth >= imageHeight) {
           const offsetWidth = ref.current.offsetWidth
           const res = {
             width: '100%',
@@ -100,7 +100,6 @@ const ImageContainer = ({
       }, imageSizeDef)
       setImageSize(imageSize)
     }, rTimeout + 800)
-
   }
 
 
