@@ -18,7 +18,6 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
   const [thumbVisibility, setThumbVisibility] = React.useState(!isServer())
   const [isLoaded, setIsLoaded] = React.useState(isServer())
   const [error, setError] = React.useState(src ? 0 : backupSrc ? 1 : 2)
-  // const [serverSideError, setServerSideError] = React.useState(false)
 
   useEffect(() => {
     if (!isLoaded)
@@ -37,16 +36,6 @@ const Image = ({ src, thumb, alt, backupSrc, ...props }) => {
       setError(!Boolean(src))
   }, [src])
 
-  // useEffect(()=>{
-  //   if (!serverSideError)
-  //     return
-  //
-  //   setIsThumbLoaded( !Boolean(thumb))
-  //   setThumbVisibility(true)
-  //   setIsLoaded(false)
-  //   setError(!Boolean(src))
-  // },[serverSideError])
-  //
 
   return (
     <React.Fragment>

@@ -17,6 +17,7 @@ export { default as InfoButton } from './components/button/InfoButton'
 export { default as AppBar } from './components/appBar/AppBar'
 export { default as BottomAppBar } from './components/appBar/BottomAppBar'
 export { default as AppBarHideOnScroll } from './components/appBar/AppBarHideOnScroll'
+export { default as DelayComponent } from './components/DelayComponent'
 
 
 export { default as useInterval } from './utils/useInterval'

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { getSafe, gLog } from '../..'
 import ImageContainer from './ImageContainer'
 import PropTypes from 'prop-types'
@@ -19,7 +19,18 @@ function Img({
                ...props
              }) {
 
-  const src = useMemo(() => _.isObject(sr) ? sr.image : sr, [sr])
+  const [delay, setDelay] = useState(false)
+
+  const src = useMemo(() => {
+    if (src) {
+      setDelay(true)
+      setTimeout(() => {
+        setDelay(false)
+      }, 1000)
+    }
+    return _.isObject(sr) ? sr.image : sr
+  }, [sr])
+
   const alt = useMemo(() => {
     return getSafe(() => {
       if (al) {
@@ -45,19 +56,21 @@ function Img({
 
 
   return (
-    <ImageContainer
-      src={src}
-      thumb={thumbnail}
-      alt={alt}
-      groupKey={groupKey}
-      renderTimeout={renderTimeout}
-      backupSrc={backupSrc}
-      autoSize={autoSize}
-      imageWidth={imageWidth}
-      imageHeight={imageHeight}
-      imageProps={imageProps}
-      onIsVisible={onIsVisible}
-      {...props}/>
+    !delay ?
+      <ImageContainer
+        src={src}
+        thumb={thumbnail}
+        alt={alt}
+        groupKey={groupKey}
+        renderTimeout={renderTimeout}
+        backupSrc={backupSrc}
+        autoSize={autoSize}
+        imageWidth={imageWidth}
+        imageHeight={imageHeight}
+        imageProps={imageProps}
+        onIsVisible={onIsVisible}
+        {...props}/> :
+      <React.Fragment/>
   )
 }
 
@@ -78,8 +91,8 @@ Img.propTypes = {
   autoSize: PropTypes.bool,
   thumbnail: PropTypes.string,
   imageProps: PropTypes.object,
-  groupKey:PropTypes.string,
-  onIsVisible: PropTypes.func,
+  groupKey: PropTypes.string,
+  onIsVisible: PropTypes.func
 }
 
 export default Img
