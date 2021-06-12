@@ -78,12 +78,13 @@ export default function Dialog(pr) {
             </Box> :
             closeEl ?
               <Box
+                {...headerProps}
                 style={{
+                  ...headerProps?.style,
                   position: 'absolute',
                   top: 2,
                   left: 2
-                }}
-                {...headerProps}>
+                }}>
                 {closeEl}
               </Box> :
               <React.Fragment/>
