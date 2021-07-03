@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import React, { createRef, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import {
   Backdrop,
   gLog,
@@ -31,7 +31,6 @@ import {
   ShowInTablet,
   ShowInTabletAndDesktop,
   Typography,
-  useOpenWithBrowserHistory,
   UtilsElement,
   UtilsStyle,
   DefaultTextField,
@@ -40,7 +39,9 @@ import {
   useLimitHeight,
   HoverWatcher,
   useLimitLine,
-  AppBarHideOnScroll
+  AppBarHideOnScroll,
+  tryIt,
+  useOpenWithBrowserHistory
 
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
@@ -1255,18 +1256,31 @@ function App21() {
 }
 
 function App22() {
+  const [open,__,setOpen,setClose,openRef] = useOpenWithBrowserHistory("test")
+
 
   return (
     <Box width={1}>
-      <Box width={1/6}>
-        <Img
-          src={'https://api.mehrtakhfif.com/media/resize_300x300&crop_300x300/boxes/2/2020-07-31/media/11-30-14-27-has-ph.jpg'}
-          imageWidth={300}
-          imageHeight={300}
-          alt={'sf'}/>
-      </Box>
+      <Button onClick={setOpen}>
+        open 2
+      </Button>
+      <Dialog open={open} onClose={setClose} onBackdropClick={setClose}>
+        <Box width={300} py={5} px={10}>
+          TEST 2
+        </Box>
+      </Dialog>
     </Box>
   )
 }
 
 export default App22
+
+
+
+
+
+
+
+
+
+

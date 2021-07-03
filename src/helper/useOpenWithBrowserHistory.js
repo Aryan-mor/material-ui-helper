@@ -1,5 +1,5 @@
-import { useCallback, useEffect, useState } from 'react'
-import { getSafe, tryIt } from '..'
+import { createRef, useCallback, useEffect, useRef, useState } from 'react'
+import { getSafe, gLog, tryIt } from '..'
 import _ from 'lodash'
 
 const listOfListener = {}
@@ -10,8 +10,12 @@ function onPopState(event) {
   })
 }
 
+const buttonDelay = 1000
+
 export default function useOpenWithBrowserHistory(uniq, defaultValue) {
 
+  const [openDelay,setOpenDelay] = useState(false)
+  const [closeDelay,setCloseDelay] = useState(false)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
@@ -40,16 +44,31 @@ export default function useOpenWithBrowserHistory(uniq, defaultValue) {
     }
   }, [])
 
-  const handleOpenClick = useCallback(() => {
+  const handleOpenClick = () => {
+    if (openDelay === true)
+      return
+    setOpenDelay(true)
+
     const data = {}
     data[uniq] = true
     history.pushState(data, null, location.href)
     setOpen(true)
-  }, [])
-  const handleCloseClick = useCallback(() => {
-    window.history.back()
-  }, [])
 
+    setTimeout(() => {
+      setOpenDelay(false)
+    }, buttonDelay)
+  }
+
+  const handleCloseClick = () => {
+    if (closeDelay === true)
+      return
+    setCloseDelay(true)
+
+    window.history.back()
+    setTimeout(() => {
+      setCloseDelay(false)
+    }, buttonDelay)
+  }
 
   const handleSetOpen = useCallback((open) => {
     if (open) {
@@ -61,3 +80,10 @@ export default function useOpenWithBrowserHistory(uniq, defaultValue) {
 
   return [open, handleSetOpen, handleOpenClick, handleCloseClick]
 }
+
+
+
+
+
+
+
