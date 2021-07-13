@@ -11,7 +11,7 @@ export default function FullWidthSkeleton({...props}) {
       {...props}
       style={{
         ...props.style,
-        position: 'relative',
+        position: 'absolute',
         top: 0,
         right: 0,
         left: 0,
