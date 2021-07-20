@@ -222,7 +222,10 @@ function TextFieldContainer(pr) {
     ref.current.value = text
     const focusEv = new Event('focus')
     const keydownEv = new Event('keydown')
-    ref.current.dispatchEvent(focusEv)
+
+
+    //Todo:remove this function for nextjs auto focused
+    // ref.current.dispatchEvent(focusEv)
     ref.current.dispatchEvent(keydownEv)
     checkDir()
   }

@@ -42,6 +42,7 @@ import {
   AppBarHideOnScroll,
   tryIt,
   useOpenWithBrowserHistory,
+  FormController
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -1269,7 +1270,60 @@ function App22() {
   )
 }
 
-export default App22
+function App23(){
+const ref = useRef()
+  function handleSubmitChange(){
+
+  }
+
+  return(
+    <Box p={10}>
+      <FormController
+        innerRef={ref}
+        name={"baseSearch-form-controller"}
+        width={1}
+        flexDirectionColumn={true}
+        center={true}
+        onSubmit={handleSubmitChange}>
+        <DefaultTextField
+          variant={"outlined"}
+          type={"search"}
+          placeholder={"search"}
+          name={"baseSearch"}
+          autoComplete={"off"}
+          autoFocus={false}
+          onFocusInDelay={0}
+          onFocusOutDelay={0}
+          inputProps={{
+            onKeyDown: ()=>{
+
+            }
+          }}
+          onFocusIn={()=>{}}
+          onFocusOut={()=>{}}
+          onChangeTextFieldDelay={300}
+          onChangeDelay={1000}
+          onChange={()=>{}}
+          startAdornment={(
+            <React.Fragment>
+               testIcon
+
+            </React.Fragment>
+          )}
+          textFieldProps={{
+            InputProps: {
+              style: {
+                height: "3.4375vw",
+                maxHeight: 62
+              }
+            }
+          }}/>
+      </FormController>
+    </Box>
+  )
+}
+
+export default App23
 
 
 

@@ -3,6 +3,7 @@ import TextField from './TextField'
 import TextFieldContainer from './TextFieldContainer'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
+import { getSafe, gLog, tryIt } from '../../utils/Helper'
 
 function DefaultTextField(pr) {
 
@@ -44,6 +45,19 @@ function DefaultTextField(pr) {
     onFocusOutDelay,
     ...props
   } = pr
+
+
+  function handleFocusIn() {
+    tryIt(()=>onFocusIn())
+    gLog('asfaskjfkjaskjfkasj handleFocusIn')
+  }
+
+  function handleFocusOut() {
+    tryIt(()=>onFocusOut())
+    gLog('asfaskjfkjaskjfkasj handleFocusOut')
+  }
+
+
   return (
     <TextFieldContainer
       name={name}
@@ -84,9 +98,9 @@ function DefaultTextField(pr) {
             autoComplete={autoComplete}
             onChange={onChangeTextField}
             onChangeDelay={onChangeTextFieldDelay}
-            onFocusIn={onFocusIn}
+            onFocusIn={handleFocusIn}
             onFocusInDelay={onFocusInDelay}
-            onFocusOut={onFocusOut}
+            onFocusOut={handleFocusOut}
             onFocusOutDelay={onFocusOutDelay}
             error={error || (_.isNumber(errorIndex) && errorIndex !== -1)}
             {...textFieldProps}
@@ -104,13 +118,13 @@ function DefaultTextField(pr) {
 DefaultTextField.defaultProps = {
   onChangeDelay: 600,
   inputProps: {},
-  InputProps: {},
+  InputProps: {}
 }
 
 DefaultTextField.propTypes = {
   name: PropTypes.any.isRequired,
   defaultValue: PropTypes.string,
-  value:PropTypes.string,
+  value: PropTypes.string,
   variant: PropTypes.oneOf(['filled', 'outlined', 'standard']),
   label: PropTypes.string,
   multiline: PropTypes.bool,
