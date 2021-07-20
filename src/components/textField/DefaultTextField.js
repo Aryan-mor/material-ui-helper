@@ -9,6 +9,7 @@ function DefaultTextField(pr) {
   const {
     name,
     value,
+    className,
     defaultValue,
     variant,
     label,
@@ -56,6 +57,7 @@ function DefaultTextField(pr) {
         return (
           <TextField
             {...props}
+            className={className}
             variant={variant}
             inputRef={ref}
             value={value}

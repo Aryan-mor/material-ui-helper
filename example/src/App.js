@@ -41,8 +41,7 @@ import {
   useLimitLine,
   AppBarHideOnScroll,
   tryIt,
-  useOpenWithBrowserHistory
-
+  useOpenWithBrowserHistory,
 } from 'material-ui-helper'
 import 'material-ui-helper/dist/index.css'
 import Collapse from '@material-ui/core/Collapse'
@@ -1215,7 +1214,6 @@ function App19() {
   )
 }
 
-
 function App20() {
   return (
     <Box flexDirectionColumn={true}>
@@ -1235,7 +1233,6 @@ function App20() {
     </Box>
   )
 }
-
 
 function App21() {
 
@@ -1257,7 +1254,6 @@ function App21() {
 
 function App22() {
   const [open,__,setOpen,setClose,openRef] = useOpenWithBrowserHistory("test")
-
 
   return (
     <Box width={1}>

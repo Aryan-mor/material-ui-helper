@@ -54,7 +54,6 @@ function Img({
     })
   }, [src, th])
 
-
   return (
     !delay ?
       <ImageContainer

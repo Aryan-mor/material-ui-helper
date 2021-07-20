@@ -78,7 +78,6 @@ const ImageContainer = ({
       const imageSize = getSafe(() => {
         if (!autoSize || !(imageWidth && imageHeight))
           throw ''
-        if (groupKey && imgGroupKey[groupKey]) return imgGroupKey[groupKey]
         if (imageWidth >= imageHeight) {
           const offsetWidth = ref.current.offsetWidth
           const res = {
