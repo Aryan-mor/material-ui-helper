@@ -26,6 +26,7 @@ export { default as useIsomorphicLayoutEffect } from './utils/useIsomorphicLayou
 export { default as useOpenWithBrowserHistory } from './helper/useOpenWithBrowserHistory'
 export { default as useInit } from './helper/useInit'
 export { default as useState } from './helper/state/useState'
+export { default as useBooleanState } from './helper/state/useBooleanState'
 export { default as useEffectWithoutInit } from './helper/useEffectWithoutInit'
 export { default as useLimitHeight} from "./helper/limit/useLimitHeight"
 export { default as useLimitLine} from "./helper/limit/useLimitLine"
