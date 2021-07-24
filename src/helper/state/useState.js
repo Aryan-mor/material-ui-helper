@@ -23,5 +23,9 @@ export default function useState(initialState, {
     setVal(value)
   }, [val, setVal])
 
-  return [val, handleChange]
+  const clearState = useCallback(() => {
+    setVal(undefined)
+  }, [setVal])
+
+  return [val, handleChange, clearState]
 }
