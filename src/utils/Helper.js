@@ -33,6 +33,7 @@ export function useWindowSize(wait = 2000, useBreakpoints = true) {
   useEffect(() => {
     function updateSize() {
       let breakpoints = {}
+      const width = window.innerWidth
       tryIt(() => {
         if (useBreakpoints) {
           const isXl = theme.breakpoints.width('xl') <= width
@@ -61,7 +62,7 @@ export function useWindowSize(wait = 2000, useBreakpoints = true) {
       })
 
       tryIt(() => setSize([
-        window.innerWidth,
+        width,
         window.innerHeight,
         breakpoints
       ]))
