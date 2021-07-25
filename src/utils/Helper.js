@@ -29,7 +29,7 @@ export function sleep(ms) {
 
 export function useWindowSize(wait = 2000, useBreakpoints = true) {
   const theme = useTheme()
-  const [size, setSize] = useState([0, 0,{}])
+  const [size, setSize] = useState([0, 0, {}])
   useEffect(() => {
     function updateSize() {
       let breakpoints = {}
@@ -47,15 +47,15 @@ export function useWindowSize(wait = 2000, useBreakpoints = true) {
             isMd,
             isSm,
             isXs,
-            xsDown: isXs,
-            smDown: isXs || isSm,
-            mdDown: isXs || isSm || isMd,
-            lgDown: isXs || isSm || isMd || isLg,
+            xsDown: isXs && !(isSm || isMd || isLg || isXl),
+            smDown: (isXs || isSm) && !(isMd || isLg || isXl),
+            mdDown: (isXs || isSm || isMd) && !(isLg || isXl),
+            lgDown: (isXs || isSm || isMd || isLg) && !isXl,
             xlDown: isXs || isSm || isMd || isLg || isXl,
-            xlUp: isXl,
-            lgUp: isXl || isLg,
-            mdUp: isXl || isLg || isMd,
-            smUp: isXl || isLg || isMd || isSm,
+            xlUp: isXl && !(isLg || isMd || isSm || isXs),
+            lgUp: (isXl || isLg) && !(isMd || isSm || isXs),
+            mdUp: (isXl || isLg || isMd) &&  !(isSm || isXs),
+            smUp: (isXl || isLg || isMd || isSm) && !isXs,
             xsUp: isXl || isLg || isMd || isSm || isXs
           }
         }
@@ -67,6 +67,7 @@ export function useWindowSize(wait = 2000, useBreakpoints = true) {
         breakpoints
       ]))
     }
+
     window.addEventListener('resize', _.debounce(function() {
       updateSize()
     }, wait))
