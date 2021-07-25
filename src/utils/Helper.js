@@ -1,6 +1,7 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import _ from 'lodash'
 import { UtilsString } from './Utils'
+import { useTheme } from '@material-ui/core'
 
 //region functions
 export const toNumberSafe = (x) => {
@@ -26,13 +27,45 @@ export function sleep(ms) {
 }
 
 
-export function useWindowSize(wait = 2000) {
+export function useWindowSize(wait = 2000, useBreakpoints = true) {
+  const theme = useTheme()
   const [size, setSize] = useState([0, 0])
   useEffect(() => {
     function updateSize() {
-      tryIt(() => setSize([window.innerWidth, window.innerHeight]))
-    }
+      let breakpoints = {}
+      tryIt(() => {
+        if (useBreakpoints) {
+          const isXl = theme.breakpoints.width('xl') <= width
+          const isLg = theme.breakpoints.width('lg') <= width
+          const isMd = theme.breakpoints.width('md') <= width
+          const isSm = theme.breakpoints.width('sm') <= width
+          const isXs = theme.breakpoints.width('xs') <= width
+          breakpoints = {
+            isXl,
+            isLg,
+            isMd,
+            isSm,
+            isXs,
+            xsDown: isXl,
+            smDown: isXs && isSm,
+            mdDown: isXs && isSm && isMd,
+            lgDown: isXs && isSm && isMd && isLg,
+            xlDown: isXs && isSm && isMd && isLg && isXl,
+            xlUp: isXl,
+            lgUp: isXl || isLg,
+            mdUp: isXl || isLg || isMd,
+            smUp: isXl || isLg || isMd || isSm,
+            xsUp: isXl || isLg || isMd || isSm || isXs
+          }
+        }
+      })
 
+      tryIt(() => setSize([
+        window.innerWidth,
+        window.innerHeight,
+        breakpoints
+      ]))
+    }
     window.addEventListener('resize', _.debounce(function() {
       updateSize()
     }, wait))
@@ -80,8 +113,8 @@ String.prototype.trimAll = function() {
 String.prototype.replaceAt = function(index, replacement) {
   return UtilsString.replaceAt(this, index, replacement)
 }
-String.prototype.replaceAtTo = function(startIndex,endIndex, replacement) {
-  return UtilsString.replaceAtTo(this, startIndex, endIndex,replacement)
+String.prototype.replaceAtTo = function(startIndex, endIndex, replacement) {
+  return UtilsString.replaceAtTo(this, startIndex, endIndex, replacement)
 }
 String.prototype.spaceWithPattern = function(pattern) {
   return UtilsString.spaceWithPattern(this, pattern)
