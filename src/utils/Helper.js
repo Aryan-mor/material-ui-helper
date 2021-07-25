@@ -29,7 +29,7 @@ export function sleep(ms) {
 
 export function useWindowSize(wait = 2000, useBreakpoints = true) {
   const theme = useTheme()
-  const [size, setSize] = useState([0, 0])
+  const [size, setSize] = useState([0, 0,{}])
   useEffect(() => {
     function updateSize() {
       let breakpoints = {}
