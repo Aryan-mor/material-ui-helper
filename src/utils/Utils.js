@@ -105,6 +105,15 @@ export const UtilsStyle = {
       MsUserSelect: 'none',
       userSelect: 'none'
     }
+  },
+  limitTextLine: (line = 2) => {
+    return {
+      WebkitLineClamp: line,
+      WebkitBoxOrient: 'vertical',
+      textOverflow: 'ellipsis',
+      display: '-webkit-box',
+      overflow: 'hidden'
+    }
   }
 }
 
