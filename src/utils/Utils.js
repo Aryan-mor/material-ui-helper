@@ -119,8 +119,9 @@ export const UtilsStyle = {
 
 export const Random = {
   randomInteger: (min, max) => {
-    return Math.floor(Math.random() * (max - min)) + min
+    return Math.floor(Math.random() * (max + 1 - min)) + min
   },
+  randomBool: () => Random.randomInteger(1, 2) % 2 === 0,
   randomString: (length, withNumber = true) => {
     let result = ''
     const characters = withNumber ? 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789' : 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'
