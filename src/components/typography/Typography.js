@@ -116,8 +116,8 @@ Typography.propTypes = {
   textSelectable: PropTypes.bool,
   color: PropTypes.string,
   textDecorationBottom: PropTypes.shape({
-    color: PropTypes.string,
-    width: PropTypes.string
+    color: PropTypes.any,
+    width: PropTypes.any
   })
 }
 

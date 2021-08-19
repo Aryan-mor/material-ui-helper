@@ -120,7 +120,7 @@ export const boxPropType = {
   component: PropTypes.any,
   width: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  display: PropTypes.oneOf(['block', 'flex', 'none', 'inline', 'inline-block', 'grid', 'unset']),
+  display: PropTypes.oneOf(['block', 'flex', 'none', 'inline', 'inline-block','inline-flex', 'grid', 'unset']),
   overflow: PropTypes.oneOf(['visible', 'hidden', 'scroll', 'auto']),
   itemscope: PropTypes.oneOf(['visible', 'hidden', 'scroll', 'auto']),
   alignItems: PropTypes.oneOf(['unset', 'flex-start', 'flex-end', 'center', 'stretch', 'initial', 'inherit']),

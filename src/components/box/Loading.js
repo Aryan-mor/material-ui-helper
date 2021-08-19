@@ -3,6 +3,7 @@ import MaterialBox from '@material-ui/core/Box'
 import Skeleton from '@material-ui/lab/Skeleton'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import { gLog } from '../../utils/Helper'
+import { FullWidthSkeleton } from '../../index'
 
 export function LoadingContainer({ children, loading, skeleton, ...props }) {
   return (
@@ -28,12 +29,7 @@ export default function Loading({ children, loading, loadingWidth, skeleton }) {
           }}>
           {
             (skeleton) &&
-            <Skeleton
-              variant="rect"
-              style={{
-                width: '100%',
-                height: '100%'
-              }}/>
+            <FullWidthSkeleton/>
           }
           {
             loading &&
